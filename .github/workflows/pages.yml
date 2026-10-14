@@ -26,8 +26,7 @@ jobs:
       - name: Preparar carpeta pública
         run: |
           mkdir _site
-          cp -r *.html css js images robots.txt sitemap.xml _site/
-          cp -r v2 _site/v2
+          cp -r *.html css js fonts images robots.txt sitemap.xml _site/
           [ -f CNAME ] && cp CNAME _site/ || true
           touch _site/.nojekyll
 
