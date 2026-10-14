@@ -15,7 +15,7 @@
     boton.addEventListener("click", function () { menu(!nav.classList.contains("abierto")); });
     nav.addEventListener("click", function (e) { if (e.target.closest("a")) menu(false); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") menu(false); });
-    window.matchMedia("(min-width: 961px)").addEventListener("change", function () { menu(false); });
+    window.matchMedia("(min-width: 1181px)").addEventListener("change", function () { menu(false); });
   }
 
   /* ---- Hora en Chalco ---- */

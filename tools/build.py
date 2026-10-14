@@ -377,12 +377,10 @@ page("nosotros.html", "Nosotros",
      + bloque("hoja", cabeza("Lo que nos hace diferentes") + filas(DIFERENCIALES))
      + f'<section class="resultados" id="impacto"><div class="contenedor">{impacto_frase()}</div></section>'
      + bloque("papel", f"""<div class="dividido">
-  <div><h2>Parte de una red global de laboratorios</h2>
+  <h2>Parte de una red global de laboratorios</h2><div class="der">
     <p class="texto-largo">Formamos parte de la red global <a href="{FABLAB_NETWORK}" target="_blank" rel="noopener">FabLab Network</a> y operamos bajo sus estándares, lo que nos conecta con conocimiento, proyectos y personas de todo el mundo.</p>
     {puntos(["Colaboraciones con instituciones, empresas y organizaciones", "Intercambio de buenas prácticas con otros laboratorios", "Proyectos con impacto educativo, social y económico"])}
-  </div>
-  {panel("¿Quieres colaborar con nosotros?", "Si representas a una institución, empresa u organización y quieres construir algo en conjunto, escríbenos.", "Contáctanos", "contacto.html")}
-</div>""", "red"))
+  {panel("¿Quieres colaborar con nosotros?", "Si representas a una institución, empresa u organización y quieres construir algo en conjunto, escríbenos.", "Contáctanos", "contacto.html")}</div></div>""", "red"))
 
 
 # ---- Laboratorio ----
@@ -392,7 +390,7 @@ def servicios_lab():
         existe = os.path.exists(os.path.join(ROOT, "images", "servicios", foto))
         img = f'<img src="images/servicios/{foto}" alt="{escape(nombre)}" loading="lazy" width="180" height="135">' if existe else ""
         clase = "servicio con-foto" if existe else "servicio"
-        out.append(f'<div class="{clase}">{img}<div><h3>{escape(nombre)}</h3><p class="corto">{escape(corto)}</p></div>'
+        out.append(f'<div class="{clase}"><div class="id">{img}<div><h3>{escape(nombre)}</h3><p class="corto">{escape(corto)}</p></div></div>'
                    f'<p class="largo">{escape(largo)}</p><a class="cotizar" href="{cot(nombre)}">Cotizar</a></div>')
     return '<div class="lista-servicios">' + "".join(out) + "</div>"
 
@@ -405,12 +403,10 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
      + bloque("papel", cabeza("Servicios de fabricación", "Transformamos archivos digitales en objetos físicos con precisión. Elige un servicio o cuéntanos tu proyecto y te orientamos.") + servicios_lab(), "servicios")
      + bloque("hoja", cabeza("Equipamiento y tecnologías", "Herramientas y maquinaria agrupadas por área, listas para tus prototipos, maquetas y producciones.") + filas(EQUIPO), "equipamiento")
      + bloque("papel", f"""<div class="dividido">
-  <div><h2>Fabrica tú, sin comprar herramientas caras</h2>
+  <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
     <p class="texto-largo">Te ofrecemos un espacio con acceso flexible a nuestras instalaciones, equipadas con herramientas y maquinaria, para sacar adelante tus maquetas, trabajos, prototipos o proyectos.</p>
     {puntos(["Acceso flexible a las instalaciones", "Herramientas y maquinaria listas para usar", "Orientación del equipo técnico cuando la necesites"])}
-  </div>
-  {panel("¿Quieres usar el espacio?", "Cuéntanos qué vas a hacer y te decimos cómo acceder.", "Quiero usar el espacio", cot("Usar el espacio (membresía / acceso)"))}
-</div>""", "usa-el-espacio")
+  {panel("¿Quieres usar el espacio?", "Cuéntanos qué vas a hacer y te decimos cómo acceder.", "Quiero usar el espacio", cot("Usar el espacio (membresía / acceso)"))}</div></div>""", "usa-el-espacio")
      + llamado())
 
 # ---- Innovación ----
@@ -425,12 +421,10 @@ page("innovacion.html", "Innovación e I+D",
          ("Fabricación en casa", "Máquinas y procesos en un solo lugar para pasar de la propuesta al objeto físico sin intermediarios."),
      ]), "id-empresas")
      + bloque("hoja", f"""<div class="dividido">
-  <div><h2>De la idea al prototipo funcional</h2>
+  <h2>De la idea al prototipo funcional</h2><div class="der">
     <p class="texto-largo">Iteramos contigo hasta tener un prototipo que puedas probar, mostrar y mejorar, sin mínimos de producción.</p>
     {puntos(["Prototipos rápidos y piezas funcionales", "Piezas únicas e hiper-personalizadas", "Pruebas y mejoras en ciclos cortos"])}
-  </div>
-  {panel("¿Tienes un reto de producto?", "Cuéntanos qué quieres lograr y te proponemos cómo abordarlo.", "Hablemos", cot("Innovación / I+D"))}
-</div>""", "prototipado")
+  {panel("¿Tienes un reto de producto?", "Cuéntanos qué quieres lograr y te proponemos cómo abordarlo.", "Hablemos", cot("Innovación / I+D"))}</div></div>""", "prototipado")
      + bloque("papel", cabeza("Asesoría y diseño", "Más que máquinas: revisamos contigo tu proyecto y sugerimos el mejor camino.") + filas([
          ("Modelado 3D y CAD", "Convertimos tus ideas o piezas físicas en modelos listos para fabricar."),
          ("Vectorización", "Preparamos tus gráficos para corte, grabado y vinil."),
@@ -446,12 +440,10 @@ page("emprendimiento.html", "Emprendimiento",
               "Te acompañamos para transformar una idea en un proyecto real: te guiamos desde el inicio hasta la fabricación.",
               ["Emprendimiento"])
      + bloque("papel", f"""<div class="dividido">
-  <div><h2>Un ecosistema para quien quiere crear algo propio</h2>
+  <h2>Un ecosistema para quien quiere crear algo propio</h2><div class="der">
     <p class="texto-largo">Más de 150 emprendedores han pasado por Fabjardin. Aquí encuentras tecnología, método y personas que te ayudan a avanzar.</p>
     {puntos(["Orientación técnica y de diseño desde la primera idea", "Fabricación de tus prototipos y primeras producciones", "Producción sin mínimos, ideal para validar antes de invertir"])}
-  </div>
-  {panel("+150 emprendedores beneficiados", "Si tienes una idea de producto, platícanos en qué etapa estás y te decimos cómo podemos ayudarte.", "Quiero emprender", cot("Emprendimiento"))}
-</div>""", "acompanamiento")
+  {panel("+150 emprendedores beneficiados", "Si tienes una idea de producto, platícanos en qué etapa estás y te decimos cómo podemos ayudarte.", "Quiero emprender", cot("Emprendimiento"))}</div></div>""", "acompanamiento")
      + bloque("hoja", cabeza("De la idea al producto", "Nuestra ruta, en cinco pasos.") + pasos([
          ("Idea", "Aterrizamos tu concepto y definimos qué problema resuelve."),
          ("Diseño", "Modelamos y preparamos los archivos para fabricar."),
@@ -477,10 +469,8 @@ page("formacion.html", "Formación",
               + '<ul class="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS) + "</ul>"
               + f'<p style="margin-top:1.6rem">¿Quieres saber cuándo es el próximo taller? <a href="{cot("Formación / talleres")}">Escríbenos</a> y te avisamos.</p>', "talleres")
      + bloque("tinta", f"""<div class="dividido">
-  <div><h2>Capacitaciones intensivas</h2>
-    <p class="texto-largo">Más de 15 bootcamps y capacitaciones realizados. Programas intensivos para adquirir habilidades concretas en poco tiempo.</p></div>
-  {panel("+15 bootcamps", "Capacitaciones impartidas en Fabjardin.", "Pide información", cot("Formación / talleres"))}
-</div>""", "bootcamps")
+  <h2>Capacitaciones intensivas</h2><div class="der">
+    <p class="texto-largo">Más de 15 bootcamps y capacitaciones realizados. Programas intensivos para adquirir habilidades concretas en poco tiempo.</p>{panel("+15 bootcamps", "Capacitaciones impartidas en Fabjardin.", "Pide información", cot("Formación / talleres"))}</div></div>""", "bootcamps")
      + bloque("papel", cabeza("Escuelas y jóvenes", "Diseñamos experiencias educativas para que niñas, niños y jóvenes entiendan cómo funcionan las cosas y se atrevan a crearlas.") + filas([
          ("Programas educativos", "Contenidos prácticos adaptados a cada nivel y objetivo de aprendizaje."),
          ("Visitas de grupos y escuelas", "Recorridos y actividades en el taller para grupos escolares y comunitarios."),
@@ -495,11 +485,9 @@ page("comunidad.html", "Comunidad",
               "Eventos, proyectos y personas que se encuentran en Fabjardin para aprender, fabricar y colaborar.",
               ["Comunidad"])
      + bloque("papel", f"""<div class="dividido">
-  <div><h2>Eventos y agenda</h2>
+  <h2>Eventos y agenda</h2><div class="der">
     <p class="texto-largo">Talleres, jornadas abiertas y encuentros con la comunidad. Pronto publicaremos aquí el calendario.</p>
-    <div class="fila-botones"><a class="boton boton--lleno" href="contacto.html">Quiero enterarme</a></div></div>
-  {panel("Próximamente", "Escríbenos y te avisamos de las próximas actividades abiertas al público.", "Escríbenos", "contacto.html")}
-</div>""", "agenda")
+    <div class="fila-botones"><a class="boton boton--lleno" href="contacto.html">Quiero enterarme</a></div>{panel("Próximamente", "Escríbenos y te avisamos de las próximas actividades abiertas al público.", "Escríbenos", "contacto.html")}</div></div>""", "agenda")
      + bloque("hoja", cabeza("Proyectos", "Más de 2,200 proyectos finalizados, desde maquetas y prototipos hasta productos de emprendedores. Conoce lo que hemos hecho en nuestro informe de actividades.")
               + f'<div class="fila-botones"><a class="boton boton--lleno" href="{IMPACT_REPORT}" target="_blank" rel="noopener">Ver informe de actividades</a></div>', "proyectos")
      + bloque("papel", cabeza("Noticias", "Estamos preparando esta sección con novedades, convocatorias y casos de la comunidad."), "noticias")
