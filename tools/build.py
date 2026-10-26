@@ -328,9 +328,29 @@ def page(slug, titulo, desc, cuerpo, noindex=False):
     PAGES[slug] = (titulo, desc, cuerpo, noindex)
 
 
-def tile(clave, forma, etiqueta, color):
-    img = foto(f"images/portada/{clave}.webp", etiqueta)
+def tile(archivo, forma, etiqueta, color, pos="50% 50%"):
+    img = foto(f"images/servicios/{archivo}.webp", etiqueta)
+    if img:
+        img = img.replace("<img", f'<img style="object-position:{pos}"', 1).replace('loading="lazy"', 'loading="eager"')
     return f'<div class="tile {forma} t-{color}"><span class="et">{escape(etiqueta)}</span>{img}</div>'
+
+
+def marca_tile(paths, animada):
+    ident = ' id="pieza"' if animada else ""
+    rayo = '<circle id="rayo" class="rayo" r="7" cx="256" cy="256"/>' if animada else ""
+    return (f'<div class="tile circulo t-lima t-marca"><svg viewBox="0 0 512 512"><path{ident} class="pieza" fill-rule="evenodd" d="{paths}"/>{rayo}</svg></div>')
+
+
+COLUMNA_A = [("corte-laser-co2", "rect", "Corte láser", "cian", "50% 60%"), ("impresion-3d-resina", "circulo", "Resina 3D", "coral", "50% 40%"),
+             ("router-cnc", "rect", "Router CNC", "sol", "50% 30%"), ("prensas-de-calor", "circulo", "Prensas de calor", "lila", "45% 50%"),
+             ("asesoria-y-diseno", "rect", "Asesoría y diseño", "azul", "50% 50%")]
+COLUMNA_B = [("escaner-3d", "rect", "Escáner 3D", "lila", "40% 50%"), ("impresion-3d-filamento", "circulo", "Impresión 3D", "sol", "45% 55%"),
+             ("circuitos", "rect", "Circuitos", "coral", "55% 50%"), ("grabado-laser-uv", "circulo", "Grabado UV", "cian", "50% 60%"),
+             ("corte-de-vinil", "rect", "Corte de vinil", "azul", "50% 50%")]
+
+
+def columna(items, marca=None):
+    return "".join(tile(*t) for t in items) if marca is None else marca + "".join(tile(*t) for t in items)
 
 
 def home():
@@ -342,6 +362,9 @@ def home():
     filas_t = "".join(
         f'<tr><td>{escape(m)}</td><td>{escape(t)}</td><td>{escape(s)}</td><td><a class="cotizar" href="{cot(m)}">Cotizar</a></td></tr>'
         for m, t, s in HOJA)
+    col_a = '<div class="grupo">' + columna(COLUMNA_A) + "</div>"
+    col_b = '<div class="grupo">' + columna(COLUMNA_B, marca_tile(paths, True)) + "</div>"
+    col_b2 = '<div class="grupo">' + columna(COLUMNA_B, marca_tile(paths, False)) + "</div>"
     manif = "".join(f"<p>{escape(t)}</p>" for t in MANIFIESTO)
     return f"""
 <section class="hero">
@@ -361,16 +384,8 @@ def home():
       </ul>
     </div>
     <div class="collage" aria-hidden="true">
-      <div class="col col-a">
-        {tile("grabado-laser", "rect", "Láser", "cian")}
-        {tile("impresion-3d", "circulo", "Impresión 3D", "coral")}
-        {tile("router-cnc", "rect", "Router CNC", "sol")}
-      </div>
-      <div class="col col-b">
-        <div class="tile circulo t-lima t-marca"><svg viewBox="0 0 512 512"><path id="pieza" class="pieza" fill-rule="evenodd" d="{paths}"/><circle id="rayo" class="rayo" r="7" cx="256" cy="256"/></svg></div>
-        {tile("escaner-3d", "rect", "Escáner 3D", "lila")}
-        {tile("corte-vinil", "circulo", "Vinil", "azul")}
-      </div>
+      <div class="col col-a"><div class="pista">{col_a}{col_a}</div></div>
+      <div class="col col-b"><div class="pista">{col_b}{col_b2}</div></div>
     </div>
   </div>
 </section>

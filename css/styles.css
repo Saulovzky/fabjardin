@@ -138,18 +138,22 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: .98; le
 .cifras span { font-size: .9rem; color: rgba(255,255,255,.75); }
 
 /* Collage: fotos o color de la paleta (images/portada/<clave>.webp) */
-.collage { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.6rem, 1.4vw, 1.1rem); height: clamp(420px, 66vh, 640px); overflow: hidden;
+.collage { --sep: clamp(.6rem, 1.4vw, 1.1rem); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(.6rem, 1.4vw, 1.1rem); height: clamp(420px, 66vh, 640px); overflow: hidden;
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); }
-.col { display: flex; flex-direction: column; gap: clamp(.6rem, 1.4vw, 1.1rem); }
-.col-a { margin-top: -2.5rem; }
-.col-b { margin-top: 3.5rem; }
+.col { overflow: hidden; min-width: 0; }
+.pista { display: flex; flex-direction: column; will-change: transform; animation: sube 46s linear infinite; }
+.col-b .pista { animation-name: baja; animation-duration: 52s; }
+.collage:hover .pista { animation-play-state: paused; }
+.grupo { display: flex; flex-direction: column; gap: var(--sep); padding-bottom: var(--sep); }
+@keyframes sube { to { transform: translateY(-50%); } }
+@keyframes baja { from { transform: translateY(-50%); } to { transform: translateY(0); } }
 .tile { position: relative; overflow: hidden; flex: none; display: flex; align-items: flex-end; padding: 1rem; color: var(--tinta); }
 .tile.rect { aspect-ratio: 1 / .8; border-radius: 30px; }
 .tile.circulo { aspect-ratio: 1; border-radius: 50%; justify-content: center; align-items: center; text-align: center; }
 .tile::before { content: ""; position: absolute; inset: 0; background: url("../images/panal.svg") 0 0 / 56px auto; opacity: .7; pointer-events: none; }
 .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; max-width: none; }
 .tile .et { position: relative; z-index: 1; font: 800 clamp(1.3rem, 2vw, 1.8rem)/1 var(--display); }
-.tile img ~ .et, .tile:has(img) .et { background: var(--tinta); color: #fff; padding: .4rem .8rem; border-radius: 999px; font-size: 1rem; font-family: var(--cuerpo); font-weight: 700; }
+.tile:has(img) .et { background: var(--tinta); color: #fff; padding: .4rem .8rem; border-radius: 999px; font-size: 1rem; font-family: var(--cuerpo); font-weight: 700; }
 .tile.circulo:has(img) { align-items: flex-end; }
 .t-lima { background: var(--lima); } .t-cian { background: var(--cian); } .t-sol { background: var(--sol); }
 .t-coral { background: var(--coral); } .t-lila { background: var(--lila); } .t-azul { background: var(--azul); color: #fff; }
@@ -400,8 +404,6 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
   .hero { min-height: 0; }
   .hero .contenedor { grid-template-columns: 1fr; }
   .collage { height: clamp(300px, 56vw, 440px); }
-  .col-a { margin-top: -1.5rem; }
-  .col-b { margin-top: 1.5rem; }
   .cabeza, .dividido, .contacto-grid { grid-template-columns: 1fr; }
   .dividido .panel { max-width: none; }
   .pasos li { grid-template-columns: 1fr; }

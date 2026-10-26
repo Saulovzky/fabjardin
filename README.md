@@ -39,7 +39,7 @@ Formato WebP (o cambia la extensión en `build.py`). Si el archivo no existe, se
 
 | Dónde | Carpeta y nombres |
 |---|---|
-| Collage de la portada (6 mosaicos) | `images/portada/` → `grabado-laser.webp`, `impresion-3d.webp`, `router-cnc.webp`, `escaner-3d.webp`, `corte-vinil.webp` (el círculo del logo es fijo) |
+| Collage de la portada (dos columnas que se desplazan) | Usa las fotos de `images/servicios/`. Cambia cuáles y su orden en `COLUMNA_A` / `COLUMNA_B` de `tools/build.py` |
 | Cinco ejes de la portada | `images/ejes/` → `laboratorio.webp`, `innovacion.webp`, `emprendimiento.webp`, `formacion.webp`, `comunidad.webp` |
 | Encabezado de cada página (3 formas) | `images/hero/` → `<pagina>-1.webp` (rectángulo), `-2.webp`, `-3.webp` (círculos). Ej.: `laboratorio-1.webp` |
 | Servicios de Laboratorio | `images/servicios/` (nombres abajo) |
