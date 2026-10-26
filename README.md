@@ -33,6 +33,21 @@ python3 tools/build.py
 
 Esto regenera todos los `.html`. Si editas un `.html` a mano, el siguiente `build.py` lo sobrescribirá.
 
+## Imágenes (se detectan solas al ejecutar `python3 tools/build.py`)
+
+Formato WebP (o cambia la extensión en `build.py`). Si el archivo no existe, se ve el color de la paleta.
+
+| Dónde | Carpeta y nombres |
+|---|---|
+| Collage de la portada (6 mosaicos) | `images/portada/` → `grabado-laser.webp`, `impresion-3d.webp`, `router-cnc.webp`, `escaner-3d.webp`, `corte-vinil.webp` (el círculo del logo es fijo) |
+| Cinco ejes de la portada | `images/ejes/` → `laboratorio.webp`, `innovacion.webp`, `emprendimiento.webp`, `formacion.webp`, `comunidad.webp` |
+| Encabezado de cada página (3 formas) | `images/hero/` → `<pagina>-1.webp` (rectángulo), `-2.webp`, `-3.webp` (círculos). Ej.: `laboratorio-1.webp` |
+| Servicios de Laboratorio | `images/servicios/` (nombres abajo) |
+
+## Paleta
+
+Azul del logo `#001c72` + lima `#c8f53c`, cian `#29d3f0`, sol `#ffc933`, coral `#ff6a45`, lila `#b8a7ff` y azul eléctrico `#2f5bff`. Cada página usa un color de acento (`TONOS` en `tools/build.py`).
+
 ## Pendientes
 
 1. **Fotos de servicios.** Guárdalas en `images/servicios/` con estos nombres y vuelve a ejecutar `python3 tools/build.py`: aparecen solas en Laboratorio.

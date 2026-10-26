@@ -125,6 +125,31 @@ EQUIPO = [
 # --------------------------------------------------------------------------
 # Piezas de HTML
 # --------------------------------------------------------------------------
+TONOS = {  # color de acento por página (paleta en css/styles.css)
+    "index": "lima", "nosotros": "azul", "laboratorio": "lima", "innovacion": "cian",
+    "emprendimiento": "coral", "formacion": "sol", "comunidad": "lila", "contacto": "lima",
+}
+
+
+def hay(ruta):
+    return os.path.exists(os.path.join(ROOT, ruta))
+
+
+def foto(ruta, alt="", clase=""):
+    """<img> si el archivo existe; si no, cadena vacía (queda el color de la paleta)."""
+    if not hay(ruta):
+        return ""
+    c = f' class="{clase}"' if clase else ""
+    return f'<img{c} src="{ruta}" alt="{escape(alt)}" loading="lazy" decoding="async">'
+
+
+def mosaico(slug):
+    """Tres formas de color a la derecha del encabezado; aceptan fotos images/hero/<pagina>-1..3.webp."""
+    base = slug.replace(".html", "")
+    formas = "".join(f'<span class="m{i}">{foto(f"images/hero/{base}-{i}.webp")}</span>' for i in (1, 2, 3))
+    return f'<div class="mosaico" aria-hidden="true">{formas}</div>'
+
+
 FLECHA = ('<svg class="flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" '
           'stroke-linecap="square" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7"/></svg>')
 
@@ -142,11 +167,11 @@ def cabecera(actual):
     cl, ch = NAV_CTA
     return f"""<header class="cabecera">
   <div class="contenedor">
-    <a class="marca-logo" href="index.html" aria-label="{NAME}, inicio"><img src="images/logo.png" alt="{NAME} · {TAGLINE}" width="681" height="181"></a>
+    <a class="marca-logo" href="index.html" aria-label="{NAME}, inicio"><img src="images/logo-blanco.png" alt="{NAME} · {TAGLINE}" width="681" height="181"></a>
     <nav class="nav" id="menu-principal" aria-label="Principal">
       <ul>{''.join(items)}</ul>
       <span class="reloj" id="reloj" aria-hidden="true">Chalco</span>
-      <a class="boton boton--lleno" href="{ch}">{escape(cl)}</a>
+      <a class="boton boton--lima" href="{ch}">{escape(cl)}</a>
     </nav>
     <button class="boton-menu" aria-expanded="false" aria-controls="menu-principal">Menú</button>
   </div>
@@ -195,7 +220,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(full)}</title>
 <meta name="description" content="{escape(desc)}">
-<meta name="theme-color" content="#f1f3fa">
+<meta name="theme-color" content="#001c72">
 {robots}<link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
@@ -211,11 +236,11 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 <link rel="preload" href="fonts/body-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-tono="{TONOS.get(slug.replace(".html", ""), "lima")}">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 {cabecera(slug)}
 <main id="contenido">
-{cuerpo}
+{cuerpo.replace("<!--MOSAICO-->", mosaico(slug))}
 </main>
 {pie()}
 <script src="js/config.js"></script>
@@ -225,7 +250,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 """
 
 
-def panal_svg():
+def panal_svg(color="#001c72", op=".10"):
     """Panal de la cama de corte láser como mosaico sin costuras."""
     r = 20.0
     w, h = math.sqrt(3) * r, 3 * r
@@ -235,16 +260,19 @@ def panal_svg():
         return "M" + " L".join(f"{x:.2f} {y:.2f}" for x, y in pts) + "Z"
     d = " ".join([hexa(w / 2, r), hexa(0, r + 1.5 * r), hexa(w, r + 1.5 * r)])
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w:.3f} {h:.1f}" width="{w:.3f}" height="{h:.1f}">'
-            f'<path d="{d}" fill="none" stroke="#001c72" stroke-opacity=".10" stroke-width="1"/></svg>')
+            f'<path d="{d}" fill="none" stroke="{color}" stroke-opacity="{op}" stroke-width="1"/></svg>')
 
 
 def hero_int(titulo, entrada, migas):
     trail = '<a href="index.html">Inicio</a>' + "".join(f" / {m}" for m in migas)
     return f"""<section class="hero-int">
   <div class="contenedor">
-    <div class="migas">{trail}</div>
-    <h1>{escape(titulo)}</h1>
-    <p class="entrada">{escape(entrada)}</p>
+    <div class="texto-hero">
+      <div class="migas">{trail}</div>
+      <h1>{escape(titulo)}</h1>
+      <p class="entrada">{escape(entrada)}</p>
+    </div>
+    <!--MOSAICO-->
   </div>
 </section>"""
 
@@ -261,7 +289,7 @@ def cabeza(titulo, texto="", sola=False):
 
 
 def filas(items):
-    return '<div class="filas">' + "".join(f'<div class="fila"><h3>{escape(t)}</h3><p>{escape(d)}</p></div>' for t, d in items) + "</div>"
+    return '<div class="filas">' + "".join(f'<div class="fila"><span class="num">{i:02d}</span><h3>{escape(t)}</h3><p>{escape(d)}</p></div>' for i, (t, d) in enumerate(items, 1)) + "</div>"
 
 
 def pasos(items):
@@ -279,10 +307,10 @@ def panel(titulo, texto, etiqueta, href):
 
 def llamado(titulo="¿Tienes una idea o un proyecto?", texto="Cuéntanos qué necesitas y te respondemos con la mejor solución.",
             etiqueta="Solicita tu cotización", href="contacto.html"):
-    return f"""<section class="llamado"><div class="contenedor">
+    return f"""<section class="llamado"><div class="contenedor"><div class="caja">
   <div><h2>{escape(titulo)}</h2><p>{escape(texto)}</p></div>
-  <a class="boton boton--claro" href="{href}">{escape(etiqueta)}</a>
-</div></section>"""
+  <a class="boton boton--lima" href="{href}">{escape(etiqueta)}</a>
+</div></div></section>"""
 
 
 def impacto_frase():
@@ -300,9 +328,17 @@ def page(slug, titulo, desc, cuerpo, noindex=False):
     PAGES[slug] = (titulo, desc, cuerpo, noindex)
 
 
+def tile(clave, forma, etiqueta, color):
+    img = foto(f"images/portada/{clave}.webp", etiqueta)
+    return f'<div class="tile {forma} t-{color}"><span class="et">{escape(etiqueta)}</span>{img}</div>'
+
+
 def home():
     paths = open(os.path.join(ROOT, "tools", "marca_paths.txt"), encoding="utf-8").read().replace("\n", " ")
-    ejes = "".join(f'<a class="eje" href="{h}"><span class="nombre">{n}</span><p class="detalle">{escape(d)}</p>{FLECHA}</a>' for n, h, d in EJES)
+    ejes = "".join(
+        f'<a class="eje" href="{h}"><span class="n">{i:02d}</span>{foto("images/ejes/" + h.replace(".html", "") + ".webp", n, "eje-foto")}'
+        f'<span class="nombre">{n}</span><p class="detalle">{escape(d)}</p><span class="ir">{FLECHA}</span></a>'
+        for i, (n, h, d) in enumerate(EJES, 1))
     filas_t = "".join(
         f'<tr><td>{escape(m)}</td><td>{escape(t)}</td><td>{escape(s)}</td><td><a class="cotizar" href="{cot(m)}">Cotizar</a></td></tr>'
         for m, t, s in HOJA)
@@ -310,15 +346,30 @@ def home():
     return f"""
 <section class="hero">
   <div class="contenedor">
-    <h1><span>Del archivo</span><span>al objeto.</span></h1>
-    <div class="marca-corte" aria-hidden="true">
-      <svg viewBox="0 0 512 512"><path id="pieza" class="pieza" fill-rule="evenodd" d="{paths}"/><circle id="rayo" class="rayo" r="7" cx="256" cy="256"/></svg>
-    </div>
-    <div class="pie-hero">
-      <p>Fabrica con nosotros, aprende en el taller o convierte tu idea en un negocio. Somos un centro de innovación y tecnologías creativas en Chalco.</p>
+    <div class="hero-texto">
+      <p class="sello">Chalco · Estado de México</p>
+      <h1><span>Del archivo</span><span class="acento">al objeto.</span></h1>
+      <p class="hero-p">Fabrica con nosotros, aprende en el taller o convierte tu idea en un negocio. Somos un centro de innovación y tecnologías creativas en Chalco.</p>
       <div class="fila-botones">
-        <a class="boton boton--lleno" href="contacto.html">Cotiza tu proyecto</a>
-        <a class="boton boton--borde" href="#maquinas">Ver máquinas y materiales</a>
+        <a class="boton boton--lima" href="contacto.html">Cotiza tu proyecto</a>
+        <a class="boton boton--borde-claro" href="#maquinas">Ver máquinas y materiales</a>
+      </div>
+      <ul class="cifras" aria-label="Resultados">
+        <li><b>+2,200</b><span>proyectos finalizados</span></li>
+        <li><b>+150</b><span>emprendedores</span></li>
+        <li><b>+15</b><span>bootcamps</span></li>
+      </ul>
+    </div>
+    <div class="collage" aria-hidden="true">
+      <div class="col col-a">
+        {tile("grabado-laser", "rect", "Láser", "cian")}
+        {tile("impresion-3d", "circulo", "Impresión 3D", "coral")}
+        {tile("router-cnc", "rect", "Router CNC", "sol")}
+      </div>
+      <div class="col col-b">
+        <div class="tile circulo t-lima t-marca"><svg viewBox="0 0 512 512"><path id="pieza" class="pieza" fill-rule="evenodd" d="{paths}"/><circle id="rayo" class="rayo" r="7" cx="256" cy="256"/></svg></div>
+        {tile("escaner-3d", "rect", "Escáner 3D", "lila")}
+        {tile("corte-vinil", "circulo", "Vinil", "azul")}
       </div>
     </div>
   </div>
@@ -346,16 +397,16 @@ def home():
 <section class="resultados"><div class="contenedor">{impacto_frase()}</div></section>
 
 <section class="final">
-  <div class="contenedor">
+  <div class="contenedor"><div class="caja">
     <h2>Trae tu archivo o trae tu idea.</h2>
     <div class="sub-final">
       <p>Te respondemos con la viabilidad, los tiempos y el costo. Estamos en La Bomba, Chalco de Díaz Covarrubias, Estado de México.</p>
       <div class="fila-botones">
-        <a class="boton boton--lleno" href="contacto.html">Solicitar cotización</a>
-        <a class="boton boton--borde" href="{CONTACT['maps']}" target="_blank" rel="noopener">Cómo llegar</a>
+        <a class="boton boton--lima" href="contacto.html">Solicitar cotización</a>
+        <a class="boton boton--borde-claro" href="{CONTACT['maps']}" target="_blank" rel="noopener">Cómo llegar</a>
       </div>
     </div>
-  </div>
+  </div></div>
 </section>
 """
 
@@ -386,12 +437,12 @@ page("nosotros.html", "Nosotros",
 # ---- Laboratorio ----
 def servicios_lab():
     out = []
-    for nombre, foto, corto, largo in SERVICES:
-        existe = os.path.exists(os.path.join(ROOT, "images", "servicios", foto))
-        img = f'<img src="images/servicios/{foto}" alt="{escape(nombre)}" loading="lazy" width="180" height="135">' if existe else ""
-        clase = "servicio con-foto" if existe else "servicio"
-        out.append(f'<div class="{clase}"><div class="id">{img}<div><h3>{escape(nombre)}</h3><p class="corto">{escape(corto)}</p></div></div>'
-                   f'<p class="largo">{escape(largo)}</p><a class="cotizar" href="{cot(nombre)}">Cotizar</a></div>')
+    for i, (nombre, archivo, corto, largo) in enumerate(SERVICES, 1):
+        img = foto(f"images/servicios/{archivo}", nombre)
+        clase = "servicio con-foto" if img else "servicio"
+        out.append(f'<article class="{clase}"><div class="visual"><span class="n">{i:02d}</span>{img}</div>'
+                   f'<div class="cuerpo"><h3>{escape(nombre)}</h3><p class="corto">{escape(corto)}</p>'
+                   f'<p class="largo">{escape(largo)}</p><a class="boton boton--borde boton--chico" href="{cot(nombre)}">Cotizar</a></div></article>')
     return '<div class="lista-servicios">' + "".join(out) + "</div>"
 
 
@@ -565,6 +616,7 @@ def main():
         hero_int("No encontramos esa página", "Puede que el enlace haya cambiado.", ["Error 404"])
         + bloque("papel", '<div class="fila-botones"><a class="boton boton--lleno" href="index.html">Volver al inicio</a></div>'), noindex=True))
     write("images/panal.svg", panal_svg())
+    write("images/panal-claro.svg", panal_svg("#ffffff", ".08"))
 
     urls = [s for s, p in PAGES.items() if not p[3]]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
