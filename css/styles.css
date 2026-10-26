@@ -128,7 +128,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: .98; le
   -webkit-mask-image: linear-gradient(100deg, #000 0%, transparent 70%); mask-image: linear-gradient(100deg, #000 0%, transparent 70%); }
 .hero .contenedor { position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 2rem clamp(1.5rem, 4vw, 4rem); align-items: center; }
 .sello { display: inline-block; margin: 0 0 1.2rem; padding: .4rem 1rem; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; font-weight: 600; font-size: .9rem; color: rgba(255,255,255,.9); }
-.hero h1 { font-size: clamp(3.2rem, 6.6vw, 6.6rem); color: #fff; margin-bottom: 1.4rem; }
+.hero h1 { font-size: clamp(2.5rem, 4.6vw, 4.6rem); line-height: 1.02; color: #fff; margin-bottom: 1.4rem; }
 .hero h1 span { display: block; }
 .hero h1 .acento { color: var(--lima); }
 .hero-p { font-size: clamp(1.05rem, 1.3vw, 1.2rem); color: rgba(255,255,255,.88); max-width: 46ch; margin-bottom: 1.8rem; }
