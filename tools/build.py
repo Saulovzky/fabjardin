@@ -41,7 +41,7 @@ NAV = [
         ("I+D para empresas e instituciones", "innovacion.html"), ("Prototipado y producto", "innovacion.html#prototipado"), ("Asesoría y diseño", "innovacion.html#asesoria")]),
     ("Emprendimiento", "emprendimiento.html", [
         ("Acompañamiento", "emprendimiento.html"), ("De la idea al producto", "emprendimiento.html#ruta"), ("Mentorías y red", "emprendimiento.html#red")]),
-    ("Formación", "formacion.html", [
+    ("Educación", "formacion.html", [
         ("Talleres y cursos", "formacion.html"), ("BootCamps", "formacion.html#bootcamps"), ("Escuelas y jóvenes", "formacion.html#escuelas")]),
     ("Comunidad", "comunidad.html", [
         ("Eventos y agenda", "comunidad.html#agenda"), ("Proyectos", "comunidad.html#proyectos"), ("Noticias", "comunidad.html#noticias")]),
@@ -74,7 +74,7 @@ SERVICES = [
      "Prototipado, servicio de modelado 3D y CAD, servicios de vectorización y consultoría para desarrollo de producto."),
 ]
 SERVICE_OPTIONS = [s[0] for s in SERVICES] + [
-    "Usar el espacio (membresía / acceso)", "Innovación / I+D", "Emprendimiento", "Formación / talleres", "Otro / no estoy seguro",
+    "Usar el espacio (membresía / acceso)", "Innovación / I+D", "Emprendimiento", "Educación / talleres", "Otro / no estoy seguro",
 ]
 
 # Hoja de la portada: (máquina, trabaja con, sirve para)
@@ -145,9 +145,23 @@ def foto(ruta, alt="", clase=""):
     return f'<img{c} src="{ruta}" alt="{escape(alt)}" loading="lazy" decoding="async">'
 
 
+def rebanadas():
+    """Mini columnas con imágenes recortadas; al pasar el cursor una se abre completa (images/educacion/*.webp)."""
+    d = os.path.join(ROOT, "images", "educacion")
+    fotos = sorted(f for f in os.listdir(d) if f.endswith(".webp"))[:6] if os.path.isdir(d) else []
+    colores = ["sol", "coral", "lima", "cian", "lila", "azul"]
+    if fotos:
+        cols = "".join(f'<figure class="reb" tabindex="0"><img src="images/educacion/{f}" alt="Actividad en Fabjardin" loading="eager" decoding="async"></figure>' for f in fotos)
+    else:
+        cols = "".join(f'<figure class="reb t-{c}" tabindex="0"></figure>' for c in colores[:4])
+    return f'<div class="rebanadas">{cols}</div>'
+
+
 def mosaico(slug):
     """Tres formas de color a la derecha del encabezado; aceptan fotos images/hero/<pagina>-1..3.webp."""
     base = slug.replace(".html", "")
+    if base == "formacion":
+        return rebanadas()
     formas = "".join(f'<span class="m{i}">{foto(f"images/hero/{base}-{i}.webp")}</span>' for i in (1, 2, 3))
     return f'<div class="mosaico" aria-hidden="true">{formas}</div>'
 
@@ -390,7 +404,7 @@ GUIA = {
                 {"t": "Copiar o digitalizar una pieza que ya existe", **_fab("Escáner 3D", "Captura el objeto real y lo convierte en un archivo digital editable.", ["Escáner 3D"])},
                 {"t": "Tengo la idea, pero no sé cómo hacerla", **_fab("Asesoría y diseño", "Revisamos contigo tu proyecto y te sugerimos el mejor camino.", ["Asesoría y diseño"])},
             ]}},
-        {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "formacion.html", "Formación / talleres")},
+        {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "formacion.html", "Educación / talleres")},
         {"t": "Convertir mi idea en negocio", "d": "Acompañamiento para emprender", **_ruta("Acompañamiento para emprender", "Acompañamiento y formación para convertir tus ideas en proyectos reales.", "Ver cómo te acompañamos", "emprendimiento.html", "Emprendimiento")},
         {"t": "Resolver un reto de mi empresa o institución", "d": "I+D, prototipado y formación", **_ruta("Innovación para organizaciones", "I+D, prototipado y formación para empresas, instituciones y organizaciones.", "Ver innovación", "innovacion.html", "Innovación / I+D")},
         {"t": "Usar el taller por mi cuenta", "d": "Acceso a instalaciones y maquinaria", **_ruta("Usa el espacio", "Acceso flexible a nuestras instalaciones, con herramientas y maquinaria listas para usar.", "Ver cómo usar el espacio", "laboratorio.html#usa-el-espacio", "Usar el espacio (membresía / acceso)")},
@@ -575,29 +589,29 @@ page("emprendimiento.html", "Emprendimiento",
      + bloque("papel", cabeza("Mentorías y red", "Fabjardin es un punto de encuentro entre emprendedores, empresas, instituciones y comunidad.") + filas([
          ("Comunidad", "Conoce a otras personas que están creando y fabricando."),
          ("Colaboraciones", "Más de 20 colaboraciones institucionales abren puertas para tus proyectos."),
-         ("Formación", "Talleres y bootcamps para fortalecer tus habilidades técnicas y de diseño."),
+         ("Educación", "Talleres y bootcamps para fortalecer tus habilidades técnicas y de diseño."),
      ]), "red")
      + llamado("Cuéntanos tu idea", "Te ayudamos a dar el primer paso.", "Hablemos de tu proyecto", cot("Emprendimiento")))
 
-# ---- Formación ----
+# ---- Educación ----
 TEMAS = ["Diseño 3D y CAD", "Corte y grabado láser", "Impresión 3D", "Electrónica creativa", "Vectorización y diseño gráfico", "Personalización textil"]
-page("formacion.html", "Formación",
+page("formacion.html", "Educación",
      "Talleres prácticos, bootcamps y programas para escuelas y jóvenes sobre nuevas tecnologías y diseño.",
      hero_int("Aprende haciendo, con las máquinas del taller",
               "Un ecosistema donde impartimos talleres prácticos sobre nuevas tecnologías y diseño.",
-              ["Formación"])
+              ["Educación"])
      + bloque("papel", cabeza("Talleres y cursos", "Aprendes usando las mismas máquinas con las que fabricamos proyectos reales.")
               + '<ul class="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS) + "</ul>"
-              + f'<p style="margin-top:1.6rem">¿Quieres saber cuándo es el próximo taller? <a href="{cot("Formación / talleres")}">Escríbenos</a> y te avisamos.</p>', "talleres")
+              + f'<p style="margin-top:1.6rem">¿Quieres saber cuándo es el próximo taller? <a href="{cot("Educación / talleres")}">Escríbenos</a> y te avisamos.</p>', "talleres")
      + bloque("tinta", f"""<div class="dividido">
   <h2>Capacitaciones intensivas</h2><div class="der">
-    <p class="texto-largo">Más de 15 bootcamps y capacitaciones realizados. Programas intensivos para adquirir habilidades concretas en poco tiempo.</p>{panel("+15 bootcamps", "Capacitaciones impartidas en Fabjardin.", "Pide información", cot("Formación / talleres"))}</div></div>""", "bootcamps")
+    <p class="texto-largo">Más de 15 bootcamps y capacitaciones realizados. Programas intensivos para adquirir habilidades concretas en poco tiempo.</p>{panel("+15 bootcamps", "Capacitaciones impartidas en Fabjardin.", "Pide información", cot("Educación / talleres"))}</div></div>""", "bootcamps")
      + bloque("papel", cabeza("Escuelas y jóvenes", "Diseñamos experiencias educativas para que niñas, niños y jóvenes entiendan cómo funcionan las cosas y se atrevan a crearlas.") + filas([
          ("Programas educativos", "Contenidos prácticos adaptados a cada nivel y objetivo de aprendizaje."),
          ("Visitas de grupos y escuelas", "Recorridos y actividades en el taller para grupos escolares y comunitarios."),
          ("Proyectos con impacto", "Aprender resolviendo retos reales de la comunidad."),
      ]), "escuelas")
-     + llamado("Capacita a tu equipo o a tu grupo", "Cuéntanos qué quieres aprender y armamos el programa.", "Solicitar información", cot("Formación / talleres")))
+     + llamado("Capacita a tu equipo o a tu grupo", "Cuéntanos qué quieres aprender y armamos el programa.", "Solicitar información", cot("Educación / talleres")))
 
 # ---- Comunidad ----
 page("comunidad.html", "Comunidad",
