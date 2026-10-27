@@ -112,13 +112,14 @@ MANIFIESTO = [
     "Estándares de la FabLab Network.",
     "Acompañamiento técnico de la idea al objeto.",
 ]
+# Equipamiento por área: (área, qué cubre, [nombres de máquinas de HOJA])
 EQUIPO = [
-    ("Corte y grabado láser", "Láser CO2 para madera, acrílico, cuero, cartón, papel y textiles, y láser UV para metales y materiales delicados."),
-    ("Impresión 3D", "Impresión en filamento para piezas funcionales y en resina para alta resolución."),
-    ("Router CNC", "Corte de tableros completos de madera, MDF, OSB, aluminio y plásticos de ingeniería."),
-    ("Textil y personalización", "Prensas de calor y corte de vinil para sublimación, vinil textil, stickers y rotulación."),
-    ("Electrónica", "Iluminación, circuitos, letreros neón y movimiento con motores para tus prototipos."),
-    ("Escaneo y diseño 3D", "Escáner 3D, modelado CAD y vectorización para pasar de lo real a lo digital y viceversa."),
+    ("Corte y grabado láser", "Dos tecnologías láser: una para cortar y grabar materiales orgánicos, otra para marcar metales y materiales delicados.", ["Corte láser CO2", "Grabado láser UV"]),
+    ("Impresión 3D", "Filamento para piezas funcionales y resina para alta resolución.", ["Impresión 3D de filamento", "Impresión 3D de resina"]),
+    ("Router CNC", "Corte de tableros completos y de formatos grandes.", ["Router CNC"]),
+    ("Textil y personalización", "Sublimación, vinil textil, stickers y rotulación.", ["Prensas de calor", "Corte de vinil"]),
+    ("Electrónica", "Iluminación, circuitos y movimiento con motores para tus prototipos.", ["Circuitos"]),
+    ("Escaneo y diseño 3D", "Pasar de lo real a lo digital y viceversa: escáner, modelado CAD y vectorización.", ["Escáner 3D", "Asesoría y diseño"]),
 ]
 
 
@@ -359,9 +360,6 @@ def home():
         f'<a class="eje" href="{h}"><span class="n">{i:02d}</span>{foto("images/ejes/" + h.replace(".html", "") + ".webp", n, "eje-foto")}'
         f'<span class="nombre">{n}</span><p class="detalle">{escape(d)}</p><span class="ir">{FLECHA}</span></a>'
         for i, (n, h, d) in enumerate(EJES, 1))
-    filas_t = "".join(
-        f'<tr><td>{escape(m)}</td><td>{escape(t)}</td><td>{escape(s)}</td><td><a class="cotizar" href="{cot(m)}">Cotizar</a></td></tr>'
-        for m, t, s in HOJA)
     col_a = '<div class="grupo">' + columna(COLUMNA_A) + "</div>"
     col_b = '<div class="grupo">' + columna(COLUMNA_B, marca_tile(paths, True)) + "</div>"
     col_b2 = '<div class="grupo">' + columna(COLUMNA_B, marca_tile(paths, False)) + "</div>"
@@ -374,13 +372,13 @@ def home():
       <h1><span>Facilitamos y centralizamos la fabricación de tus proyectos,</span> <span class="acento">en un solo lugar.</span></h1>
       <p class="hero-p">Fabrica con nosotros, aprende en el taller o convierte tu idea en un negocio. Somos un centro de innovación y tecnologías creativas en Chalco.</p>
       <div class="fila-botones">
-        <a class="boton boton--lima" href="contacto.html">Cotiza tu proyecto</a>
-        <a class="boton boton--borde-claro" href="#maquinas">Ver máquinas y materiales</a>
+        <a class="boton boton--lima" href="contacto.html">Cuéntanos en qué andas</a>
+        <a class="boton boton--borde-claro" href="laboratorio.html#equipamiento">Ver máquinas y materiales</a>
       </div>
       <ul class="cifras" aria-label="Resultados">
         <li><b>+2,200</b><span>proyectos finalizados</span></li>
         <li><b>+150</b><span>emprendedores</span></li>
-        <li><b>+15</b><span>bootcamps</span></li>
+        <li><b>+15</b><span>capacitaciones intensivas</span></li>
       </ul>
     </div>
     <div class="collage" aria-hidden="true">
@@ -394,16 +392,6 @@ def home():
   <div class="contenedor">
     <h2>Un solo centro. Cinco maneras de entrar.</h2>
     <div class="lista-ejes">{ejes}</div>
-  </div>
-</section>
-
-<section class="especificaciones" id="maquinas">
-  <div class="contenedor">
-    {cabeza("Qué máquina para qué material", "Elige por material o cuéntanos tu proyecto y te decimos cuál conviene. Trabajamos con tus archivos o los diseñamos contigo.")}
-    <table class="tabla">
-      <thead><tr><th scope="col">Máquina</th><th scope="col">Trabaja con</th><th scope="col">Sirve para</th><th scope="col"><span class="visually-hidden">Acción</span></th></tr></thead>
-      <tbody>{filas_t}</tbody>
-    </table>
   </div>
 </section>
 
@@ -450,6 +438,20 @@ page("nosotros.html", "Nosotros",
 
 
 # ---- Laboratorio ----
+def equipamiento():
+    datos = {m: (t, u) for m, t, u in HOJA}
+    out = []
+    for i, (area, desc, maqs) in enumerate(EQUIPO, 1):
+        filas_m = "".join(
+            f'<div class="maq"><h4>{escape(m)}</h4><dl>'
+            f'<div><dt>Trabaja con</dt><dd>{escape(datos[m][0])}</dd></div>'
+            f'<div><dt>Sirve para</dt><dd>{escape(datos[m][1])}</dd></div></dl>'
+            f'<a class="cotizar" href="{cot(m)}">Cotizar</a></div>' for m in maqs)
+        out.append(f'<article class="area"><div class="area-id"><span class="num">{i:02d}</span><h3>{escape(area)}</h3><p>{escape(desc)}</p></div>'
+                   f'<div class="maquinas">{filas_m}</div></article>')
+    return '<div class="equipo">' + "".join(out) + "</div>"
+
+
 def servicios_lab():
     out = []
     for i, (nombre, archivo, corto, largo) in enumerate(SERVICES, 1):
@@ -467,7 +469,7 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
               "Cuéntanos tu idea, envíanos tus archivos o diseños, y los transformamos en objetos que podrás tener en tus manos.",
               ["Laboratorio"])
      + bloque("papel", cabeza("Servicios de fabricación", "Transformamos archivos digitales en objetos físicos con precisión. Elige un servicio o cuéntanos tu proyecto y te orientamos.") + servicios_lab(), "servicios")
-     + bloque("hoja", cabeza("Equipamiento y tecnologías", "Herramientas y maquinaria agrupadas por área, listas para tus prototipos, maquetas y producciones.") + filas(EQUIPO), "equipamiento")
+     + bloque("hoja", cabeza("Equipamiento y tecnologías", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.") + equipamiento(), "equipamiento")
      + bloque("papel", f"""<div class="dividido">
   <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
     <p class="texto-largo">Te ofrecemos un espacio con acceso flexible a nuestras instalaciones, equipadas con herramientas y maquinaria, para sacar adelante tus maquetas, trabajos, prototipos o proyectos.</p>

@@ -305,8 +305,8 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .tabla td:nth-child(2) { font-weight: 600; }
 .tabla td:last-child { text-align: right; white-space: nowrap; }
 .tabla tbody tr:hover td { background: var(--hoja); }
-.servicio .cotizar, .tabla .cotizar { display: inline-block; font-weight: 700; font-size: .92rem; color: var(--tinta); text-decoration: none; padding: .5rem 1.1rem; border: 2px solid var(--tinta); border-radius: 999px; white-space: nowrap; transition: background-color .15s, color .15s; }
-.tabla .cotizar:hover { background: var(--tinta); color: #fff; }
+.maq .cotizar, .servicio .cotizar, .tabla .cotizar { display: inline-block; font-weight: 700; font-size: .92rem; color: var(--tinta); text-decoration: none; padding: .5rem 1.1rem; border: 2px solid var(--tinta); border-radius: 999px; white-space: nowrap; transition: background-color .15s, color .15s; }
+.maq .cotizar:hover, .tabla .cotizar:hover { background: var(--tinta); color: #fff; }
 
 /* ---------- Manifiesto ---------- */
 .manifiesto { background: var(--hoja); padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
@@ -436,3 +436,21 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
   html { scroll-behavior: auto; }
   * { transition: none !important; animation: none !important; }
 }
+
+/* ---------- Equipamiento por área (Laboratorio) ---------- */
+.equipo { border-top: 2px solid var(--tinta); }
+.area { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.2rem var(--hueco); padding: 2rem 0; border-bottom: 1px solid var(--trazo); align-items: start; }
+.area .num { display: inline-grid; place-items: center; width: 2.6rem; height: 2.6rem; margin-bottom: 1rem; border-radius: 50%; background: var(--lima); color: var(--tinta); font: 800 1.1rem/1 var(--display); }
+.area:nth-child(6n+2) .num { background: var(--cian); } .area:nth-child(6n+3) .num { background: var(--sol); }
+.area:nth-child(6n+4) .num { background: var(--lila); } .area:nth-child(6n+5) .num { background: var(--coral); } .area:nth-child(6n+6) .num { background: var(--azul); color: #fff; }
+.area h3 { font-size: clamp(1.8rem, 2.6vw, 2.4rem); color: var(--tinta); margin-bottom: .5rem; }
+.area-id p { margin: 0; color: var(--suave); max-width: 40ch; }
+.maquinas { display: grid; gap: .8rem; }
+.maq { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .8rem 1.2rem; align-items: start; background: var(--papel); border-radius: 22px; padding: 1.2rem 1.4rem; }
+.maq h4 { grid-column: 1 / -1; margin: 0; font: 800 clamp(1.3rem, 1.8vw, 1.6rem)/1.05 var(--display); color: var(--tinta); }
+.maq dl { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem 1.4rem; }
+.maq dt { font-size: .8rem; font-weight: 700; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; }
+.maq dd { margin: .1rem 0 0; font-size: .96rem; line-height: 1.5; }
+.maq .cotizar { align-self: end; }
+@media (max-width: 960px) { .area { grid-template-columns: 1fr; } }
+@media (max-width: 620px) { .maq { grid-template-columns: 1fr; } .maq dl { grid-template-columns: 1fr; } .maq .cotizar { justify-self: start; } }
