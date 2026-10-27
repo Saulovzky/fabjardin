@@ -110,7 +110,6 @@ FAB_MIT = "https://fab.cba.mit.edu/"
 MANIFIESTO = [
     "Haz solo una pieza, o las que necesites.",
     "Todo lo que necesitas para fabricar, en un solo lugar.",
-    "Hacemos lo que las fábricas grandes no hacen: piezas únicas y a tu medida.",
     ("Parte de una red mundial de laboratorios de fabricación.", FAB_MIT, "Conoce la red"),
     "Te acompañamos desde el 0, hasta el 1.",
 ]
