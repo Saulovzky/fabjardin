@@ -37,7 +37,7 @@ NAV = [
     ("Nosotros", "nosotros.html", [
         ("Quiénes somos", "nosotros.html"), ("Impacto", "nosotros.html#impacto"), ("Red FabLab y aliados", "nosotros.html#red")]),
     ("Laboratorio", "laboratorio.html", [
-        ("Servicios de fabricación", "laboratorio.html#servicios"), ("Equipamiento y tecnologías", "laboratorio.html#equipamiento"), ("Usa el espacio", "laboratorio.html#usa-el-espacio")]),
+        ("Equipos", "laboratorio.html#servicios"), ("Equipamiento y tecnologías", "laboratorio.html#equipamiento"), ("Usa el espacio", "laboratorio.html#usa-el-espacio")]),
     ("Innovación", "innovacion.html", [
         ("I+D para empresas e instituciones", "innovacion.html"), ("Prototipado y producto", "innovacion.html#prototipado"), ("Asesoría y diseño", "innovacion.html#asesoria")]),
     ("Emprendimiento", "emprendimiento.html", [
@@ -287,16 +287,16 @@ def panal_svg(color="#001c72", op=".10"):
             f'<path d="{d}" fill="none" stroke="{color}" stroke-opacity="{op}" stroke-width="1"/></svg>')
 
 
-def hero_int(titulo, entrada, migas):
+def hero_int(titulo, entrada, migas, lineal=False):
     trail = '<a href="index.html">Inicio</a>' + "".join(f" / {m}" for m in migas)
-    return f"""<section class="hero-int">
+    return f"""<section class="hero-int{" hero-int--lineal" if lineal else ""}">
   <div class="contenedor">
     <div class="texto-hero">
       <div class="migas">{trail}</div>
       <h1>{escape(titulo)}</h1>
-      <p class="entrada">{escape(entrada)}</p>
+      {f'<p class="entrada">{escape(entrada)}</p>' if entrada else ""}
     </div>
-    <!--MOSAICO-->
+    {"" if lineal else "<!--MOSAICO-->"}
   </div>
 </section>"""
 
@@ -540,10 +540,8 @@ def servicios_lab():
 
 page("laboratorio.html", "Laboratorio de fabricación digital",
      "Servicios de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, vinil, circuitos, escáner 3D y uso del espacio.",
-     hero_int("Fabricación digital, en un solo lugar",
-              "Cuéntanos tu idea, envíanos tus archivos o diseños, y los transformamos en objetos que podrás tener en tus manos.",
-              ["Laboratorio"])
-     + bloque("papel", cabeza("Servicios de fabricación", "Transformamos archivos digitales en objetos físicos con precisión. Elige un servicio o cuéntanos tu proyecto y te orientamos.") + servicios_lab(), "servicios")
+     hero_int("Fabricación y herramientas digitales, en un solo lugar", "", ["Laboratorio"], lineal=True)
+     + bloque("papel", cabeza("Equipos") + servicios_lab(), "servicios")
      + bloque("hoja", cabeza("Equipamiento y tecnologías", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.") + equipamiento(), "equipamiento")
      + bloque("papel", f"""<div class="dividido">
   <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
