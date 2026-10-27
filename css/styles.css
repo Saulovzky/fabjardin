@@ -530,3 +530,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .steam:hover .def i:nth-child(5), .steam:focus .def i:nth-child(5) { transition-delay: .24s; }
 @media (max-width: 620px) { .temas li.otro input { width: 12.5rem; } }
 .cabeza-txt p + p { margin-top: .8rem; }
+
+/* Cabeceras de Educación: título arriba, texto a todo lo ancho */
+.cabeza--ancha { align-items: start; }
+.cabeza--ancha p, .cabeza--ancha .cabeza-txt { max-width: none; }
