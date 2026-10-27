@@ -24,8 +24,8 @@ CONTACT = {
     "tel_label": "55 7657 1685",
     "tel_href": "+525576571685",
     "wa": "https://wa.me/525576571685?text=Hola%20Fabjardin%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n",
-    "address": "C. 5 de Febrero No. 23, Col. La Bomba, C.P. 56600, Chalco de Díaz Covarrubias, Estado de México",
-    "maps": "https://www.google.com/maps/search/?api=1&query=C.+5+de+Febrero+23+La+Bomba+Chalco+de+D%C3%ADaz+Covarrubias",
+    "address": "C. 5 de Febrero No. 23B, Col. La Bomba, C.P. 56600, Chalco de Díaz Covarrubias, Estado de México",
+    "maps": "https://maps.app.goo.gl/UQqeSkzYNFNghbhFA",
 }
 IMPACT_REPORT = "https://heyzine.com/flip-book/5ed696c717.html#page/1"
 FABLAB_NETWORK = "https://www.fablabs.io/"
@@ -222,8 +222,8 @@ def pie():
         <li><a href="{c['wa']}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp al {c['tel_label']}">{c['tel_label']} · WhatsApp</a></li>
         <li><a href="{c['maps']}" target="_blank" rel="noopener">{escape(c['address'])}</a></li>
       </ul></div>
+      <div class="pie-mapa"><iframe src="{MAPA}" title="Mapa de ubicación de Fabjardin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     </div>
-    <div class="pie-mapa"><iframe src="{MAPA}" title="Mapa de ubicación de Fabjardin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <div class="legal">
       <span>© <span id="anio">2026</span> {NAME.upper()}. Todos los derechos reservados.</span>
       <nav aria-label="Legal"><a href="politica-de-privacidad.html">Políticas de privacidad</a><a href="terminos-de-los-servicios.html">Términos de los servicios</a></nav>

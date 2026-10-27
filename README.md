@@ -55,7 +55,7 @@ Azul del logo `#001c72` + lima `#c8f53c`, cian `#29d3f0`, sol `#ffc933`, coral `
    `corte-laser-co2.webp`, `grabado-laser-uv.webp`, `prensas-de-calor.webp`, `impresion-3d-filamento.webp`, `impresion-3d-resina.webp`, `router-cnc.webp`, `corte-de-vinil.webp`, `circuitos.webp`, `escaner-3d.webp`, `asesoria-y-diseno.webp`
 
 2. **Formulario de cotización.** GitHub Pages no ejecuta código de servidor. Crea un formulario en [Formspree](https://formspree.io) (o similar) y pega su URL en `js/config.js` → `formEndpoint`. Sin eso, el formulario abre el correo del visitante con los datos ya escritos. Los archivos se comparten por enlace (Drive, Dropbox).
-3. **Dirección.** Se usa la del membrete (*C. 5 de Febrero No. 23*). El sitio anterior decía *5 de Febrero 418*. Confirma cuál es y corrígela en `CONTACT` dentro de `tools/build.py`.
+3. **Dirección.** Se usa la del membrete (*C. 5 de Febrero No. 23B*). El sitio anterior decía *5 de Febrero 418*. Confirma cuál es y corrígela en `CONTACT` dentro de `tools/build.py`.
 4. **Redes sociales.** No hay enlaces porque no se conocen las URLs. Agrégalos en la función `pie()` de `tools/build.py`.
 5. **Textos legales.** Privacidad y términos son borradores; revísalos con asesoría legal.
 6. **Horarios y precios.** Agrega horarios de atención y, si quieres, tarifas.
