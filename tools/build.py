@@ -286,14 +286,14 @@ def panal_svg(color="#001c72", op=".10"):
             f'<path d="{d}" fill="none" stroke="{color}" stroke-opacity="{op}" stroke-width="1"/></svg>')
 
 
-def hero_int(titulo, entrada, migas, lineal=False):
+def hero_int(titulo, entrada, migas, lineal=False, html=False, extra=""):
     trail = '<a href="index.html">Inicio</a>' + "".join(f" / {m}" for m in migas)
-    return f"""<section class="hero-int{" hero-int--lineal" if lineal else ""}">
+    return f"""<section class="hero-int{" hero-int--lineal" if lineal else ""}{" hero-int--frase" if html else ""}">
   <div class="contenedor">
     <div class="texto-hero">
       <div class="migas">{trail}</div>
-      <h1>{escape(titulo)}</h1>
-      {f'<p class="entrada">{escape(entrada)}</p>' if entrada else ""}
+      {titulo if html else f"<h1>{escape(titulo)}</h1>"}
+      {entrada if html else (f'<p class="entrada">{escape(entrada)}</p>' if entrada else "")}
     </div>
     {"" if lineal else "<!--MOSAICO-->"}
   </div>
@@ -492,11 +492,20 @@ page("index.html", TAGLINE,
      home())
 
 # ---- Nosotros ----
+PALABRAS_CENTRO = ["centro", "nodo", "hub", "punto", "espacio", "núcleo", "laboratorio", "ecosistema", "taller", "jardín"]
+NOSOTROS_H1 = (
+    '<h1 aria-label="Somos un centro donde creamos comunidad mediante proyectos creativos, tecnológicos, educativos y de emprendimiento.">'
+    '<span class="ln1" aria-hidden="true">Somos un <span class="flash" data-palabras="' + ",".join(PALABRAS_CENTRO) + '">centro</span></span>'
+    '<span class="ln2" aria-hidden="true">donde creamos comunidad mediante proyectos creativos, tecnológicos, educativos y de emprendimiento.</span></h1>')
+NOSOTROS_TXT = (
+    '<div class="entrada entrada--prosa">'
+    '<p>Nacemos para ser un motor de transformación comunitaria y movilidad social, que usa la tecnología como herramienta para cerrar brechas.</p>'
+    '<p>Nuestro propósito es empoderar a nuestra región mediante la innovación técnica, convirtiendo el conocimiento científico y de vanguardia en un bien público que impulsa:</p>'
+    '<ul class="metas"><li>el progreso colectivo</li><li>la soberanía tecnológica</li><li>el desarrollo sostenible desde la base social</li></ul></div>')
+
 page("nosotros.html", "Nosotros",
      "Conoce a Fabjardin: misión, visión, impacto y nuestra pertenencia a la red global FabLab.",
-     hero_int("Un centro que conecta tecnología, creatividad y comunidad",
-              "Somos un centro de fabricación digital parte de la red global FabLab, donde diseñamos y convertimos ideas en proyectos fabricables y tangibles para toda la comunidad.",
-              ["Nosotros"])
+     hero_int(NOSOTROS_H1, NOSOTROS_TXT, ["Nosotros"], html=True)
      + bloque("papel", cabeza("Misión y visión") + filas([
          ("Nuestra misión", "Empoderar a la comunidad facilitando el acceso a la fabricación digital y tecnologías de vanguardia, para transformar ideas en proyectos de alto impacto educativo, social y económico."),
          ("Visión", "Ser el nodo de referencia regional en innovación y creatividad, donde la colaboración y la tecnología se unen para impulsar el desarrollo sostenible y transformar el futuro de nuestras comunidades."),

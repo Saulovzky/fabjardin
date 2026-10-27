@@ -282,3 +282,17 @@
   if (escritorio.addEventListener) escritorio.addEventListener("change", inicial); else escritorio.addListener(inicial);
   inicial();
 })();
+
+/* Nosotros: la palabra "centro" cambia a sus sinónimos con un destello */
+(function () {
+  var el = document.querySelector(".flash[data-palabras]");
+  if (!el) return;
+  var lista = el.getAttribute("data-palabras").split(",");
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || lista.length < 2) return;
+  var i = 0;
+  setInterval(function () {
+    i = (i + 1) % lista.length;
+    el.classList.remove("cambia"); void el.offsetWidth; el.classList.add("cambia");
+    setTimeout(function () { el.textContent = lista[i]; }, 120);
+  }, 1500);
+})();
