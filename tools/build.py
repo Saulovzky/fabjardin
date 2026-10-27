@@ -42,7 +42,7 @@ NAV = [
     ("Emprendimiento", "emprendimiento.html", [
         ("Acompañamiento", "emprendimiento.html"), ("De la idea al producto", "emprendimiento.html#ruta"), ("Mentorías y red", "emprendimiento.html#red")]),
     ("Educación", "educacion.html", [
-        ("Talleres y cursos", "educacion.html"), ("BootCamps", "educacion.html#bootcamps"), ("Escuelas y jóvenes", "educacion.html#escuelas")]),
+        ("Talleres y cursos", "educacion.html"), ("Escuelas y jóvenes", "educacion.html#escuelas")]),
     ("Comunidad", "comunidad.html", [
         ("Eventos y agenda", "comunidad.html#agenda"), ("Proyectos", "comunidad.html#proyectos"), ("Noticias", "comunidad.html#noticias")]),
 ]
@@ -606,10 +606,7 @@ page("educacion.html", "Educación",
               + '<ul class="temas" id="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS)
               + '<li class="otro"><form id="form-tema" autocomplete="off"><label class="visually-hidden" for="tema-nuevo">Escribe otro tema que quieras aprender</label>'
                 '<input id="tema-nuevo" type="text" maxlength="40" placeholder="¿Otro tema? Escríbelo y da Enter"><button type="submit" aria-label="Grabar tema">↵</button></form></li></ul>', "talleres")
-     + bloque("tinta", f"""<div class="dividido">
-  <h2>Capacitaciones intensivas</h2><div class="der">
-    <p class="texto-largo">Más de 15 bootcamps y capacitaciones realizados. Programas intensivos para adquirir habilidades concretas en poco tiempo.</p>{panel("+15 bootcamps", "Capacitaciones impartidas en Fabjardin.", "Pide información", cot("Educación / talleres"))}</div></div>""", "bootcamps")
-     + bloque("papel", cabeza("Escuelas y jóvenes", "Diseñamos experiencias educativas para que niñas, niños y jóvenes entiendan cómo funcionan las cosas y se atrevan a crearlas.") + filas([
+     + bloque("hoja", cabeza("Escuelas y jóvenes", "Diseñamos experiencias educativas para que niñas, niños y jóvenes entiendan cómo funcionan las cosas y se atrevan a crearlas.") + filas([
          ("Programas educativos", "Contenidos prácticos adaptados a cada nivel y objetivo de aprendizaje."),
          ("Visitas de grupos y escuelas", "Recorridos y actividades en el taller para grupos escolares y comunitarios."),
          ("Proyectos con impacto", "Aprender resolviendo retos reales de la comunidad."),
