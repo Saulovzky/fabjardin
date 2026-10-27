@@ -633,3 +633,19 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .metas li { padding: .35rem .95rem; border-radius: 999px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); color: #fff; font-weight: 600; font-size: .95rem; }
 .metas li:nth-child(1) { border-color: var(--lima); } .metas li:nth-child(2) { border-color: var(--cian); } .metas li:nth-child(3) { border-color: var(--sol); }
 @media (prefers-reduced-motion: reduce) { .flash.cambia { animation: none; } }
+
+/* Nosotros: texto a todo el ancho y sin bloques */
+.hero-int--frase .ln2 { max-width: none; }
+.hero-int--frase .entrada--prosa { max-width: none; }
+
+/* Lo que nos hace diferentes: 5 tarjetas en una fila, colores vivos e iconos */
+.difs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .9rem; }
+.dif { border-radius: var(--radio); padding: 1.3rem 1.2rem 1.5rem; color: var(--tinta); background: var(--lima); }
+.dif:nth-child(2) { background: var(--cian); } .dif:nth-child(3) { background: var(--sol); }
+.dif:nth-child(4) { background: var(--coral); } .dif:nth-child(5) { background: var(--azul); color: #fff; }
+.dif .ico { display: inline-grid; place-items: center; width: 3.2rem; height: 3.2rem; margin-bottom: 1rem; border-radius: 50%; background: var(--tinta); color: #fff; }
+.dif .ico svg { width: 1.6rem; height: 1.6rem; }
+.dif h3 { font-size: clamp(1.2rem, 1.7vw, 1.8rem); overflow-wrap: anywhere; line-height: 1.05; margin-bottom: .5rem; color: inherit; }
+.dif p { margin: 0; font-size: .96rem; line-height: 1.45; max-width: none; }
+@media (max-width: 1040px) { .difs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dif:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+@media (max-width: 620px) { .difs { grid-template-columns: 1fr; } }
