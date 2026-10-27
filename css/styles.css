@@ -536,8 +536,8 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .cabeza--ancha p, .cabeza--ancha .cabeza-txt { max-width: none; }
 .cabeza--ancha .cabeza-txt { width: 100%; }
 .cabeza--ancha p { width: 100%; }
-@media (min-width: 1100px) { #instituciones .filas { grid-template-columns: repeat(5, minmax(0, 1fr)); } #instituciones .fila { padding: 1.4rem 1.2rem 1.6rem; } #instituciones .fila h3 { font-size: clamp(1.4rem, 1.7vw, 1.8rem); } }
+@media (min-width: 900px) { #instituciones .filas { grid-template-columns: repeat(5, minmax(0, 1fr)); } #instituciones .fila { padding: 1.4rem 1.2rem 1.6rem; } #instituciones .fila h3 { font-size: clamp(1.4rem, 1.7vw, 1.8rem); } }
 /* Tablet: la ficha 5 ocupa todo el ancho para no quedar huérfana */
-@media (min-width: 621px) and (max-width: 1099px) { #instituciones .fila:nth-child(5):nth-child(odd) { grid-column: 1 / -1; } }
+@media (min-width: 621px) and (max-width: 899px) { #instituciones .fila:nth-child(5):nth-child(odd) { grid-column: 1 / -1; } }
 /* Móvil: el cajón "otro tema" usa todo el ancho */
 @media (max-width: 620px) { .temas li.otro { width: 100%; } .temas li.otro form { width: 100%; } .temas li.otro input { flex: 1; width: auto; min-width: 0; font-size: 1.2rem; } }

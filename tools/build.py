@@ -324,7 +324,7 @@ def panel(titulo, texto, etiqueta, href):
 def llamado(titulo="¿Tienes una idea o un proyecto?", texto="Cuéntanos qué necesitas y te respondemos con la mejor solución.",
             etiqueta="Solicita tu cotización", href="contacto.html"):
     return f"""<section class="llamado"><div class="contenedor"><div class="caja">
-  <div><h2>{escape(titulo)}</h2><p>{escape(texto)}</p></div>
+  <div><h2>{escape(titulo)}</h2>{"<p>"+escape(texto)+"</p>" if texto else ""}</div>
   <a class="boton boton--lima" href="{href}">{escape(etiqueta)}</a>
 </div></div></section>"""
 
@@ -613,7 +613,7 @@ page("educacion.html", "Educación",
          ("Consultoría", "Formación y consultoría para la escuela y el profesorado en el ámbito STEAM."),
          ("Aulas", "Puesta en marcha de espacios de innovación y educación basados en nuevas tecnologías."),
      ]), "instituciones")
-     + llamado("Capacita a tu equipo o a tu grupo", "Cuéntanos qué quieres aprender y armamos el programa.", "Solicitar información", cot("Educación / talleres")))
+     + llamado("Capacita a tu equipo o a tu grupo", "", "Solicitar información", cot("Educación / talleres")))
 
 # ---- Comunidad ----
 page("comunidad.html", "Comunidad",
