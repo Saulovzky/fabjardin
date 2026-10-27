@@ -255,3 +255,30 @@
       encodeURIComponent("Hola, quiero cotizar un proyecto en Fabjardin.");
   }
 })();
+
+/* Equipos: nombre -> detalle (hover/foco en escritorio, toque en móvil) */
+(function () {
+  var cont = document.getElementById("equipos");
+  if (!cont) return;
+  var items = Array.prototype.slice.call(cont.querySelectorAll(".eq"));
+  var escritorio = window.matchMedia("(min-width: 900px)");
+  var conHover = window.matchMedia("(hover: hover)");
+  cont.classList.add("js");
+  function poner(item, abierto) {
+    item.classList.toggle("on", abierto);
+    item.querySelector(".eq-b").setAttribute("aria-expanded", abierto ? "true" : "false");
+  }
+  function activar(item) { items.forEach(function (i) { poner(i, i === item); }); }
+  items.forEach(function (item) {
+    var b = item.querySelector(".eq-b");
+    b.addEventListener("mouseenter", function () { if (escritorio.matches && conHover.matches) activar(item); });
+    b.addEventListener("focus", function () { if (escritorio.matches) activar(item); });
+    b.addEventListener("click", function () {
+      if (escritorio.matches) activar(item);
+      else poner(item, !item.classList.contains("on"));
+    });
+  });
+  function inicial() { if (escritorio.matches) { if (!cont.querySelector(".eq.on")) activar(items[0]); } else { items.forEach(function (i) { poner(i, false); }); } }
+  if (escritorio.addEventListener) escritorio.addEventListener("change", inicial); else escritorio.addListener(inicial);
+  inicial();
+})();

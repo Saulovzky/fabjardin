@@ -514,18 +514,22 @@ page("nosotros.html", "Nosotros",
 
 # ---- Laboratorio ----
 def equipamiento():
+    """Lista de nombres; al pasar el cursor (o tocar) se muestra el detalle de cada equipo."""
     largo = {n: l for n, _, _, l in SERVICES}  # el detalle de cada servicio vive aquí
     datos = {m: (t, largo.get(m, u)) for m, t, u in HOJA}
+    nombres = [n for n, _, _, _ in SERVICES]  # mismo orden y numeración que la matriz de servicios
     out = []
-    for i, (area, desc, maqs) in enumerate(EQUIPO, 1):
-        filas_m = "".join(
-            f'<div class="maq"><h4>{escape(m)}</h4><dl>'
-            f'<div><dt>Trabaja con</dt><dd>{escape(datos[m][0])}</dd></div>'
-            f'<div><dt>Sirve para</dt><dd>{escape(datos[m][1])}</dd></div></dl>'
-            f'<a class="cotizar" href="{cot(m)}">Cotizar</a></div>' for m in maqs)
-        out.append(f'<article class="area"><div class="area-id"><span class="num">{i:02d}</span><h3>{escape(area)}</h3><p>{escape(desc)}</p></div>'
-                   f'<div class="maquinas">{filas_m}</div></article>')
-    return '<div class="equipo">' + "".join(out) + "</div>"
+    for i, m in enumerate(nombres, 1):
+        t, u = datos[m]
+        out.append(
+            f'<div class="eq"><button type="button" class="eq-b" id="eq-b{i}" aria-expanded="false" aria-controls="eq-p{i}">'
+            f'<span class="num">{i:02d}</span><span class="eq-n">{escape(m)}</span>'
+            f'<svg class="eq-f" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>'
+            f'<div class="eq-p" id="eq-p{i}" role="region" aria-labelledby="eq-b{i}"><div class="eq-d"><h3>{escape(m)}</h3><dl>'
+            f'<div><dt>Trabaja con</dt><dd>{escape(t)}</dd></div>'
+            f'<div><dt>Sirve para</dt><dd>{escape(u)}</dd></div></dl>'
+            f'<a class="boton boton--borde boton--chico" href="{cot(m)}">Cotizar</a></div></div></div>')
+    return f'<div class="equipos" id="equipos" style="--n:{len(nombres)}">' + "".join(out) + "</div>"
 
 
 def servicios_lab():
@@ -543,7 +547,7 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
      "Servicios de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, vinil, circuitos, escáner 3D y uso del espacio.",
      hero_int("Fabricación y herramientas digitales, en un solo lugar", "", ["Laboratorio"], lineal=True)
      + bloque("papel", cabeza("Servicios y tecnologías") + servicios_lab(), "servicios")
-     + bloque("hoja", cabeza("Para qué sirve cada equipo", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.", sola=True) + equipamiento(), "equipamiento")
+     + bloque("hoja", cabeza("Para qué sirve cada equipo", "Pasa el cursor (o toca) el nombre de un equipo para ver con qué materiales trabaja y lo que puedes hacer con él.", sola=True) + equipamiento(), "equipamiento")
      + bloque("papel", f"""<div class="dividido">
   <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
     <p class="texto-largo">Te ofrecemos un espacio con acceso flexible a nuestras instalaciones, equipadas con herramientas y maquinaria, para sacar adelante tus maquetas, trabajos, prototipos o proyectos.</p>
