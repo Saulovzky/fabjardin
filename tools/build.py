@@ -601,10 +601,11 @@ page("educacion.html", "Educación",
      hero_int("Aprende haciendo",
               "Un ecosistema donde generamos experiencias educativas prácticas sobre nuevas tecnologías creativas.",
               ["Educación"])
-     + bloque("papel", cabeza("¿Qué quieres aprender?", "Aprendes usando las mismas máquinas con las que fabricamos proyectos reales.")
-              + '<ul class="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS)
-              + f'<li class="otro"><a href="{cot("Educación / talleres")}">¿Otro tema? Cuéntanos cuál</a></li>' + "</ul>"
-              + f'<p style="margin-top:1.6rem">¿Quieres saber cuándo es el próximo taller? <a href="{cot("Educación / talleres")}">Escríbenos</a> y te avisamos.</p>', "talleres")
+     + bloque("papel", f'''<div class="cabeza"><h2>¿Qué quieres aprender?</h2>
+  <p class="steam-p">Implementamos educación <span class="steam" tabindex="0" aria-label="STEAM: Ciencia, Tecnología, Ingeniería, Artes y Matemáticas"><b>STEAM</b><span class="def" role="tooltip"><i><b>S</b>Ciencia</i><i><b>T</b>Tecnología</i><i><b>E</b>Ingeniería</i><i><b>A</b>Artes</i><i><b>M</b>Matemáticas</i></span></span> llevando a escuelas, organizaciones, instituciones y comunidad en general, programas y productos con los que impartimos talleres y cursos para inspirar a niños, jóvenes y adultos a fabricar el futuro.</p></div>'''
+              + '<ul class="temas" id="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS)
+              + '<li class="otro"><form id="form-tema" autocomplete="off"><label class="visually-hidden" for="tema-nuevo">Escribe otro tema que quieras aprender</label>'
+                '<input id="tema-nuevo" type="text" maxlength="40" placeholder="¿Otro tema? Escríbelo y da Enter"><button type="submit" aria-label="Grabar tema">↵</button></form></li></ul>', "talleres")
      + bloque("tinta", f"""<div class="dividido">
   <h2>Capacitaciones intensivas</h2><div class="der">
     <p class="texto-largo">Más de 15 bootcamps y capacitaciones realizados. Programas intensivos para adquirir habilidades concretas en poco tiempo.</p>{panel("+15 bootcamps", "Capacitaciones impartidas en Fabjardin.", "Pide información", cot("Educación / talleres"))}</div></div>""", "bootcamps")

@@ -156,6 +156,38 @@
     }
   }
 
+  /* ---- Educación: "otro tema" se graba con láser y se puede enviar por correo ---- */
+  var formTema = document.getElementById("form-tema");
+  var listaTemas = document.getElementById("temas");
+  if (formTema && listaTemas) {
+    var contador = 0;
+    var entrada = document.getElementById("tema-nuevo");
+    formTema.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var texto = entrada.value.replace(/\s+/g, " ").trim();
+      if (!texto) { entrada.focus(); return; }
+      var li = document.createElement("li");
+      li.className = "nuevo grabando c" + (contador++ % 5);
+      var t = document.createElement("span");
+      t.className = "txt";
+      t.textContent = texto;
+      var rayo = document.createElement("span");
+      rayo.className = "rayo-grabado";
+      rayo.setAttribute("aria-hidden", "true");
+      li.appendChild(t);
+      li.appendChild(rayo);
+      var enviar = document.createElement("a");
+      enviar.className = "enviar-tema";
+      enviar.textContent = "Enviarlo a Fabjardin ↗";
+      enviar.href = "mailto:" + (cfg.email || "") + "?subject=" + encodeURIComponent("Tema que quiero aprender: " + texto) +
+        "&body=" + encodeURIComponent("Hola, me gustaría aprender sobre: " + texto);
+      li.appendChild(enviar);
+      listaTemas.insertBefore(li, formTema.parentNode);
+      entrada.value = "";
+      setTimeout(function () { li.classList.remove("grabando"); li.classList.add("listo"); }, 1900);
+    });
+  }
+
   /* ---- Formulario de cotización ---- */
   var form = document.getElementById("form-cotizacion");
   if (!form) return;

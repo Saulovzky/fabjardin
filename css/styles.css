@@ -490,7 +490,42 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .reb:hover, .reb:focus { flex-grow: var(--abierta); border-radius: 28px; }
 .reb:hover img, .reb:focus img { filter: none; }
 @media (max-width: 820px) { .rebanadas { --W: min(calc(100vw - 2.5rem), 460px); } }
-.temas li.otro { background: transparent; border: 2px dashed var(--tinta); padding: 0; }
-.temas li.otro a { display: block; padding: calc(.8rem - 2px) calc(1.5rem - 2px); color: var(--tinta); text-decoration: none; }
-.temas li.otro:hover { background: var(--tinta); border-style: solid; }
-.temas li.otro:hover a { color: #fff; }
+/* "Otro tema": caja de texto + grabado láser */
+.temas li.otro { padding: 0; background: transparent; border: 2px dashed var(--tinta); display: flex; }
+.temas li.otro form { display: flex; align-items: center; }
+.temas li.otro input { width: clamp(15rem, 24vw, 21rem); border: 0; background: transparent; font: 800 clamp(1.3rem, 1.9vw, 1.7rem)/1 var(--display); color: var(--tinta); padding: .8rem 0 .8rem 1.4rem; outline: none; }
+.temas li.otro input::placeholder { color: var(--tinta); opacity: .65; }
+.temas li.otro button { border: 0; background: var(--tinta); color: #fff; width: 2.4rem; height: 2.4rem; margin: .35rem; border-radius: 50%; font-size: 1.1rem; cursor: pointer; }
+.temas li.otro:focus-within { border-style: solid; box-shadow: 0 0 0 3px rgba(47,91,255,.25); }
+
+.temas li.nuevo { position: relative; display: inline-flex; align-items: center; gap: .8rem; background: #e6c9a0; transition: background-color .5s .1s; }
+.temas li.nuevo.c1 { --f: var(--cian); } .temas li.nuevo.c2 { --f: var(--sol); } .temas li.nuevo.c3 { --f: var(--lila); } .temas li.nuevo.c4 { --f: var(--coral); }
+.temas li.nuevo.c0 { --f: var(--lima); }
+.temas li.nuevo.listo { background: var(--f); }
+.temas li.nuevo .txt { display: inline-block; color: var(--tinta); }
+.temas li.nuevo.grabando .txt { animation: revela 1.7s linear both, quema 1.9s ease-out both; }
+.temas li.nuevo .rayo-grabado { position: absolute; top: 12%; bottom: 12%; left: 1.5rem; width: 3px; margin-left: -1px; border-radius: 2px; opacity: 0; background: #fff; box-shadow: 0 0 6px 2px #ff3b2e, 0 0 18px 6px rgba(255,59,46,.75); pointer-events: none; }
+.temas li.nuevo.grabando .rayo-grabado { animation: barre 1.7s linear both; }
+.temas li.nuevo .enviar-tema { display: none; font: 700 .85rem/1 var(--cuerpo); color: #fff; background: var(--tinta); padding: .5rem .8rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+.temas li.nuevo.listo .enviar-tema { display: inline-block; animation: entra .4s both; }
+.temas li.nuevo .enviar-tema:hover { background: var(--azul); }
+@keyframes revela { from { clip-path: inset(-10% 100% -10% 0); } }
+@keyframes quema { 0% { color: #3b2410; } 100% { color: var(--tinta); } }
+@keyframes barre { 0% { left: 1.5rem; opacity: 1; } 96% { opacity: 1; } 100% { left: calc(100% - 1.5rem); opacity: 0; } }
+@keyframes entra { from { opacity: 0; transform: translateX(-6px); } }
+
+/* STEAM: el significado se despliega al pasar el cursor */
+.steam-p { position: relative; max-width: 62ch; }
+.steam { cursor: help; outline: none; }
+.steam b { padding: 0 .3em; border-radius: 6px; background: var(--lima); color: var(--tinta); }
+.steam .def { position: absolute; z-index: 20; left: 0; top: calc(100% + .4rem); width: min(100%, 30rem); display: flex; flex-wrap: wrap; gap: .4rem; padding: .8rem; border-radius: 20px; background: var(--tinta); box-shadow: 0 16px 34px rgba(0,28,114,.3);
+  opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.96); transform-origin: top left; transition: opacity .25s, transform .35s cubic-bezier(.2,.8,.3,1), visibility .25s; pointer-events: none; }
+.steam .def i { display: inline-flex; align-items: center; gap: .45rem; padding: .35rem .8rem .35rem .35rem; border-radius: 999px; background: rgba(255,255,255,.1); color: #fff; font: 700 .95rem/1 var(--cuerpo); font-style: normal; opacity: 0; transform: translateX(-8px); transition: opacity .3s, transform .3s; }
+.steam .def b { display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; padding: 0; border-radius: 50%; background: var(--lima); color: var(--tinta); font: 800 1rem/1 var(--display); }
+.steam:hover .def, .steam:focus .def { opacity: 1; visibility: visible; transform: none; }
+.steam:hover .def i, .steam:focus .def i { opacity: 1; transform: none; }
+.steam:hover .def i:nth-child(2), .steam:focus .def i:nth-child(2) { transition-delay: .06s; }
+.steam:hover .def i:nth-child(3), .steam:focus .def i:nth-child(3) { transition-delay: .12s; }
+.steam:hover .def i:nth-child(4), .steam:focus .def i:nth-child(4) { transition-delay: .18s; }
+.steam:hover .def i:nth-child(5), .steam:focus .def i:nth-child(5) { transition-delay: .24s; }
+@media (max-width: 620px) { .temas li.otro input { width: 12.5rem; } }
