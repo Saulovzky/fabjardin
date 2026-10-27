@@ -534,3 +534,6 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 /* Cabeceras de Educación: título arriba, texto a todo lo ancho */
 .cabeza--ancha { align-items: start; }
 .cabeza--ancha p, .cabeza--ancha .cabeza-txt { max-width: none; }
+.cabeza--ancha .cabeza-txt { width: 100%; }
+.cabeza--ancha p { width: 100%; }
+@media (min-width: 1100px) { #instituciones .filas { grid-template-columns: repeat(5, minmax(0, 1fr)); } #instituciones .fila { padding: 1.4rem 1.2rem 1.6rem; } #instituciones .fila h3 { font-size: clamp(1.4rem, 1.7vw, 1.8rem); } }
