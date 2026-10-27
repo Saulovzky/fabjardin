@@ -37,7 +37,7 @@ NAV = [
     ("Nosotros", "nosotros.html", [
         ("Quiénes somos", "nosotros.html"), ("Impacto", "nosotros.html#impacto"), ("Red FabLab y aliados", "nosotros.html#red")]),
     ("Laboratorio", "laboratorio.html", [
-        ("Equipos", "laboratorio.html#servicios"), ("Equipamiento y tecnologías", "laboratorio.html#equipamiento"), ("Usa el espacio", "laboratorio.html#usa-el-espacio")]),
+        ("Servicios y tecnologías", "laboratorio.html#servicios"), ("Para qué sirve cada equipo", "laboratorio.html#equipamiento"), ("Usa el espacio", "laboratorio.html#usa-el-espacio")]),
     ("Innovación", "innovacion.html", [
         ("I+D para empresas e instituciones", "innovacion.html"), ("Prototipado y producto", "innovacion.html#prototipado"), ("Asesoría y diseño", "innovacion.html#asesoria")]),
     ("Emprendimiento", "emprendimiento.html", [
@@ -541,8 +541,8 @@ def servicios_lab():
 page("laboratorio.html", "Laboratorio de fabricación digital",
      "Servicios de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, vinil, circuitos, escáner 3D y uso del espacio.",
      hero_int("Fabricación y herramientas digitales, en un solo lugar", "", ["Laboratorio"], lineal=True)
-     + bloque("papel", cabeza("Equipos") + servicios_lab(), "servicios")
-     + bloque("hoja", cabeza("Equipamiento y tecnologías", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.") + equipamiento(), "equipamiento")
+     + bloque("papel", cabeza("Servicios y tecnologías") + servicios_lab(), "servicios")
+     + bloque("hoja", cabeza("Para qué sirve cada equipo", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.") + equipamiento(), "equipamiento")
      + bloque("papel", f"""<div class="dividido">
   <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
     <p class="texto-largo">Te ofrecemos un espacio con acceso flexible a nuestras instalaciones, equipadas con herramientas y maquinaria, para sacar adelante tus maquetas, trabajos, prototipos o proyectos.</p>
