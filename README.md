@@ -7,7 +7,7 @@ Sitio web estático (HTML + CSS + JS, sin frameworks) publicado con **GitHub Pag
 ```
 index.html                 Portada: "Del archivo al objeto"
 nosotros.html              Misión y visión · Impacto · Red FabLab
-laboratorio.html           Servicios de fabricación · Equipamiento · Usa el espacio
+laboratorio.html           Servicios de fabricación · Equipamiento
 innovacion.html            I+D · Prototipado · Asesoría y diseño
 emprendimiento.html        Acompañamiento · Ruta idea→producto · Mentorías y red
 educacion.html             Talleres · BootCamps · Escuelas y jóvenes

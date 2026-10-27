@@ -617,3 +617,5 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 }
 @keyframes eq-entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .equipos.js .eq-p, .equipos.js .eq-p > .eq-d, .eq-b, .eq-f { transition: none !important; animation: none !important; } .equipos.js .eq.on .eq-p { animation: none; } }
+.llamado h2 { max-width: 26ch; }
+@media (max-width: 620px) { .llamado .caja::after { width: 110px; height: 110px; right: -35px; top: -45px; } }

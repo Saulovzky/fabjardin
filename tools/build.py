@@ -37,7 +37,7 @@ NAV = [
     ("Nosotros", "nosotros.html", [
         ("Quiénes somos", "nosotros.html"), ("Impacto", "nosotros.html#impacto"), ("Red FabLab y aliados", "nosotros.html#red")]),
     ("Laboratorio", "laboratorio.html", [
-        ("Servicios y tecnologías", "laboratorio.html#servicios"), ("Para qué sirve cada equipo", "laboratorio.html#equipamiento"), ("Usa el espacio", "laboratorio.html#usa-el-espacio")]),
+        ("Servicios y tecnologías", "laboratorio.html#servicios"), ("Para qué sirve cada equipo", "laboratorio.html#equipamiento")]),
     ("Innovación", "innovacion.html", [
         ("I+D para empresas e instituciones", "innovacion.html"), ("Prototipado y producto", "innovacion.html#prototipado"), ("Asesoría y diseño", "innovacion.html#asesoria")]),
     ("Emprendimiento", "emprendimiento.html", [
@@ -75,7 +75,7 @@ SERVICES = [
      "Prototipado, servicio de modelado 3D y CAD, servicios de vectorización y consultoría para desarrollo de producto."),
 ]
 SERVICE_OPTIONS = [s[0] for s in SERVICES] + [
-    "Usar el espacio (membresía / acceso)", "Innovación / I+D", "Emprendimiento", "Educación / talleres", "Otro / no estoy seguro",
+    "Innovación / I+D", "Emprendimiento", "Educación / talleres", "Otro / no estoy seguro",
 ]
 
 # Hoja de la portada: (máquina, trabaja con, sirve para)
@@ -213,7 +213,6 @@ def pie():
       <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li>{cols}</ul></div>
       <div><h3>Servicios</h3><ul>
         <li><a href="laboratorio.html#servicios">Fabricación digital</a></li>
-        <li><a href="laboratorio.html#usa-el-espacio">Usa el espacio</a></li>
         <li><a href="innovacion.html">Innovación e I+D</a></li>
         <li><a href="contacto.html">Solicitar cotización</a></li>
       </ul></div>
@@ -333,7 +332,7 @@ def llamado(titulo="¿Tienes una idea o un proyecto?", texto="Cuéntanos qué ne
             etiqueta="Solicita tu cotización", href="contacto.html"):
     return f"""<section class="llamado"><div class="contenedor"><div class="caja">
   <div><h2>{escape(titulo)}</h2>{"<p>"+escape(texto)+"</p>" if texto else ""}</div>
-  <a class="boton boton--lima" href="{href}">{escape(etiqueta)}</a>
+  <a class="boton boton--lima" href="{href}"{' target="_blank" rel="noopener"' if href.startswith("http") else ""}>{escape(etiqueta)}</a>
 </div></div></section>"""
 
 
@@ -415,7 +414,6 @@ GUIA = {
         {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "educacion.html", "Educación / talleres")},
         {"t": "Convertir mi idea en negocio", "d": "Acompañamiento para emprender", **_ruta("Acompañamiento para emprender", "Acompañamiento y formación para convertir tus ideas en proyectos reales.", "Ver cómo te acompañamos", "emprendimiento.html", "Emprendimiento")},
         {"t": "Resolver un reto de mi empresa o institución", "d": "I+D, prototipado y formación", **_ruta("Innovación para organizaciones", "I+D, prototipado y formación para empresas, instituciones y organizaciones.", "Ver innovación", "innovacion.html", "Innovación / I+D")},
-        {"t": "Usar el taller por mi cuenta", "d": "Acceso a instalaciones y maquinaria", **_ruta("Usa el espacio", "Acceso flexible a nuestras instalaciones, con herramientas y maquinaria listas para usar.", "Ver cómo usar el espacio", "laboratorio.html#usa-el-espacio", "Usar el espacio (membresía / acceso)")},
         {"t": "Aún no lo sé", "d": "Cuéntanos y te orientamos", "res": {"si": "Platiquemos", "titulo": "Cuéntanos en qué andas", "texto": "Describe tu idea y te decimos si podemos hacerla y con qué.", "items": [],
             "ctas": [{"l": "Escríbenos", "h": "contacto.html"}, {"l": "Hablar por WhatsApp", "h": "wa"}]}},
     ],
@@ -528,7 +526,7 @@ def equipamiento():
             f'<div class="eq-p" id="eq-p{i}" role="region" aria-labelledby="eq-b{i}"><div class="eq-d"><h3>{escape(m)}</h3><dl>'
             f'<div><dt>Trabaja con</dt><dd>{escape(t)}</dd></div>'
             f'<div><dt>Sirve para</dt><dd>{escape(u)}</dd></div></dl>'
-            f'<a class="boton boton--borde boton--chico" href="{cot(m)}">Cotizar</a></div></div></div>')
+            f'</div></div></div>')
     return f'<div class="equipos" id="equipos" style="--n:{len(nombres)}">' + "".join(out) + "</div>"
 
 
@@ -547,13 +545,8 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
      "Servicios de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, vinil, circuitos, escáner 3D y uso del espacio.",
      hero_int("Fabricación y herramientas digitales, en un solo lugar", "", ["Laboratorio"], lineal=True)
      + bloque("papel", cabeza("Servicios y tecnologías") + servicios_lab(), "servicios")
-     + bloque("hoja", cabeza("Para qué sirve cada equipo", "Pasa el cursor (o toca) el nombre de un equipo para ver con qué materiales trabaja y lo que puedes hacer con él.", sola=True) + equipamiento(), "equipamiento")
-     + bloque("papel", f"""<div class="dividido">
-  <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
-    <p class="texto-largo">Te ofrecemos un espacio con acceso flexible a nuestras instalaciones, equipadas con herramientas y maquinaria, para sacar adelante tus maquetas, trabajos, prototipos o proyectos.</p>
-    {puntos(["Acceso flexible a las instalaciones", "Herramientas y maquinaria listas para usar", "Orientación del equipo técnico cuando la necesites"])}
-  {panel("¿Quieres usar el espacio?", "Cuéntanos qué vas a hacer y te decimos cómo acceder.", "Quiero usar el espacio", cot("Usar el espacio (membresía / acceso)"))}</div></div>""", "usa-el-espacio")
-     + llamado())
+     + bloque("hoja", cabeza("Para qué sirve cada equipo") + equipamiento(), "equipamiento")
+     + llamado("¿Aún no sabes por dónde iniciar? Conéctate con el equipo", "", "Escribir por WhatsApp", CONTACT["wa"]))
 
 # ---- Innovación ----
 page("innovacion.html", "Innovación e I+D",
