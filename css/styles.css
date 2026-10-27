@@ -529,3 +529,4 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .steam:hover .def i:nth-child(4), .steam:focus .def i:nth-child(4) { transition-delay: .18s; }
 .steam:hover .def i:nth-child(5), .steam:focus .def i:nth-child(5) { transition-delay: .24s; }
 @media (max-width: 620px) { .temas li.otro input { width: 12.5rem; } }
+.cabeza-txt p + p { margin-top: .8rem; }

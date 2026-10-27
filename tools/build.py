@@ -42,7 +42,7 @@ NAV = [
     ("Emprendimiento", "emprendimiento.html", [
         ("Acompañamiento", "emprendimiento.html"), ("De la idea al producto", "emprendimiento.html#ruta"), ("Mentorías y red", "emprendimiento.html#red")]),
     ("Educación", "educacion.html", [
-        ("Talleres y cursos", "educacion.html"), ("Escuelas y jóvenes", "educacion.html#escuelas")]),
+        ("Talleres y cursos", "educacion.html"), ("Instituciones", "educacion.html#instituciones")]),
     ("Comunidad", "comunidad.html", [
         ("Eventos y agenda", "comunidad.html#agenda"), ("Proyectos", "comunidad.html#proyectos"), ("Noticias", "comunidad.html#noticias")]),
 ]
@@ -601,16 +601,16 @@ page("educacion.html", "Educación",
      hero_int("Aprende haciendo",
               "Un ecosistema donde generamos experiencias educativas prácticas sobre nuevas tecnologías creativas.",
               ["Educación"])
-     + bloque("papel", f'''<div class="cabeza"><h2>¿Qué quieres aprender?</h2>
-  <p class="steam-p">Implementamos educación <span class="steam" tabindex="0" aria-label="STEAM: Ciencia, Tecnología, Ingeniería, Artes y Matemáticas"><b>STEAM</b><span class="def" role="tooltip"><i><b>S</b>Ciencia</i><i><b>T</b>Tecnología</i><i><b>E</b>Ingeniería</i><i><b>A</b>Artes</i><i><b>M</b>Matemáticas</i></span></span> llevando a escuelas, organizaciones, instituciones y comunidad en general, programas y productos con los que impartimos talleres y cursos para inspirar a niños, jóvenes y adultos a fabricar el futuro.</p></div>'''
+     + bloque("papel", f'''<div class="cabeza"><h2>Talleres y cursos</h2>
+  <p>Fórmate con nuestras actividades de educación. Si eres una persona curiosa, emprendedora o docente, o simplemente quieres aprender algo nuevo, aquí encuentras talleres y cursos prácticos en los que aprendes haciendo.</p></div>'''
               + '<ul class="temas" id="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS)
               + '<li class="otro"><form id="form-tema" autocomplete="off"><label class="visually-hidden" for="tema-nuevo">Escribe otro tema que quieras aprender</label>'
                 '<input id="tema-nuevo" type="text" maxlength="40" placeholder="¿Otro tema? Escríbelo y da Enter"><button type="submit" aria-label="Grabar tema">↵</button></form></li></ul>', "talleres")
-     + bloque("hoja", cabeza("Escuelas y jóvenes", "Diseñamos experiencias educativas para que niñas, niños y jóvenes entiendan cómo funcionan las cosas y se atrevan a crearlas.") + filas([
+     + bloque("hoja", f'''<div class="cabeza"><h2>Instituciones</h2><div class="cabeza-txt"><p class="steam-p">Implementamos educación <span class="steam" tabindex="0" aria-label="STEAM: Ciencia, Tecnología, Ingeniería, Artes y Matemáticas"><b>STEAM</b><span class="def" role="tooltip"><i><b>S</b>Ciencia</i><i><b>T</b>Tecnología</i><i><b>E</b>Ingeniería</i><i><b>A</b>Artes</i><i><b>M</b>Matemáticas</i></span></span> llevando a escuelas, organizaciones, instituciones y comunidad en general, programas y productos con los que impartimos talleres y cursos para inspirar a niños, jóvenes y adultos a fabricar el futuro.</p><p>Diseñamos experiencias educativas para que niñas, niños y jóvenes entiendan cómo funcionan las cosas y se atrevan a crearlas.</p></div></div>''' + filas([
          ("Programas educativos", "Contenidos prácticos adaptados a cada nivel y objetivo de aprendizaje."),
          ("Visitas de grupos y escuelas", "Recorridos y actividades en el taller para grupos escolares y comunitarios."),
          ("Proyectos con impacto", "Aprender resolviendo retos reales de la comunidad."),
-     ]), "escuelas")
+     ]), "instituciones")
      + llamado("Capacita a tu equipo o a tu grupo", "Cuéntanos qué quieres aprender y armamos el programa.", "Solicitar información", cot("Educación / talleres")))
 
 # ---- Comunidad ----
