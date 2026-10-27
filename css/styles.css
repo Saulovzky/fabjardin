@@ -541,3 +541,18 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 @media (min-width: 621px) and (max-width: 899px) { #instituciones .fila:nth-child(5):nth-child(odd) { grid-column: 1 / -1; } }
 /* Móvil: el cajón "otro tema" usa todo el ancho */
 @media (max-width: 620px) { .temas li.otro { width: 100%; } .temas li.otro form { width: 100%; } .temas li.otro input { flex: 1; width: auto; min-width: 0; font-size: 1.2rem; } }
+
+/* Mapa en el pie */
+.pie-mapa { margin-top: 2rem; border-radius: var(--radio); overflow: hidden; height: clamp(220px, 28vw, 320px); background: rgba(255,255,255,.06); }
+.pie-mapa iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* WhatsApp siempre visible a la derecha */
+.wa-flotante { position: fixed; right: clamp(.9rem, 2vw, 1.6rem); bottom: clamp(.9rem, 2vw, 1.6rem); z-index: 90; display: inline-flex; align-items: center; gap: .55rem; height: 3.6rem; min-width: 3.6rem; padding: 0 .85rem; border-radius: 999px; background: #25d366; color: #fff; text-decoration: none; font: 700 1rem var(--cuerpo); box-shadow: 0 6px 18px rgba(0,0,0,.28); transition: transform .2s, box-shadow .2s; }
+.wa-flotante svg { width: 2.1rem; height: 2.1rem; flex: none; }
+.wa-flotante span { max-width: 0; overflow: hidden; white-space: nowrap; transition: max-width .3s; }
+.wa-flotante:hover, .wa-flotante:focus-visible { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.34); }
+.wa-flotante:hover span, .wa-flotante:focus-visible span { max-width: 7rem; padding-right: .3rem; }
+@media (max-width: 620px) { .wa-flotante { height: 3.3rem; min-width: 3.3rem; padding: 0 .65rem; } .wa-flotante svg { width: 2rem; height: 2rem; } }
+.pie { padding-bottom: 5.4rem; }
+.temas li.otro input { width: clamp(18.5rem, 24vw, 21rem); }
+@media (max-width: 620px) { .temas li.otro input { width: auto; } }
