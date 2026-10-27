@@ -92,10 +92,10 @@ HOJA = [
 
 EJES = [
     ("Laboratorio", "laboratorio.html", "Fabricación digital y uso del taller, con la maquinaria lista para usar."),
-    ("Innovación", "innovacion.html", "I+D, prototipado y desarrollo de producto para empresas e instituciones."),
-    ("Emprendimiento", "emprendimiento.html", "Acompañamiento para convertir una idea en un proyecto real."),
-    ("Formación", "formacion.html", "Talleres, bootcamps y programas para escuelas y jóvenes."),
-    ("Comunidad", "comunidad.html", "Eventos, proyectos y personas que crean en conjunto."),
+    ("Innovación", "innovacion.html", "I+D, prototipado y formación para empresas, instituciones y organizaciones."),
+    ("Emprendimiento", "emprendimiento.html", "Acompañamiento y formación para convertir tus ideas en proyectos reales."),
+    ("Educación", "formacion.html", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad."),
+    ("Comunidad", "comunidad.html", "Eventos, proyectos y personas con las que creamos en conjunto."),
 ]
 
 DIFERENCIALES = [
