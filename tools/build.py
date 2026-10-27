@@ -105,12 +105,13 @@ DIFERENCIALES = [
     ("Hiper-personalización", "Fabricación de piezas únicas que la industria masiva no puede atender."),
     ("Socios de la innovación", "Know-how técnico y acompañamiento en diseño y metodologías."),
 ]
+FAB_MIT = "https://fab.cba.mit.edu/"
 MANIFIESTO = [
-    "Sin mínimos de producción.",
-    "Máquinas y procesos bajo el mismo techo.",
-    "Piezas únicas que la industria masiva no atiende.",
-    "Estándares de la FabLab Network.",
-    "Acompañamiento técnico de la idea al objeto.",
+    "Haz solo una pieza, o las que necesites.",
+    "Todo lo que necesitas para fabricar, en un solo lugar.",
+    "Hacemos lo que las fábricas grandes no hacen: piezas únicas y a tu medida.",
+    ("Parte de una red mundial de laboratorios de fabricación.", FAB_MIT, "Conoce la red"),
+    "Te acompañamos desde el 0, hasta el 1.",
 ]
 # Equipamiento por área: (área, qué cubre, [nombres de máquinas de HOJA])
 EQUIPO = [
@@ -363,7 +364,10 @@ def home():
     col_a = '<div class="grupo">' + columna(COLUMNA_A) + "</div>"
     col_b = '<div class="grupo">' + columna(COLUMNA_B, marca_tile(paths, True)) + "</div>"
     col_b2 = '<div class="grupo">' + columna(COLUMNA_B, marca_tile(paths, False)) + "</div>"
-    manif = "".join(f"<p>{escape(t)}</p>" for t in MANIFIESTO)
+    manif = "".join(
+        f"<p>{escape(t)}</p>" if isinstance(t, str) else
+        f'<p>{escape(t[0])} <a class="mas" href="{t[1]}" target="_blank" rel="noopener">{escape(t[2])} {FLECHA}</a></p>'
+        for t in MANIFIESTO)
     return f"""
 <section class="hero">
   <div class="contenedor">
