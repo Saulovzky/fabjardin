@@ -564,3 +564,4 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .hero-int--lineal .contenedor { grid-template-columns: 1fr; }
 .hero-int--lineal h1 { max-width: none; margin-bottom: 0; font-size: clamp(1.4rem, calc((100vw - 5rem) / 24), 4.6rem); }
 @media (min-width: 640px) { .hero-int--lineal h1 { white-space: nowrap; } }
+.cabeza--sola p { max-width: none; }

@@ -542,7 +542,7 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
      "Servicios de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, vinil, circuitos, escáner 3D y uso del espacio.",
      hero_int("Fabricación y herramientas digitales, en un solo lugar", "", ["Laboratorio"], lineal=True)
      + bloque("papel", cabeza("Servicios y tecnologías") + servicios_lab(), "servicios")
-     + bloque("hoja", cabeza("Para qué sirve cada equipo", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.") + equipamiento(), "equipamiento")
+     + bloque("hoja", cabeza("Para qué sirve cada equipo", "Herramientas y maquinaria agrupadas por área, con los materiales que trabajan y lo que puedes hacer con ellas.", sola=True) + equipamiento(), "equipamiento")
      + bloque("papel", f"""<div class="dividido">
   <h2>Fabrica tú, sin comprar herramientas caras</h2><div class="der">
     <p class="texto-largo">Te ofrecemos un espacio con acceso flexible a nuestras instalaciones, equipadas con herramientas y maquinaria, para sacar adelante tus maquetas, trabajos, prototipos o proyectos.</p>
