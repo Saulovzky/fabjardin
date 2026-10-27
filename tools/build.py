@@ -41,8 +41,8 @@ NAV = [
         ("I+D para empresas e instituciones", "innovacion.html"), ("Prototipado y producto", "innovacion.html#prototipado"), ("Asesoría y diseño", "innovacion.html#asesoria")]),
     ("Emprendimiento", "emprendimiento.html", [
         ("Acompañamiento", "emprendimiento.html"), ("De la idea al producto", "emprendimiento.html#ruta"), ("Mentorías y red", "emprendimiento.html#red")]),
-    ("Educación", "formacion.html", [
-        ("Talleres y cursos", "formacion.html"), ("BootCamps", "formacion.html#bootcamps"), ("Escuelas y jóvenes", "formacion.html#escuelas")]),
+    ("Educación", "educacion.html", [
+        ("Talleres y cursos", "educacion.html"), ("BootCamps", "educacion.html#bootcamps"), ("Escuelas y jóvenes", "educacion.html#escuelas")]),
     ("Comunidad", "comunidad.html", [
         ("Eventos y agenda", "comunidad.html#agenda"), ("Proyectos", "comunidad.html#proyectos"), ("Noticias", "comunidad.html#noticias")]),
 ]
@@ -95,7 +95,7 @@ EJES = [
     ("Laboratorio", "laboratorio.html", "Fabricación digital y uso del taller, con la maquinaria lista para usar."),
     ("Innovación", "innovacion.html", "I+D, prototipado y formación para empresas, instituciones y organizaciones."),
     ("Emprendimiento", "emprendimiento.html", "Acompañamiento y formación para convertir tus ideas en proyectos reales."),
-    ("Educación", "formacion.html", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad."),
+    ("Educación", "educacion.html", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad."),
     ("Comunidad", "comunidad.html", "Eventos, proyectos y personas con las que creamos en conjunto."),
 ]
 
@@ -129,7 +129,7 @@ EQUIPO = [
 # --------------------------------------------------------------------------
 TONOS = {  # color de acento por página (paleta en css/styles.css)
     "index": "lima", "nosotros": "azul", "laboratorio": "lima", "innovacion": "cian",
-    "emprendimiento": "coral", "formacion": "sol", "comunidad": "lila", "contacto": "lima",
+    "emprendimiento": "coral", "educacion": "sol", "comunidad": "lila", "contacto": "lima",
 }
 
 
@@ -160,7 +160,7 @@ def rebanadas():
 def mosaico(slug):
     """Tres formas de color a la derecha del encabezado; aceptan fotos images/hero/<pagina>-1..3.webp."""
     base = slug.replace(".html", "")
-    if base == "formacion":
+    if base == "educacion":
         return rebanadas()
     formas = "".join(f'<span class="m{i}">{foto(f"images/hero/{base}-{i}.webp")}</span>' for i in (1, 2, 3))
     return f'<div class="mosaico" aria-hidden="true">{formas}</div>'
@@ -404,7 +404,7 @@ GUIA = {
                 {"t": "Copiar o digitalizar una pieza que ya existe", **_fab("Escáner 3D", "Captura el objeto real y lo convierte en un archivo digital editable.", ["Escáner 3D"])},
                 {"t": "Tengo la idea, pero no sé cómo hacerla", **_fab("Asesoría y diseño", "Revisamos contigo tu proyecto y te sugerimos el mejor camino.", ["Asesoría y diseño"])},
             ]}},
-        {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "formacion.html", "Educación / talleres")},
+        {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "educacion.html", "Educación / talleres")},
         {"t": "Convertir mi idea en negocio", "d": "Acompañamiento para emprender", **_ruta("Acompañamiento para emprender", "Acompañamiento y formación para convertir tus ideas en proyectos reales.", "Ver cómo te acompañamos", "emprendimiento.html", "Emprendimiento")},
         {"t": "Resolver un reto de mi empresa o institución", "d": "I+D, prototipado y formación", **_ruta("Innovación para organizaciones", "I+D, prototipado y formación para empresas, instituciones y organizaciones.", "Ver innovación", "innovacion.html", "Innovación / I+D")},
         {"t": "Usar el taller por mi cuenta", "d": "Acceso a instalaciones y maquinaria", **_ruta("Usa el espacio", "Acceso flexible a nuestras instalaciones, con herramientas y maquinaria listas para usar.", "Ver cómo usar el espacio", "laboratorio.html#usa-el-espacio", "Usar el espacio (membresía / acceso)")},
@@ -594,14 +594,16 @@ page("emprendimiento.html", "Emprendimiento",
      + llamado("Cuéntanos tu idea", "Te ayudamos a dar el primer paso.", "Hablemos de tu proyecto", cot("Emprendimiento")))
 
 # ---- Educación ----
-TEMAS = ["Diseño 3D y CAD", "Corte y grabado láser", "Impresión 3D", "Electrónica creativa", "Vectorización y diseño gráfico", "Personalización textil"]
-page("formacion.html", "Educación",
+TEMAS = ["Diseño 3D y CAD", "Corte y grabado láser", "Impresión 3D", "Electrónica creativa", "Vectorización y diseño gráfico", "Personalización textil",
+         "Innovación", "Pensamiento de diseño", "Creatividad", "Emprendimiento"]
+page("educacion.html", "Educación",
      "Talleres prácticos, bootcamps y programas para escuelas y jóvenes sobre nuevas tecnologías y diseño.",
-     hero_int("Aprende haciendo, con las máquinas del taller",
-              "Un ecosistema donde impartimos talleres prácticos sobre nuevas tecnologías y diseño.",
+     hero_int("Aprende haciendo",
+              "Un ecosistema donde generamos experiencias educativas prácticas sobre nuevas tecnologías creativas.",
               ["Educación"])
-     + bloque("papel", cabeza("Talleres y cursos", "Aprendes usando las mismas máquinas con las que fabricamos proyectos reales.")
-              + '<ul class="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS) + "</ul>"
+     + bloque("papel", cabeza("¿Qué quieres aprender?", "Aprendes usando las mismas máquinas con las que fabricamos proyectos reales.")
+              + '<ul class="temas">' + "".join(f"<li>{escape(t)}</li>" for t in TEMAS)
+              + f'<li class="otro"><a href="{cot("Educación / talleres")}">¿Otro tema? Cuéntanos cuál</a></li>' + "</ul>"
               + f'<p style="margin-top:1.6rem">¿Quieres saber cuándo es el próximo taller? <a href="{cot("Educación / talleres")}">Escríbenos</a> y te avisamos.</p>', "talleres")
      + bloque("tinta", f"""<div class="dividido">
   <h2>Capacitaciones intensivas</h2><div class="der">
@@ -699,6 +701,13 @@ def main():
         "404.html", "Página no encontrada", "La página que buscas no existe.",
         hero_int("No encontramos esa página", "Puede que el enlace haya cambiado.", ["Error 404"])
         + bloque("papel", '<div class="fila-botones"><a class="boton boton--lleno" href="index.html">Volver al inicio</a></div>'), noindex=True))
+    write("formacion.html", f"""<!doctype html>
+<html lang="es-MX"><head><meta charset="utf-8"><title>Educación · {NAME}</title>
+<meta name="robots" content="noindex"><link rel="canonical" href="{SITE_URL}/educacion.html">
+<meta http-equiv="refresh" content="0; url=educacion.html"></head>
+<body><p>Esta página ahora es <a href="educacion.html">Educación</a>.</p>
+<script>location.replace("educacion.html" + location.search + location.hash);</script></body></html>
+""")
     write("images/panal.svg", panal_svg())
     write("images/panal-claro.svg", panal_svg("#ffffff", ".08"))
 

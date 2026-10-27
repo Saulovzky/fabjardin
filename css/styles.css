@@ -490,3 +490,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .reb:hover, .reb:focus { flex-grow: var(--abierta); border-radius: 28px; }
 .reb:hover img, .reb:focus img { filter: none; }
 @media (max-width: 820px) { .rebanadas { --W: min(calc(100vw - 2.5rem), 460px); } }
+.temas li.otro { background: transparent; border: 2px dashed var(--tinta); padding: 0; }
+.temas li.otro a { display: block; padding: calc(.8rem - 2px) calc(1.5rem - 2px); color: var(--tinta); text-decoration: none; }
+.temas li.otro:hover { background: var(--tinta); border-style: solid; }
+.temas li.otro:hover a { color: #fff; }
