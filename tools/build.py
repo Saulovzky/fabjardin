@@ -514,7 +514,8 @@ page("nosotros.html", "Nosotros",
 
 # ---- Laboratorio ----
 def equipamiento():
-    datos = {m: (t, u) for m, t, u in HOJA}
+    largo = {n: l for n, _, _, l in SERVICES}  # el detalle de cada servicio vive aquí
+    datos = {m: (t, largo.get(m, u)) for m, t, u in HOJA}
     out = []
     for i, (area, desc, maqs) in enumerate(EQUIPO, 1):
         filas_m = "".join(
@@ -534,7 +535,7 @@ def servicios_lab():
         clase = "servicio con-foto" if img else "servicio"
         out.append(f'<article class="{clase}"><div class="visual"><span class="n">{i:02d}</span>{img}</div>'
                    f'<div class="cuerpo"><h3>{escape(nombre)}</h3><p class="corto">{escape(corto)}</p>'
-                   f'<p class="largo">{escape(largo)}</p><a class="boton boton--borde boton--chico" href="{cot(nombre)}">Cotizar</a></div></article>')
+                   f'</div></article>')
     return '<div class="lista-servicios">' + "".join(out) + "</div>"
 
 

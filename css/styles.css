@@ -565,3 +565,15 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .hero-int--lineal h1 { max-width: none; margin-bottom: 0; font-size: clamp(1.4rem, calc((100vw - 5rem) / 24), 4.6rem); }
 @media (min-width: 640px) { .hero-int--lineal h1 { white-space: nowrap; } }
 .cabeza--sola p { max-width: none; }
+
+/* Servicios y tecnologías: matriz de 3 por fila, miniatura cuadrada + texto */
+.lista-servicios { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem; }
+.servicio { flex-direction: row; align-items: center; gap: 1rem; padding: .7rem; border-radius: 24px; }
+.servicio .visual { flex: none; width: clamp(92px, 9.5vw, 128px); aspect-ratio: 1 / 1; padding: .45rem; border-radius: 18px; }
+.servicio.con-foto .n { font-size: .78rem; padding: .3rem .55rem; }
+.servicio .cuerpo { padding: .2rem .4rem .2rem 0; justify-content: center; }
+.servicio h3 { font-size: clamp(1.25rem, 1.7vw, 1.6rem); margin-bottom: .25rem; line-height: 1.05; }
+.servicio .corto { margin: 0; font-size: .9rem; line-height: 1.4; }
+.lista-servicios .servicio:last-child:nth-child(3n+1) { grid-column: 2; }
+@media (max-width: 1000px) { .lista-servicios { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lista-servicios .servicio:last-child:nth-child(3n+1) { grid-column: auto; } }
+@media (max-width: 640px) { .lista-servicios { grid-template-columns: 1fr; } .servicio .visual { width: 96px; } }
