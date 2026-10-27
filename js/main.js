@@ -69,6 +69,93 @@
     requestAnimationFrame(cuadro);
   }
 
+  /* ---- Asistente: ¿qué necesitas y podemos hacerlo? ---- */
+  var app = document.getElementById("guia-app");
+  var datos = document.getElementById("guia-datos");
+  if (app && datos) {
+    var arbol;
+    try { arbol = JSON.parse(datos.textContent); } catch (e) { arbol = null; }
+    if (arbol) {
+      var wa = "https://wa.me/" + (cfg.whatsapp || "") + "?text=" +
+        encodeURIComponent("Hola, quiero saber si pueden ayudarme con mi proyecto en Fabjardin.");
+      var el = function (tag, clase, texto) {
+        var n = document.createElement(tag);
+        if (clase) n.className = clase;
+        if (texto !== undefined) n.textContent = texto;
+        return n;
+      };
+      var pila = [arbol];
+      var pintar = function (enfocar) {
+        var nodo = pila[pila.length - 1];
+        app.textContent = "";
+        var paso = el("div", "guia-paso");
+        if (nodo.res) {
+          var r = nodo.res;
+          paso.appendChild(el("p", "guia-si", r.si));
+          var t = el("h3", "guia-titulo", r.titulo);
+          t.tabIndex = -1;
+          paso.appendChild(t);
+          paso.appendChild(el("p", "guia-texto", r.texto));
+          if (r.items.length) {
+            var lista = el("div", "maquinas");
+            r.items.forEach(function (it) {
+              var c = el("div", "maq");
+              c.appendChild(el("h4", "", it.m));
+              var dl = el("dl");
+              [["Trabaja con", it.con], ["Sirve para", it.para]].forEach(function (par) {
+                var d = el("div"); d.appendChild(el("dt", "", par[0])); d.appendChild(el("dd", "", par[1])); dl.appendChild(d);
+              });
+              c.appendChild(dl);
+              var a = el("a", "cotizar", "Cotizar"); a.href = it.cot; c.appendChild(a);
+              lista.appendChild(c);
+            });
+            paso.appendChild(lista);
+          }
+          var fila = el("div", "fila-botones");
+          r.ctas.forEach(function (c, i) {
+            var a = el("a", "boton " + (i === 0 ? "boton--lima" : "boton--borde-claro"), c.l);
+            a.href = c.h === "wa" ? wa : c.h;
+            if (c.h === "wa") { a.target = "_blank"; a.rel = "noopener"; }
+            fila.appendChild(a);
+          });
+          paso.appendChild(fila);
+          var nav = el("div", "guia-nav");
+          var atras = el("button", "guia-link", "← Cambiar mi respuesta"); atras.type = "button";
+          atras.addEventListener("click", function () { pila.pop(); pintar(true); });
+          var reinicio = el("button", "guia-link", "Empezar de nuevo"); reinicio.type = "button";
+          reinicio.addEventListener("click", function () { pila = [arbol]; pintar(true); });
+          nav.appendChild(atras); nav.appendChild(reinicio);
+          paso.appendChild(nav);
+          app.appendChild(paso);
+          if (enfocar) t.focus({ preventScroll: true });
+          return;
+        }
+        var h = el("h3", "guia-pregunta", nodo.q);
+        h.tabIndex = -1;
+        paso.appendChild(h);
+        var opciones = el("div", "guia-opciones");
+        nodo.o.forEach(function (o) {
+          var b = el("button", "opc"); b.type = "button";
+          b.appendChild(el("span", "opc-t", o.t));
+          if (o.d) b.appendChild(el("span", "opc-d", o.d));
+          b.addEventListener("click", function () { pila.push(o.n || o); pintar(true); });
+          opciones.appendChild(b);
+        });
+        paso.appendChild(opciones);
+        if (pila.length > 1) {
+          var nv = el("div", "guia-nav");
+          var volver = el("button", "guia-link", "← Volver"); volver.type = "button";
+          volver.addEventListener("click", function () { pila.pop(); pintar(true); });
+          nv.appendChild(volver);
+          paso.appendChild(nv);
+        }
+        app.appendChild(paso);
+        if (enfocar) h.focus({ preventScroll: true });
+      };
+      pintar(false);
+    }
+  }
+
   /* ---- Formulario de cotización ---- */
   var form = document.getElementById("form-cotizacion");
   if (!form) return;

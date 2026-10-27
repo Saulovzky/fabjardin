@@ -310,7 +310,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 
 /* ---------- Manifiesto ---------- */
 .manifiesto { background: var(--hoja); padding: clamp(3.5rem, 8vw, 6.5rem) 0; }
-.manifiesto p { display: block; width: fit-content; max-width: 100%; margin: .35rem 0; font: 800 clamp(1.9rem, 4.4vw, 4rem)/1.08 var(--display); color: var(--tinta); padding: 0 .3em;
+.manifiesto p { display: block; width: fit-content; max-width: 100%; margin: .3rem 0; font: 800 clamp(1.3rem, 2.9vw, 2.7rem)/1.12 var(--display); color: var(--tinta); padding: 0 .3em;
   background: linear-gradient(var(--lima), var(--lima)) 0 90% / 100% 42% no-repeat; }
 .manifiesto p:nth-child(5n+2) { background-image: linear-gradient(var(--cian), var(--cian)); }
 .manifiesto p:nth-child(5n+3) { background-image: linear-gradient(var(--sol), var(--sol)); }
@@ -458,3 +458,26 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .manifiesto .mas { display: inline-flex; align-items: center; gap: .5rem; vertical-align: middle; margin-left: .6rem; padding: .6rem 1.1rem; border-radius: 999px; background: var(--tinta); color: #fff; font: 700 1rem/1 var(--cuerpo); text-decoration: none; transition: background-color .15s, transform .15s; }
 .manifiesto .mas:hover { background: var(--azul); transform: translateY(-2px); }
 .manifiesto .mas .flecha { width: 1rem; height: 1rem; }
+
+/* ---------- Asistente ---------- */
+.guia { background: var(--hoja); padding: clamp(2rem, 5vw, 4rem) 0 clamp(2.5rem, 6vw, 5rem); }
+.guia .caja { position: relative; overflow: hidden; background: var(--tinta); color: #fff; border-radius: clamp(28px, 4vw, 48px); padding: clamp(1.6rem, 4vw, 3.4rem); }
+.guia .caja::after { content: ""; position: absolute; right: -70px; top: -90px; width: 240px; height: 240px; border-radius: 50%; background: var(--lima); opacity: .9; pointer-events: none; }
+.guia .caja > * { position: relative; z-index: 1; }
+.guia-cab { max-width: 40rem; margin-bottom: clamp(1.4rem, 3vw, 2.2rem); }
+.guia-cab h2 { font-size: clamp(1.9rem, 3.4vw, 3rem); color: #fff; }
+.guia-app { min-height: 12rem; }
+.guia-pregunta, .guia-titulo { font-size: clamp(1.5rem, 2.4vw, 2.1rem); margin-bottom: 1.2rem; color: #fff; outline: none; }
+.guia-opciones { display: grid; grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr)); gap: .7rem; }
+.opc { display: flex; flex-direction: column; gap: .3rem; text-align: left; font: inherit; color: #fff; cursor: pointer; padding: 1rem 1.2rem; border-radius: 20px; background: rgba(255,255,255,.08); border: 1.5px solid rgba(255,255,255,.25); transition: background-color .18s, color .18s, transform .18s, border-color .18s; }
+.opc-t { font-weight: 700; line-height: 1.3; }
+.opc-d { font-size: .88rem; opacity: .8; line-height: 1.35; }
+.opc:hover, .opc:focus-visible { background: var(--lima); color: var(--tinta); border-color: var(--lima); transform: translateY(-3px); }
+.guia-si { display: inline-block; margin: 0 0 .8rem; padding: .3rem .9rem; border-radius: 999px; background: var(--lima); color: var(--tinta); font-weight: 700; font-size: .9rem; }
+.guia-texto { color: rgba(255,255,255,.88); max-width: 52ch; }
+.guia .maquinas { margin: 1.2rem 0 1.4rem; max-width: 52rem; }
+.guia .maq { color: var(--texto); }
+.guia-nav { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin-top: 1.4rem; }
+.guia-link { background: none; border: 0; padding: .3rem 0; font: 600 .95rem var(--cuerpo); color: rgba(255,255,255,.85); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.guia-link:hover { color: var(--lima); }
+@media (max-width: 720px) { .guia .caja::after { width: 120px; height: 120px; right: -40px; top: -50px; } .guia-cab { padding-right: 3rem; } }

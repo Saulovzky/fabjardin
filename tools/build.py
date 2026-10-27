@@ -9,6 +9,7 @@ cada página. Después de editar algo, vuelve a ejecutarlo y sube los .html
 resultantes. Las fotos de servicios se detectan solas: si existe
 images/servicios/<archivo>.webp, aparece en la página de Laboratorio.
 """
+import json
 import math
 import os
 from html import escape
@@ -355,6 +356,67 @@ def columna(items, marca=None):
     return "".join(tile(*t) for t in items) if marca is None else marca + "".join(tile(*t) for t in items)
 
 
+
+# --------------------------------------------------------------------------
+# Asistente interactivo de la portada: ¿qué necesitas y podemos hacerlo?
+# --------------------------------------------------------------------------
+def _maq(nombre):
+    t, u = next((t, u) for m, t, u in HOJA if m == nombre)
+    return {"m": nombre, "con": t, "para": u, "cot": cot(nombre)}
+
+
+def _fab(titulo, texto, maquinas):
+    return {"res": {"si": "Sí, lo hacemos aquí", "titulo": titulo, "texto": texto, "items": [_maq(m) for m in maquinas],
+                    "ctas": [{"l": "Cotizar mi proyecto", "h": cot(maquinas[0])}, {"l": "Hablar por WhatsApp", "h": "wa"}]}}
+
+
+def _ruta(titulo, texto, ver, href, cotiza):
+    return {"res": {"si": "Te ayudamos con esto", "titulo": titulo, "texto": texto, "items": [],
+                    "ctas": [{"l": ver, "h": href}, {"l": "Pedir información", "h": cot(cotiza)}]}}
+
+
+GUIA = {
+    "q": "¿Qué quieres lograr?",
+    "o": [
+        {"t": "Fabricar algo", "d": "Una pieza, un producto o un regalo", "n": {
+            "q": "¿Qué quieres hacer?",
+            "o": [
+                {"t": "Cortar o grabar madera, acrílico, cuero, cartón o papel", **_fab("Corte láser CO2", "Ideal para maquetas, cajas personalizadas, letreros y grabados.", ["Corte láser CO2"])},
+                {"t": "Marcar metal, vidrio, cerámica o piezas industriales", **_fab("Grabado láser UV", "Para grabar metales desnudos y materiales delicados.", ["Grabado láser UV"])},
+                {"t": "Estampar playeras, bolsas, tazas o termos", **_fab("Prensas de calor y corte de vinil", "Sublimación y vinil textil con presión y temperatura exactas.", ["Prensas de calor", "Corte de vinil"])},
+                {"t": "Hacer stickers, rótulos o letreros de vinil", **_fab("Corte de vinil", "Para cortar vinil adhesivo, vinil textil y cobre adhesivo.", ["Corte de vinil"])},
+                {"t": "Imprimir una pieza en 3D", **_fab("Impresión 3D", "Filamento para piezas funcionales y resina cuando necesitas detalle fino.", ["Impresión 3D de filamento", "Impresión 3D de resina"])},
+                {"t": "Cortar muebles, tableros o piezas grandes", **_fab("Router CNC", "Para tableros completos y formatos grandes.", ["Router CNC"])},
+                {"t": "Hacer algo con luces, motores o electrónica", **_fab("Circuitos", "Para integrar iluminación, electricidad o electrónica a tu proyecto.", ["Circuitos"])},
+                {"t": "Copiar o digitalizar una pieza que ya existe", **_fab("Escáner 3D", "Captura el objeto real y lo convierte en un archivo digital editable.", ["Escáner 3D"])},
+                {"t": "Tengo la idea, pero no sé cómo hacerla", **_fab("Asesoría y diseño", "Revisamos contigo tu proyecto y te sugerimos el mejor camino.", ["Asesoría y diseño"])},
+            ]}},
+        {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "formacion.html", "Formación / talleres")},
+        {"t": "Convertir mi idea en negocio", "d": "Acompañamiento para emprender", **_ruta("Acompañamiento para emprender", "Acompañamiento y formación para convertir tus ideas en proyectos reales.", "Ver cómo te acompañamos", "emprendimiento.html", "Emprendimiento")},
+        {"t": "Resolver un reto de mi empresa o institución", "d": "I+D, prototipado y formación", **_ruta("Innovación para organizaciones", "I+D, prototipado y formación para empresas, instituciones y organizaciones.", "Ver innovación", "innovacion.html", "Innovación / I+D")},
+        {"t": "Usar el taller por mi cuenta", "d": "Acceso a instalaciones y maquinaria", **_ruta("Usa el espacio", "Acceso flexible a nuestras instalaciones, con herramientas y maquinaria listas para usar.", "Ver cómo usar el espacio", "laboratorio.html#usa-el-espacio", "Usar el espacio (membresía / acceso)")},
+        {"t": "Aún no lo sé", "d": "Cuéntanos y te orientamos", "res": {"si": "Platiquemos", "titulo": "Cuéntanos en qué andas", "texto": "Describe tu idea y te decimos si podemos hacerla y con qué.", "items": [],
+            "ctas": [{"l": "Escríbenos", "h": "contacto.html"}, {"l": "Hablar por WhatsApp", "h": "wa"}]}},
+    ],
+}
+
+
+def guia():
+    datos = json.dumps(GUIA, ensure_ascii=False).replace("</", "<\\/")
+    return f"""<section class="guia" id="asistente">
+  <div class="contenedor"><div class="caja">
+    <div class="guia-cab">
+      <p class="sello">Asistente</p>
+      <h2>¿Qué necesitas? Te decimos si podemos hacerlo, y con qué.</h2>
+    </div>
+    <div class="guia-app" id="guia-app" aria-live="polite">
+      <noscript><p>Cuéntanos en qué andas desde la <a href="contacto.html">página de contacto</a>.</p></noscript>
+    </div>
+    <script type="application/json" id="guia-datos">{datos}</script>
+  </div></div>
+</section>"""
+
+
 def home():
     paths = open(os.path.join(ROOT, "tools", "marca_paths.txt"), encoding="utf-8").read().replace("\n", " ")
     ejes = "".join(
@@ -399,22 +461,10 @@ def home():
   </div>
 </section>
 
+{guia()}
+
 <section class="manifiesto"><div class="contenedor">{manif}</div></section>
 
-<section class="resultados"><div class="contenedor">{impacto_frase()}</div></section>
-
-<section class="final">
-  <div class="contenedor"><div class="caja">
-    <h2>Trae tu archivo o trae tu idea.</h2>
-    <div class="sub-final">
-      <p>Te respondemos con la viabilidad, los tiempos y el costo. Estamos en La Bomba, Chalco de Díaz Covarrubias, Estado de México.</p>
-      <div class="fila-botones">
-        <a class="boton boton--lima" href="contacto.html">Solicitar cotización</a>
-        <a class="boton boton--borde-claro" href="{CONTACT['maps']}" target="_blank" rel="noopener">Cómo llegar</a>
-      </div>
-    </div>
-  </div></div>
-</section>
 """
 
 
