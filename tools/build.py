@@ -542,6 +542,22 @@ def diferenciales():
     return f'<div class="difs">{out}</div>'
 
 
+ALIADOS = [  # (archivo, nombre) en images/aliados/
+    ("codecu", "CODECU Atlazalpan, Centro Multidisciplinario"), ("diet", "DIET, Dirección de Incubación de Empresas Tecnológicas"),
+    ("ipn", "Instituto Politécnico Nacional"), ("tuvch", "Tecnológico Universitario del Valle de Chalco"),
+    ("cecytem", "CECYTEM, Colegio de Estudios Científicos y Tecnológicos del Estado de México"), ("tecnm", "Tecnológico Nacional de México"),
+    ("ime", "Instituto Mexiquense del Emprendedor"), ("posible", "POSIBLE"),
+]
+
+
+def aliados():
+    def pista(oculta):
+        a = ' aria-hidden="true"' if oculta else ""
+        return "".join(f'<li{a}><img src="images/aliados/{f}.svg" alt="{"" if oculta else escape(n)}" height="72" decoding="async"></li>' for f, n in ALIADOS)
+    return (f'<section class="aliados" id="aliados" aria-label="Nuestros aliados"><div class="contenedor"><h2>Nuestros aliados</h2></div>'
+            f'<div class="ali-carril"><ul class="ali-pista">{pista(False)}{pista(True)}</ul></div></section>')
+
+
 page("nosotros.html", "Nosotros",
      "Conoce a Fabjardin: misión, visión, impacto y nuestra pertenencia a la red global FabLab.",
      hero_int(NOSOTROS_H1, NOSOTROS_TXT, ["Nosotros"], lineal=True, html=True)
@@ -561,7 +577,9 @@ page("nosotros.html", "Nosotros",
          ("Educación que se aprende haciendo", "Del curso del MIT “How To Make (almost) Anything” nació la Fab Academy: formación práctica en la que se aprende fabricando."),
          ("Producción local", "Permite fabricar cerca de donde se necesita. Iniciativas como Fab City impulsan ciudades que producen lo que consumen."),
          ("Comunidad y oportunidades", "Fortalece capacidades locales, apoya a quienes emprenden y conecta a las personas con conocimiento y proyectos de todo el mundo."),
-     ]), "impacto-social"))
+     ]), "impacto-social")
+     + aliados()
+     + llamado("¿Quieres trabajar en conjunto?", "", "Escríbenos", "contacto.html"))
 
 
 # ---- Laboratorio ----
