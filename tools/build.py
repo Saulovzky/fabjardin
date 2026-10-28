@@ -342,23 +342,16 @@ def llamado(titulo="¿Tienes una idea o un proyecto?", texto="Cuéntanos qué ne
 
 def visores():
     """Informe de actividades (flipbook interactivo) y documento de menciones, ambos incrustados."""
-    menciones = ["Red internacional de FabLabs, respaldada por el MIT", "Expositores en Maker Faire Ciudad de México (varias ediciones, 2023)",
-                 "“Itinerante FABLAB” con el IPN y la DIET", "Fundador reconocido por la ASEM entre los 100 emprendedores más inspiradores de México 2024",
-                 "Convenios con instituciones educativas y educación dual"]
-    lis = "".join(f"<li>{escape(m)}</li>" for m in menciones)
     return f"""<div class="visores">
   <article class="visor">
     <h3>Informe de actividades</h3>
-    <p>Hojéalo como un libro: pasa las páginas, acércate y recorre lo que hemos hecho.</p>
     <div class="marco"><iframe src="{IMPACT_EMBED}" title="Informe de actividades de Fabjardin" loading="lazy" allowfullscreen allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <a class="boton boton--lima boton--chico" href="{IMPACT_REPORT}" target="_blank" rel="noopener">Abrir en pantalla completa</a>
   </article>
   <article class="visor">
     <h3>Informes, artículos y publicaciones donde nos mencionan</h3>
-    <p>Evidencias y referencias públicas de nuestro trabajo, en un solo documento.</p>
     <div class="marco"><iframe src="{MENCIONES_EMBED}" title="Informes, artículos y publicaciones donde nos hacen mención" loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
     <a class="boton boton--lima boton--chico" href="{MENCIONES_VER}" target="_blank" rel="noopener">Abrir el documento</a>
-    <ul class="menciones">{lis}</ul>
   </article>
 </div>"""
 
