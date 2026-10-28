@@ -475,18 +475,12 @@ def home():
 <section class="hero">
   <div class="contenedor">
     <div class="hero-texto">
-      <p class="sello">Chalco · Estado de México</p>
       <h1><span>Facilitamos y centralizamos la fabricación de tus proyectos,</span> <span class="acento">en un solo lugar.</span></h1>
       <p class="hero-p">Fabrica con nosotros, aprende en el taller o convierte tu idea en un negocio. Somos un centro de innovación y tecnologías creativas en Chalco.</p>
       <div class="fila-botones">
         <a class="boton boton--lima" href="contacto.html">Cuéntanos en qué andas</a>
         <a class="boton boton--borde-claro" href="laboratorio.html#equipamiento">Ver máquinas y materiales</a>
       </div>
-      <ul class="cifras" aria-label="Resultados">
-        <li><b>+2,200</b><span>proyectos finalizados</span></li>
-        <li><b>+150</b><span>emprendedores</span></li>
-        <li><b>+15</b><span>capacitaciones intensivas</span></li>
-      </ul>
     </div>
     <div class="collage" aria-hidden="true">
       <div class="col col-a"><div class="pista">{col_a}{col_a}</div></div>
