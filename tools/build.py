@@ -364,7 +364,9 @@ def visores():
 
 
 def impacto_frase():
-    return f"""<p class="frase">Desde Chalco hemos terminado más de <b>2,200 proyectos</b>, acompañado a más de <b>150 emprendedores</b>, dado más de <b>15 bootcamps</b> y construido más de <b>20 colaboraciones</b> con instituciones.</p>"""
+    cifras = [(2200, "Proyectos"), (150, "Emprendedores"), (15, "Formaciones"), (20, "Colaboraciones con instituciones")]
+    items = "".join(f'<li><b data-meta="{n}">+{n:,}</b><span>{escape(t)}</span></li>' for n, t in cifras)
+    return f'<ul class="impacto-num" aria-label="Nuestro impacto en cifras">{items}</ul>'
 
 
 # --------------------------------------------------------------------------

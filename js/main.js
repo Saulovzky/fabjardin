@@ -296,3 +296,26 @@
     setTimeout(function () { el.textContent = lista[i]; }, 120);
   }, 1500);
 })();
+
+/* Impacto: las cifras suben hasta su valor al entrar en pantalla */
+(function () {
+  var cifras = document.querySelectorAll(".impacto-num b[data-meta]");
+  if (!cifras.length) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+  function fmt(n) { return "+" + n.toLocaleString("en-US"); }
+  function animar(el) {
+    var meta = parseInt(el.getAttribute("data-meta"), 10), dur = 1800, t0 = null;
+    function paso(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(Math.round(meta * e));
+      if (p < 1) requestAnimationFrame(paso);
+    }
+    requestAnimationFrame(paso);
+  }
+  cifras.forEach(function (el) { el.textContent = fmt(0); });
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { animar(e.target); io.unobserve(e.target); } });
+  }, { threshold: 0.4 });
+  cifras.forEach(function (el) { io.observe(el); });
+})();

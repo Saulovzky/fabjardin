@@ -664,3 +664,12 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .menciones li:nth-child(5n+2)::before { background: var(--cian); } .menciones li:nth-child(5n+3)::before { background: var(--sol); }
 .menciones li:nth-child(5n+4)::before { background: var(--coral); } .menciones li:nth-child(5n+5)::before { background: var(--lila); }
 @media (max-width: 900px) { .visores { grid-template-columns: 1fr; } .marco { aspect-ratio: 4 / 3.4; } }
+
+/* Impacto en cifras: ancho completo */
+.impacto-num { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2.5rem); }
+.impacto-num li { display: grid; gap: .5rem; align-content: start; padding-top: 1rem; border-top: 3px solid var(--lima); }
+.impacto-num li:nth-child(2) { border-color: var(--cian); } .impacto-num li:nth-child(3) { border-color: var(--sol); } .impacto-num li:nth-child(4) { border-color: var(--coral); }
+.impacto-num b { font: 800 clamp(3rem, 7.2vw, 6.4rem)/.95 var(--display); color: var(--lima); font-variant-numeric: tabular-nums; }
+.impacto-num li:nth-child(2) b { color: var(--cian); } .impacto-num li:nth-child(3) b { color: var(--sol); } .impacto-num li:nth-child(4) b { color: var(--coral); }
+.impacto-num span { font-size: clamp(1.05rem, 1.6vw, 1.4rem); font-weight: 600; color: #fff; line-height: 1.25; }
+@media (max-width: 760px) { .impacto-num { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1rem; } }
