@@ -673,3 +673,4 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .impacto-num li:nth-child(2) b { color: var(--cian); } .impacto-num li:nth-child(3) b { color: var(--sol); } .impacto-num li:nth-child(4) b { color: var(--coral); }
 .impacto-num span { font-size: clamp(1.05rem, 1.6vw, 1.4rem); font-weight: 600; color: #fff; line-height: 1.25; }
 @media (max-width: 760px) { .impacto-num { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 1rem; } }
+@media (min-width: 901px) { .visor h3 { min-height: 2.1em; } }
