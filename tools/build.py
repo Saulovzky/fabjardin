@@ -33,6 +33,7 @@ MENCIONES_ID = "1-1WrQYKHlLJjEo2LxpB4wvuJF1AK_56E"
 MENCIONES_VER = f"https://drive.google.com/file/d/{MENCIONES_ID}/view?usp=drive_link"
 MENCIONES_EMBED = f"https://drive.google.com/file/d/{MENCIONES_ID}/preview"
 FABLAB_NETWORK = "https://www.fablabs.io/"
+FABLAB_PERFIL = "https://fablabs.io/labs/fabjardin"
 
 # --------------------------------------------------------------------------
 # Menú: (etiqueta, enlace, [(subetiqueta, enlace)])
@@ -550,11 +551,17 @@ page("nosotros.html", "Nosotros",
      ]), "quienes-somos")
      + bloque("hoja", cabeza("Lo que nos hace diferentes") + diferenciales())
      + f'<section class="resultados" id="impacto"><div class="contenedor">{impacto_frase()}{visores()}</div></section>'
-     + bloque("papel", f"""<div class="dividido">
-  <h2>Parte de una red global de laboratorios</h2><div class="der">
-    <p class="texto-largo">Formamos parte de la red global <a href="{FABLAB_NETWORK}" target="_blank" rel="noopener">FabLab Network</a> y operamos bajo sus estándares, lo que nos conecta con conocimiento, proyectos y personas de todo el mundo.</p>
-    {puntos(["Colaboraciones con instituciones, empresas y organizaciones", "Intercambio de buenas prácticas con otros laboratorios", "Proyectos con impacto educativo, social y económico"])}
-  {panel("¿Quieres colaborar con nosotros?", "Si representas a una institución, empresa u organización y quieres construir algo en conjunto, escríbenos.", "Contáctanos", "contacto.html")}</div></div>""", "red"))
+     + bloque("papel", f'''<div class="cabeza cabeza--sola cabeza--ancha"><h2>¿Qué es un FabLab?</h2>
+  <p>Un FabLab (laboratorio de fabricación) es un espacio comunitario con herramientas de fabricación digital, como cortadoras láser, impresoras 3D, fresadoras CNC y electrónica, abierto para que cualquier persona aprenda y fabrique casi cualquier cosa. Nació a principios de los 2000 en el Center for Bits and Atoms del MIT y hoy es una red de más de 2,500 laboratorios en unos 125 países. Fabjardín forma parte de esa red y opera bajo sus estándares.</p></div>
+  <div class="fila-botones"><a class="boton boton--lleno" href="{FABLAB_PERFIL}" target="_blank" rel="noopener">Fabjardín en la red FabLab</a>
+  <a class="boton boton--borde" href="{FAB_MIT}" target="_blank" rel="noopener">Conoce la red</a></div>
+  <p class="fuente">Fuente: <a href="https://news.mit.edu/2023/how-mits-fab-labs-scaled-around-world-0605" target="_blank" rel="noopener">MIT News, 2023</a></p>''', "red")
+     + bloque("hoja", cabeza("Su impacto en la sociedad") + filas([
+         ("Acceso para todas las personas", "Pone herramientas de fabricación digital al alcance de la comunidad, como una biblioteca de herramientas, sin necesidad de comprar maquinaria cara."),
+         ("Educación que se aprende haciendo", "Del curso del MIT “How To Make (almost) Anything” nació la Fab Academy: formación práctica en la que se aprende fabricando."),
+         ("Producción local", "Permite fabricar cerca de donde se necesita. Iniciativas como Fab City impulsan ciudades que producen lo que consumen."),
+         ("Comunidad y oportunidades", "Fortalece capacidades locales, apoya a quienes emprenden y conecta a las personas con conocimiento y proyectos de todo el mundo."),
+     ]), "impacto-social"))
 
 
 # ---- Laboratorio ----
