@@ -649,3 +649,18 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .dif p { margin: 0; font-size: .96rem; line-height: 1.45; max-width: none; }
 @media (max-width: 1040px) { .difs { grid-template-columns: repeat(2, minmax(0, 1fr)); } .dif:last-child:nth-child(odd) { grid-column: 1 / -1; } }
 @media (max-width: 620px) { .difs { grid-template-columns: 1fr; } }
+
+/* Impacto: informe interactivo y documento de menciones */
+.visores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); margin-top: clamp(1.4rem, 3vw, 2.4rem); }
+.visor { display: flex; flex-direction: column; gap: .7rem; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16); border-radius: var(--radio); padding: clamp(1rem, 2vw, 1.5rem); }
+.visor h3 { font-size: clamp(1.5rem, 2.2vw, 2rem); color: #fff; margin: 0; }
+.visor p { margin: 0; color: rgba(255,255,255,.82); max-width: none; font-size: 1rem; }
+.visor .boton { align-self: flex-start; padding: .65rem 1.2rem; }
+.marco { position: relative; border-radius: 16px; overflow: hidden; background: #fff; aspect-ratio: 4 / 3; }
+.marco iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.menciones { list-style: none; margin: 0; padding: 0; display: grid; gap: .4rem; }
+.menciones li { position: relative; padding-left: 1.3rem; color: rgba(255,255,255,.9); font-size: .96rem; line-height: 1.4; }
+.menciones li::before { content: ""; position: absolute; left: 0; top: .5em; width: .6rem; height: .6rem; border-radius: 50%; background: var(--lima); }
+.menciones li:nth-child(5n+2)::before { background: var(--cian); } .menciones li:nth-child(5n+3)::before { background: var(--sol); }
+.menciones li:nth-child(5n+4)::before { background: var(--coral); } .menciones li:nth-child(5n+5)::before { background: var(--lila); }
+@media (max-width: 900px) { .visores { grid-template-columns: 1fr; } .marco { aspect-ratio: 4 / 3.4; } }

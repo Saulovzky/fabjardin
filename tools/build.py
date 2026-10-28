@@ -28,6 +28,10 @@ CONTACT = {
     "maps": "https://maps.app.goo.gl/UQqeSkzYNFNghbhFA",
 }
 IMPACT_REPORT = "https://heyzine.com/flip-book/5ed696c717.html#page/1"
+IMPACT_EMBED = "https://heyzine.com/flip-book/5ed696c717.html"
+MENCIONES_ID = "1-1WrQYKHlLJjEo2LxpB4wvuJF1AK_56E"
+MENCIONES_VER = f"https://drive.google.com/file/d/{MENCIONES_ID}/view?usp=drive_link"
+MENCIONES_EMBED = f"https://drive.google.com/file/d/{MENCIONES_ID}/preview"
 FABLAB_NETWORK = "https://www.fablabs.io/"
 
 # --------------------------------------------------------------------------
@@ -336,9 +340,31 @@ def llamado(titulo="¿Tienes una idea o un proyecto?", texto="Cuéntanos qué ne
 </div></div></section>"""
 
 
+def visores():
+    """Informe de actividades (flipbook interactivo) y documento de menciones, ambos incrustados."""
+    menciones = ["Red internacional de FabLabs, respaldada por el MIT", "Expositores en Maker Faire Ciudad de México (varias ediciones, 2023)",
+                 "“Itinerante FABLAB” con el IPN y la DIET", "Fundador reconocido por la ASEM entre los 100 emprendedores más inspiradores de México 2024",
+                 "Convenios con instituciones educativas y educación dual"]
+    lis = "".join(f"<li>{escape(m)}</li>" for m in menciones)
+    return f"""<div class="visores">
+  <article class="visor">
+    <h3>Informe de actividades</h3>
+    <p>Hojéalo como un libro: pasa las páginas, acércate y recorre lo que hemos hecho.</p>
+    <div class="marco"><iframe src="{IMPACT_EMBED}" title="Informe de actividades de Fabjardin" loading="lazy" allowfullscreen allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <a class="boton boton--lima boton--chico" href="{IMPACT_REPORT}" target="_blank" rel="noopener">Abrir en pantalla completa</a>
+  </article>
+  <article class="visor">
+    <h3>Informes, artículos y publicaciones donde nos mencionan</h3>
+    <p>Evidencias y referencias públicas de nuestro trabajo, en un solo documento.</p>
+    <div class="marco"><iframe src="{MENCIONES_EMBED}" title="Informes, artículos y publicaciones donde nos hacen mención" loading="lazy" allow="fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+    <a class="boton boton--lima boton--chico" href="{MENCIONES_VER}" target="_blank" rel="noopener">Abrir el documento</a>
+    <ul class="menciones">{lis}</ul>
+  </article>
+</div>"""
+
+
 def impacto_frase():
-    return f"""<p class="frase">Desde Chalco hemos terminado más de <b>2,200 proyectos</b>, acompañado a más de <b>150 emprendedores</b>, dado más de <b>15 bootcamps</b> y construido más de <b>20 colaboraciones</b> con instituciones.</p>
-    <a href="{IMPACT_REPORT}" target="_blank" rel="noopener">Ver el informe de actividades</a>"""
+    return f"""<p class="frase">Desde Chalco hemos terminado más de <b>2,200 proyectos</b>, acompañado a más de <b>150 emprendedores</b>, dado más de <b>15 bootcamps</b> y construido más de <b>20 colaboraciones</b> con instituciones.</p>"""
 
 
 # --------------------------------------------------------------------------
@@ -528,7 +554,7 @@ page("nosotros.html", "Nosotros",
          ("Visión", "Ser el nodo de referencia regional en innovación y creatividad, donde la colaboración y la tecnología se unen para impulsar el desarrollo sostenible y transformar el futuro de nuestras comunidades."),
      ]), "quienes-somos")
      + bloque("hoja", cabeza("Lo que nos hace diferentes") + diferenciales())
-     + f'<section class="resultados" id="impacto"><div class="contenedor">{impacto_frase()}</div></section>'
+     + f'<section class="resultados" id="impacto"><div class="contenedor">{impacto_frase()}{visores()}</div></section>'
      + bloque("papel", f"""<div class="dividido">
   <h2>Parte de una red global de laboratorios</h2><div class="der">
     <p class="texto-largo">Formamos parte de la red global <a href="{FABLAB_NETWORK}" target="_blank" rel="noopener">FabLab Network</a> y operamos bajo sus estándares, lo que nos conecta con conocimiento, proyectos y personas de todo el mundo.</p>
