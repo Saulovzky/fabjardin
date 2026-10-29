@@ -233,8 +233,22 @@ def pie():
 </footer>"""
 
 
+# Títulos SEO (<title>, og:title): 50-60 caracteres, palabra clave primero y marca al final
+SEO_TITULOS = {
+    "index.html": "Fabjardin | Fab Lab y Centro de Innovación en Chalco",
+    "nosotros.html": "Quiénes somos | Fabjardin, centro de innovación en Chalco",
+    "laboratorio.html": "Corte láser, impresión 3D y CNC en Chalco | Fabjardin",
+    "innovacion-y-emprendimiento.html": "Innovación y emprendimiento en Chalco | Fabjardin",
+    "educacion.html": "Talleres y cursos de tecnología en Chalco | Fabjardin",
+    "comunidad.html": "Comunidad, eventos y noticias | Fabjardin Chalco",
+    "contacto.html": "Cotiza tu proyecto de fabricación digital | Fabjardin",
+    "politica-de-privacidad.html": "Aviso de privacidad | Fabjardin",
+    "terminos-de-los-servicios.html": "Términos de los servicios | Fabjardin",
+}
+
+
 def pagina(slug, titulo, desc, cuerpo, noindex=False):
-    full = f"{NAME} · {TAGLINE}" if slug == "index.html" else f"{titulo} · {NAME}"
+    full = SEO_TITULOS.get(slug, f"{titulo} · {NAME}")
     url = f"{SITE_URL}/" + ("" if slug == "index.html" else slug)
     robots = '<meta name="robots" content="noindex">\n' if noindex else ""
     return f"""<!doctype html>
