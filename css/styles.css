@@ -765,3 +765,10 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .serv-col h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.05; margin: 0 0 .4rem; }
 .serv-col--2 h2 { color: #fff; }
 @media (max-width: 800px) { .serv-dos { grid-template-columns: 1fr; } }
+
+/* Redes sociales en el pie */
+.redes { display: flex; gap: .6rem; align-items: center; }
+.redes a { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.55); color: #fff; transition: background .2s, color .2s, border-color .2s; }
+.redes a:hover, .redes a:focus-visible { background: var(--lima); border-color: var(--lima); color: var(--tinta); }
+.redes svg { width: 18px; height: 18px; display: block; }
+@media (max-width: 620px) { .pie .legal { flex-direction: column; align-items: flex-start; } }

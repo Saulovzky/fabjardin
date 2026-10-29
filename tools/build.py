@@ -202,6 +202,21 @@ MAPA = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3766.314326419251!
 WA_ICONO = '<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.04 3C9.4 3 4 8.4 4 15.03c0 2.12.55 4.19 1.6 6.01L4 29l8.12-1.57a12 12 0 0 0 3.92.66C22.68 28.1 28 22.7 28 16.07 28 9.4 22.7 3 16.04 3zm0 22.04c-1.2 0-2.38-.32-3.4-.93l-.24-.15-4.82.93.97-4.7-.16-.25a9.9 9.9 0 0 1-1.52-5.3c0-5.5 4.47-9.97 9.98-9.97 5.5 0 9.97 4.47 9.97 9.97 0 5.5-4.47 10.4-9.78 10.4zm5.47-7.46c-.3-.15-1.77-.87-2.04-.97-.28-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.41-1.5-.9-.8-1.5-1.78-1.67-2.08-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.7.3 1.26.48 1.69.62.7.22 1.35.19 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>'
 
 
+REDES = [
+    ("Facebook", "https://www.facebook.com/FABBJardin",
+     '<path fill="currentColor" d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.96.4-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.1-2.4-.1-2.5 0-4.1 1.5-4.1 4.2v2.6H7.6v3.3h2.8V22z"/>'),
+    ("Instagram", "https://www.instagram.com/fabbjardin/",
+     '<path fill="none" stroke="currentColor" stroke-width="1.9" d="M7.5 3.5h9a4 4 0 0 1 4 4v9a4 4 0 0 1-4 4h-9a4 4 0 0 1-4-4v-9a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.3" cy="6.8" r="1.2" fill="currentColor"/>'),
+    ("TikTok", "https://www.tiktok.com/@fabjardin",
+     '<path fill="currentColor" d="M16.6 3h-2.9v12.2a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.6a5.5 5.5 0 1 0 4.7 5.4V8.9a6.6 6.6 0 0 0 3.8 1.2V7.2a3.9 3.9 0 0 1-3.8-4.2z"/>'),
+]
+
+
+def redes():
+    a = "".join(f'<a href="{h}" target="_blank" rel="noopener" aria-label="{n} de {NAME}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">{d}</svg></a>' for n, h, d in REDES)
+    return f'<nav class="redes" aria-label="Redes sociales">{a}</nav>'
+
+
 def pie():
     c = CONTACT
     cols = "".join(f'<li><a href="{h}">{escape(l)}</a></li>' for l, h, _ in NAV)
@@ -227,6 +242,7 @@ def pie():
     </div>
     <div class="legal">
       <span>© <span id="anio">2026</span> {NAME.upper()}. Todos los derechos reservados.</span>
+      {redes()}
       <nav aria-label="Legal"><a href="politica-de-privacidad.html">Políticas de privacidad</a><a href="terminos-de-los-servicios.html">Términos de los servicios</a></nav>
     </div>
   </div>
