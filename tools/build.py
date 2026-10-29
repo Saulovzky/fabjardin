@@ -667,13 +667,17 @@ EVIDENCIAS = [
     ("images/evidencia/cecytem.jpg", "Visita de la Dirección General del CECYTEM",
      "Visita, recorrido y experiencia con la Dirección General del CECYTEM, el Colegio de Estudios Científicos y Tecnológicos del Estado de México.",
      "Directivos del CECYTEM recorriendo el laboratorio de Fabjardin"),
+    ("images/evidencia/cecyt9.jpg", "Jornadas de formación con el IPN",
+     "Jornadas de formación en los Centros de Estudios Científicos y Tecnológicos (CECyT) del Instituto Politécnico Nacional, en colaboración con la Secretaría de Innovación e Integración Social.",
+     "Cartel de la jornada en el CECyT 9: modelo de negocio, design thinking y curso de prototipado", "cartel"),
 ]
 
 
 def evidencias():
     sl = ""
-    for i, (img, t, d, alt) in enumerate(EVIDENCIAS, 1):
-        sl += (f'<article class="evi" aria-roledescription="diapositiva" aria-label="{i} de {len(EVIDENCIAS)}">'
+    for i, (img, t, d, alt, *ex) in enumerate(EVIDENCIAS, 1):
+        cl = " evi--cartel" if ex else ""
+        sl += (f'<article class="evi{cl}" aria-roledescription="diapositiva" aria-label="{i} de {len(EVIDENCIAS)}">'
                f'<div class="evi-foto">{foto(img, alt)}</div>'
                f'<div class="evi-txt"><span class="evi-n">{i:02d}</span><h3>{escape(t)}</h3><p>{escape(d)}</p></div></article>')
     ctrl = ""

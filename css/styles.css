@@ -747,3 +747,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .evi-cnt { font-weight: 700; color: var(--tinta); min-width: 3.5rem; text-align: center; }
 @media (max-width: 800px) { .evi { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .evi-pista { scroll-behavior: auto; } }
+/* Evidencia con cartel cuadrado: se ve completo, sin recortar */
+.evi--cartel { grid-template-columns: minmax(0, 520px) 1fr; }
+.evi--cartel .evi-foto img { aspect-ratio: 1 / 1; object-fit: contain; }
+@media (max-width: 800px) { .evi--cartel { grid-template-columns: 1fr; } }
