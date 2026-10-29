@@ -248,7 +248,7 @@ SEO_TITULOS = {
 
 
 def pagina(slug, titulo, desc, cuerpo, noindex=False):
-    full = SEO_TITULOS.get(slug, f"{titulo} · {NAME}")
+    full = SEO_TITULOS.get(slug) or globals().get("SEO_TITULOS_SERV", {}).get(slug) or f"{titulo} · {NAME}"
     url = f"{SITE_URL}/" + ("" if slug == "index.html" else slug)
     robots = '<meta name="robots" content="noindex">\n' if noindex else ""
     return f"""<!doctype html>
@@ -276,7 +276,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 </head>
 <body data-tono="{TONOS.get(slug.replace(".html", ""), "lima")}">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
-{cabecera(slug)}
+{cabecera("laboratorio.html" if slug in globals().get("SERV_SLUGS", ()) else slug)}
 <main id="contenido">
 {cuerpo.replace("<!--MOSAICO-->", mosaico(slug))}
 </main>
@@ -606,13 +606,92 @@ def equipamiento():
     return f'<div class="equipos" id="equipos" style="--n:{len(nombres)}">' + "".join(out) + "</div>"
 
 
+# --------------------------------------------------------------------------
+# Páginas de servicio (SEO): una por servicio, con palabra clave y materiales
+# nombre -> (slug, título SEO, descripción, H1, introducción, materiales, usos)
+# --------------------------------------------------------------------------
+SEO_SERV = {
+    "Corte láser CO2": ("corte-laser-chalco.html",
+        "Corte láser en madera y acrílico en Chalco | Fabjardin",
+        "Corte y grabado láser CO2 en Chalco: madera, acrílico, cartón, cuero, papel y textiles. Maquetas, cajas personalizadas y joyería en acrílico. Cotiza tu proyecto.",
+        "Corte y grabado láser en Chalco",
+        "Cortamos y grabamos con láser CO2 tus diseños digitales en distintos materiales, desde una pieza única hasta pequeñas series.",
+        ["Madera", "Acrílico", "Cartón", "Cuero", "Papel", "Textiles"],
+        ["Maquetas arquitectónicas", "Cajas personalizadas", "Grabado en cuero", "Joyería en acrílico"]),
+    "Grabado láser UV": ("grabado-laser-uv-chalco.html",
+        "Grabado láser UV en metal y vidrio en Chalco | Fabjardin",
+        "Grabado láser UV en Chalco para metales desnudos, cristalería, cerámica y componentes electrónicos. Marca logos, códigos QR y joyería personalizada.",
+        "Grabado láser UV en Chalco",
+        "El láser UV graba con precisión metales desnudos y materiales delicados, para marcar piezas de forma permanente.",
+        ["Metales desnudos", "Cristalería", "Cerámica", "Componentes electrónicos"],
+        ["Personalizar joyería", "Marcar códigos, logos o QR en herramientas y piezas industriales", "Grabar cristalería y cerámica"]),
+    "Prensas de calor": ("sublimacion-y-estampado-chalco.html",
+        "Sublimación de playeras y tazas en Chalco | Fabjardin",
+        "Sublimación y vinil textil en Chalco: estampa playeras, bolsas, tazas, termos y mousepads con presión y temperatura exactas. Cotiza tu proyecto.",
+        "Sublimación y estampado en Chalco",
+        "Con prensas de calor personalizamos prendas y artículos mediante sublimación o vinil textil, con presión y temperatura exactas.",
+        ["Playeras", "Bolsas", "Ropa deportiva", "Tazas", "Termos", "Mousepads"],
+        ["Estampar playeras y bolsas", "Aplicar vinil textil en ropa deportiva", "Personalizar tazas, termos y mousepads"]),
+    "Impresión 3D de filamento": ("impresion-3d-chalco.html",
+        "Impresión 3D en Chalco: prototipos y piezas | Fabjardin",
+        "Servicio de impresión 3D en filamento en Chalco: prototipos rápidos, piezas de repuesto, figuras, maquetas y piezas funcionales. Cotiza tu proyecto.",
+        "Impresión 3D en Chalco",
+        "Materializamos volúmenes y geometrías complejas con impresión 3D en plásticos de uso hobby y técnico.",
+        ["Plásticos de uso hobby", "Plásticos técnicos"],
+        ["Prototipos rápidos", "Piezas de repuesto", "Figuras artísticas", "Maquetas", "Piezas funcionales"]),
+    "Impresión 3D de resina": ("impresion-3d-resina-chalco.html",
+        "Impresión 3D en resina y miniaturas en Chalco | Fabjardin",
+        "Impresión 3D en resina en Chalco para piezas con detalle fino: miniaturas, joyería y modelismo. Altísima resolución. Cotiza tu proyecto.",
+        "Impresión 3D en resina en Chalco",
+        "La impresión en resina logra altísima resolución en piezas pequeñas y con mucho detalle.",
+        ["Resina de alta resolución"],
+        ["Miniaturas", "Joyería", "Modelismo", "Piezas con detalles finos"]),
+    "Router CNC": ("router-cnc-chalco.html",
+        "Router CNC en madera, MDF y aluminio en Chalco | Fabjardin",
+        "Corte con router CNC en Chalco: tableros de madera, MDF, OSB, aluminio y plásticos de ingeniería. Mobiliario, stands para ferias y moldes grandes.",
+        "Router CNC en Chalco",
+        "Cortamos tableros completos con router CNC para muebles, stands y piezas de gran formato.",
+        ["Madera", "MDF", "OSB", "Aluminio", "Plásticos de ingeniería"],
+        ["Mobiliario: sillas, mesas y estanterías", "Stands para ferias", "Estructuras paramétricas", "Moldes grandes"]),
+    "Corte de vinil": ("corte-de-vinil-chalco.html",
+        "Corte de vinil, stickers y rotulación en Chalco | Fabjardin",
+        "Corte de vinil en Chalco: stickers, rotulación de ventanas, vinil textil para camisetas y circuitos flexibles de cobre adhesivo. Cotiza tu proyecto.",
+        "Corte de vinil y rotulación en Chalco",
+        "Cortamos vinil adhesivo, vinil textil y cobre adhesivo, y también dibujamos con bolígrafo en gran formato.",
+        ["Vinil adhesivo", "Vinil textil", "Cobre adhesivo"],
+        ["Stickers", "Rotulación de ventanas", "Vinil textil para estampar camisetas", "Circuitos flexibles de cobre"]),
+    "Circuitos": ("letreros-neon-y-electronica-chalco.html",
+        "Letreros neón y electrónica en Chalco | Fabjardin",
+        "Integramos iluminación, motores y electrónica a tus proyectos en Chalco: letreros neón, logos iluminados y maquetas con movimiento.",
+        "Letreros neón y electrónica en Chalco",
+        "Complementamos tus proyectos con iluminación, electricidad o electrónica.",
+        ["Iluminación", "Motores", "Electrónica"],
+        ["Iluminar un logo", "Construir letreros neón", "Dar movimiento a una maqueta o a una base de pastel"]),
+    "Escáner 3D": ("escaner-3d-chalco.html",
+        "Escaneo 3D de piezas y objetos en Chalco | Fabjardin",
+        "Escaneo 3D en Chalco: digitaliza objetos reales y conviértelos en un archivo editable. Planos de piezas rotas, artesanías y personalización médica.",
+        "Escaneo 3D en Chalco",
+        "Capturamos y digitalizamos objetos reales para convertirlos en un archivo digital editable.",
+        ["Objetos reales"],
+        ["Crear el plano de una pieza rota o antigua para hacer un repuesto", "Digitalizar artesanías", "Personalización médica a partir de partes del cuerpo"]),
+    "Asesoría y diseño": ("modelado-3d-y-cad-chalco.html",
+        "Modelado 3D, CAD y vectorización en Chalco | Fabjardin",
+        "Asesoría y diseño en Chalco: modelado 3D y CAD, vectorización, prototipado y consultoría para desarrollo de producto. Revisamos tu proyecto contigo.",
+        "Modelado 3D, CAD y vectorización en Chalco",
+        "Más que máquinas: revisamos contigo tu proyecto y te sugerimos el mejor camino.",
+        ["Tu idea", "Tus archivos"],
+        ["Prototipado", "Modelado 3D y CAD", "Vectorización", "Consultoría para desarrollo de producto"]),
+}
+SERV_SLUGS = {v[0] for v in SEO_SERV.values()}
+
+
 def servicios_lab():
     out = []
     for i, (nombre, archivo, corto, largo) in enumerate(SERVICES, 1):
         img = foto(f"images/servicios/{archivo}", nombre)
         clase = "servicio con-foto" if img else "servicio"
         out.append(f'<article class="{clase}"><div class="visual"><span class="n">{i:02d}</span>{img}</div>'
-                   f'<div class="cuerpo"><h3>{escape(nombre)}</h3><p class="corto">{escape(corto)}</p>'
+                   f'<div class="cuerpo"><h3><a class="serv-enlace" href="{SEO_SERV[nombre][0]}">{escape(nombre)}</a></h3><p class="corto">{escape(corto)}</p>'
                    f'</div></article>')
     return '<div class="lista-servicios">' + "".join(out) + "</div>"
 
@@ -623,6 +702,24 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
      + bloque("papel", cabeza("Servicios y tecnologías") + servicios_lab(), "servicios")
      + bloque("hoja", cabeza("Para qué sirve cada equipo") + equipamiento(), "equipamiento")
      + llamado("¿Aún no sabes por dónde iniciar? Conéctate con el equipo", "", "Escribir por WhatsApp", CONTACT["wa"]))
+
+
+def pagina_servicio(nombre, i):
+    slug, tit, desc, h1, intro, mats, usos = SEO_SERV[nombre]
+    otros = "".join(f'<li><a href="{SEO_SERV[n][0]}">{escape(n)}</a></li>' for n in SEO_SERV if n != nombre)
+    page_slug_titles[slug] = tit
+    page(slug, h1, desc,
+         hero_int(h1, intro, ['<a href="laboratorio.html">Laboratorio</a>', escape(nombre)], lineal=True)
+         + bloque("papel", '<div class="serv-dos"><div class="serv-col"><h2>Materiales con los que trabajamos</h2>' + puntos(mats)
+                  + '</div><div class="serv-col serv-col--2"><h2>Para qué sirve</h2>' + puntos(usos) + '</div></div>', "materiales")
+         + bloque("papel", cabeza("Otros servicios del laboratorio") + f'<ul class="otros-serv">{otros}</ul>', "otros")
+         + llamado("¿Cotizamos tu proyecto?", "", "Solicitar cotización", cot(nombre)))
+
+
+page_slug_titles = {}
+for _i, _n in enumerate(SEO_SERV, 1):
+    pagina_servicio(_n, _i)
+SEO_TITULOS_SERV = page_slug_titles
 
 # ---- Innovación ----
 # ---- Innovación y emprendimiento (una sola sección) ----
