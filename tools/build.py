@@ -697,7 +697,7 @@ page("innovacion-y-emprendimiento.html", "Innovación y emprendimiento",
      hero_int("Te ayudamos a despegar",
               "Somos el punto de apoyo para quienes quieren innovar o emprender en la región: personas con una idea, negocios que empiezan, jóvenes e instituciones.",
               ["Innovación y emprendimiento"], lineal=True)
-     + bloque("papel", cabeza("¿Para quién?", PARA_TODOS, sola=True) + cabeza("Lo que hemos trabajado") + evidencias(), "para-quien")
+     + bloque("papel", cabeza("¿Para quién?", PARA_TODOS, sola=True), "para-quien")
      + bloque("hoja", cabeza("Servicios") + servicios_ie(), "servicios")
      + llamado("¿Iniciamos?", "", "Cuéntanos tu idea", cot("Innovación y emprendimiento")))
 
@@ -735,7 +735,7 @@ page("comunidad.html", "Comunidad",
     <div class="fila-botones"><a class="boton boton--lleno" href="contacto.html">Quiero enterarme</a></div>{panel("Próximamente", "Escríbenos y te avisamos de las próximas actividades abiertas al público.", "Escríbenos", "contacto.html")}</div></div>""", "agenda")
      + bloque("hoja", cabeza("Proyectos", "Más de 2,200 proyectos finalizados, desde maquetas y prototipos hasta productos de emprendedores. Conoce lo que hemos hecho en nuestro informe de actividades.")
               + f'<div class="fila-botones"><a class="boton boton--lleno" href="{IMPACT_REPORT}" target="_blank" rel="noopener">Ver informe de actividades</a></div>', "proyectos")
-     + bloque("papel", cabeza("Noticias", "Estamos preparando esta sección con novedades, convocatorias y casos de la comunidad."), "noticias")
+     + bloque("papel", cabeza("Noticias") + evidencias(), "noticias")
      + llamado("Sé parte de la comunidad", "Colabora, aprende o fabrica con nosotros.", "Contáctanos"))
 
 # ---- Contacto ----
