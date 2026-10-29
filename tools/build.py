@@ -664,6 +664,9 @@ EVIDENCIAS = [
     ("images/evidencia/cbt.jpg", "Talleres con bachilleratos tecnológicos de la Región Volcanes",
      "Talleres sobre tecnologías creativas para diferentes Colegios de Bachillerato Tecnológico de la Región Volcanes, como complemento a su formación en carreras orientadas al diseño y la tecnología, mediante prácticas de observación y ejecución.",
      "Estudiantes de bachillerato tecnológico observando una máquina de corte láser durante un taller"),
+    ("images/evidencia/cecytem.jpg", "Visita de la Dirección General del CECYTEM",
+     "Visita, recorrido y experiencia con la Dirección General del CECYTEM, el Colegio de Estudios Científicos y Tecnológicos del Estado de México.",
+     "Directivos del CECYTEM recorriendo el laboratorio de Fabjardin"),
 ]
 
 
