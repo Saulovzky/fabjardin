@@ -44,7 +44,7 @@ NAV = [
     ("Laboratorio", "laboratorio.html", [
         ("Servicios y tecnologías", "laboratorio.html#servicios"), ("Para qué sirve cada equipo", "laboratorio.html#equipamiento")]),
     ("Innovación y emprendimiento", "innovacion-y-emprendimiento.html", [
-        ("Para quien quiera y lo necesite", "innovacion-y-emprendimiento.html#para-quien"), ("Servicios", "innovacion-y-emprendimiento.html#servicios")]),
+        ("¿Para quién?", "innovacion-y-emprendimiento.html#para-quien"), ("Servicios", "innovacion-y-emprendimiento.html#servicios")]),
     ("Educación", "educacion.html", [
         ("Talleres y cursos", "educacion.html#talleres"), ("Instituciones", "educacion.html#instituciones")]),
     ("Comunidad", "comunidad.html", [
@@ -629,9 +629,9 @@ SERV_IE = [
     ("Asesoría y mentoría", "Acompañamiento para aterrizar tu idea y hacerla avanzar paso a paso.",
      ["Definir qué problema resuelve tu idea y para quién", "Pruebas y mejoras con lo que vas aprendiendo", "Seguimiento con el equipo"], None),
     ("Formación", "Aprende haciendo, con talleres y formaciones intensivas.",
-     ["Talleres y cursos prácticos", "Formaciones intensivas", "Pensamiento de diseño, creatividad, innovación y emprendimiento"], ("Ver talleres y cursos", "educacion.html#talleres")),
+     ["Talleres y cursos prácticos", "Formaciones intensivas", "Pensamiento de diseño, creatividad, innovación y emprendimiento"], None),
     ("Comunidad y colaboración", "Emprender es más fácil en compañía: conoce a otras personas que están creando.",
-     ["Encuentros y jornadas abiertas", "Colaboraciones con instituciones que abren puertas a tu proyecto"], ("Conocer la comunidad", "comunidad.html")),
+     ["Encuentros y jornadas abiertas", "Colaboraciones con instituciones que abren puertas a tu proyecto"], None),
 ]
 
 
@@ -651,17 +651,16 @@ def cifras_ie():
     return f'<ul class="impacto-num impacto-num--3" aria-label="Resultados">{items}</ul>'
 
 
-PARA_TODOS = "Si tienes una idea, un proyecto o simplemente ganas de crear algo, aquí hay un lugar para ti. Es para quien quiera y lo necesite: sin importar tu edad, tu experiencia ni el tamaño de tu idea."
+PARA_TODOS = "Podemos ayudar a personas con una idea o un proyecto, a negocios que están empezando, a jóvenes con ganas de crear y a instituciones que quieren impulsar la innovación en su comunidad. Sin importar tu edad, tu experiencia ni el tamaño de tu idea."
 
 page("innovacion-y-emprendimiento.html", "Innovación y emprendimiento",
      "Te ayudamos a despegar: orientación, asesoría, formación y comunidad para quienes quieren innovar o emprender en la región.",
      hero_int("Te ayudamos a despegar",
               "Somos el punto de apoyo para quienes quieren innovar o emprender en la región: personas con una idea, negocios que empiezan, jóvenes e instituciones.",
               ["Innovación y emprendimiento"], lineal=True)
-     + bloque("papel", cabeza("Para quien quiera y lo necesite", PARA_TODOS, sola=True), "para-quien")
+     + bloque("papel", cabeza("¿Para quién?", PARA_TODOS, sola=True), "para-quien")
      + bloque("hoja", cabeza("Servicios") + servicios_ie(), "servicios")
-     + f'<section class="resultados" id="resultados"><div class="contenedor">{cifras_ie()}</div></section>'
-     + llamado("¿Tienes una idea y no sabes por dónde empezar?", "", "Cuéntanos tu idea", cot("Innovación y emprendimiento")))
+     + llamado("¿Iniciamos?", "", "Cuéntanos tu idea", cot("Innovación y emprendimiento")))
 
 # ---- Educación ----
 TEMAS = ["Diseño 3D y CAD", "Corte y grabado láser", "Impresión 3D", "Electrónica creativa", "Vectorización y diseño gráfico", "Personalización textil",
