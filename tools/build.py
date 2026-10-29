@@ -249,6 +249,30 @@ def pie():
 </footer>"""
 
 
+import json as _json
+
+
+def jsonld(slug, titulo, desc):
+    """Datos estructurados: negocio local en todas las páginas y Service en las de servicio."""
+    org = {
+        "@type": "LocalBusiness", "@id": f"{SITE_URL}/#negocio",
+        "name": NAME, "alternateName": f"{NAME} · {TAGLINE}", "description": "Fab Lab y centro de innovación en Chalco: fabricación digital, educación, innovación y emprendimiento.",
+        "url": f"{SITE_URL}/", "logo": f"{SITE_URL}/images/logo.png", "image": f"{SITE_URL}/images/og-fabjardin.png",
+        "telephone": CONTACT["tel_href"], "email": CONTACT["email"],
+        "address": {"@type": "PostalAddress", "streetAddress": "C. 5 de Febrero No. 23B, Col. La Bomba", "postalCode": "56600",
+                    "addressLocality": "Chalco de Díaz Covarrubias", "addressRegion": "Estado de México", "addressCountry": "MX"},
+        "geo": {"@type": "GeoCoordinates", "latitude": 19.268692, "longitude": -98.893862},
+        "hasMap": CONTACT["maps"], "areaServed": {"@type": "AdministrativeArea", "name": "Chalco y Región Volcanes, Estado de México"},
+        "sameAs": [h for _, h, _ in REDES] + [FABLAB_PERFIL, CONTACT["maps"]],
+    }
+    datos = [dict(org, **{"@context": "https://schema.org"})]
+    if slug in globals().get("SERV_SLUGS", ()):
+        datos.append({"@context": "https://schema.org", "@type": "Service", "name": titulo, "description": desc,
+                      "url": f"{SITE_URL}/{slug}", "provider": {"@id": f"{SITE_URL}/#negocio"},
+                      "areaServed": {"@type": "City", "name": "Chalco, Estado de México"}})
+    return "".join(f'<script type="application/ld+json">{_json.dumps(d, ensure_ascii=False)}</script>\n' for d in datos)
+
+
 # Títulos SEO (<title>, og:title): 50-60 caracteres, palabra clave primero y marca al final
 SEO_TITULOS = {
     "index.html": "Fabjardin | Fab Lab y Centro de Innovación en Chalco",
@@ -267,6 +291,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
     full = SEO_TITULOS.get(slug) or globals().get("SEO_TITULOS_SERV", {}).get(slug) or f"{titulo} · {NAME}"
     url = f"{SITE_URL}/" + ("" if slug == "index.html" else slug)
     robots = '<meta name="robots" content="noindex">\n' if noindex else ""
+    ld = "" if noindex else jsonld(slug, titulo, desc)
     return f"""<!doctype html>
 <html lang="es-MX">
 <head>
@@ -289,7 +314,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 <link rel="preload" href="fonts/display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/body-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/styles.css">
-</head>
+{ld}</head>
 <body data-tono="{TONOS.get(slug.replace(".html", ""), "lima")}">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 {cabecera("laboratorio.html" if slug in globals().get("SERV_SLUGS", ()) else slug)}
