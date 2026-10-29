@@ -44,7 +44,7 @@ NAV = [
     ("Laboratorio", "laboratorio.html", [
         ("Servicios y tecnologías", "laboratorio.html#servicios"), ("Para qué sirve cada equipo", "laboratorio.html#equipamiento")]),
     ("Innovación", "innovacion.html", [
-        ("I+D para empresas e instituciones", "innovacion.html"), ("Prototipado y producto", "innovacion.html#prototipado"), ("Asesoría y diseño", "innovacion.html#asesoria")]),
+        ("Cuatro pilares", "innovacion.html#pilares"), ("¿Para quién es?", "innovacion.html#para-quien")]),
     ("Emprendimiento", "emprendimiento.html", [
         ("Acompañamiento", "emprendimiento.html"), ("De la idea al producto", "emprendimiento.html#ruta"), ("Mentorías y red", "emprendimiento.html#red")]),
     ("Educación", "educacion.html", [
@@ -218,7 +218,7 @@ def pie():
       <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li>{cols}</ul></div>
       <div><h3>Servicios</h3><ul>
         <li><a href="laboratorio.html#servicios">Fabricación digital</a></li>
-        <li><a href="innovacion.html">Innovación e I+D</a></li>
+        <li><a href="innovacion.html">Innovación</a></li>
         <li><a href="contacto.html">Solicitar cotización</a></li>
       </ul></div>
       <div><h3>Contacto</h3><ul>
@@ -435,7 +435,7 @@ GUIA = {
             ]}},
         {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "educacion.html", "Educación / talleres")},
         {"t": "Convertir mi idea en negocio", "d": "Acompañamiento para emprender", **_ruta("Acompañamiento para emprender", "Acompañamiento y formación para convertir tus ideas en proyectos reales.", "Ver cómo te acompañamos", "emprendimiento.html", "Emprendimiento")},
-        {"t": "Resolver un reto de mi empresa o institución", "d": "I+D, prototipado y formación", **_ruta("Innovación para organizaciones", "I+D, prototipado y formación para empresas, instituciones y organizaciones.", "Ver innovación", "innovacion.html", "Innovación / I+D")},
+        {"t": "Impulsar mi idea o proyecto", "d": "Orientación para despegar, aunque no sepas por dónde", **_ruta("Impulsa tu proyecto", "Te ayudamos a despegar tu proyecto, por sencillo que sea: orientación, asesoría, formación y prototipos.", "Ver innovación", "innovacion.html", "Innovación / I+D")},
         {"t": "Aún no lo sé", "d": "Cuéntanos y te orientamos", "res": {"si": "Platiquemos", "titulo": "Cuéntanos en qué andas", "texto": "Describe tu idea y te decimos si podemos hacerla y con qué.", "items": [],
             "ctas": [{"l": "Escríbenos", "h": "contacto.html"}, {"l": "Hablar por WhatsApp", "h": "wa"}]}},
     ],
@@ -615,28 +615,41 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
      + llamado("¿Aún no sabes por dónde iniciar? Conéctate con el equipo", "", "Escribir por WhatsApp", CONTACT["wa"]))
 
 # ---- Innovación ----
-page("innovacion.html", "Innovación e I+D",
-     "Tu equipo externo de investigación y desarrollo: soluciones a medida, prototipado y desarrollo de producto para empresas, instituciones y emprendedores.",
-     hero_int("Tu equipo externo de investigación y desarrollo",
-              "Echamos una mano a empresas, instituciones, emprendedores y a la comunidad con soluciones a medida, desde pensar y dinamizar ideas hasta crear prototipos y productos finales.",
-              ["Innovación"])
-     + bloque("papel", cabeza("I+D para empresas e instituciones", "Combinamos metodologías ágiles, de diseño y de fabricación con la capacidad de producir en casa.") + filas([
-         ("Dinamización de ideas", "Sesiones para pensar, explorar y priorizar retos y oportunidades de producto o proceso."),
-         ("Diseño a medida", "Soluciones diseñadas para tu necesidad, con acompañamiento técnico en cada decisión."),
-         ("Fabricación en casa", "Máquinas y procesos en un solo lugar para pasar de la propuesta al objeto físico sin intermediarios."),
-     ]), "id-empresas")
-     + bloque("hoja", f"""<div class="dividido">
-  <h2>De la idea al prototipo funcional</h2><div class="der">
-    <p class="texto-largo">Iteramos contigo hasta tener un prototipo que puedas probar, mostrar y mejorar, sin mínimos de producción.</p>
-    {puntos(["Prototipos rápidos y piezas funcionales", "Piezas únicas e hiper-personalizadas", "Pruebas y mejoras en ciclos cortos"])}
-  {panel("¿Tienes un reto de producto?", "Cuéntanos qué quieres lograr y te proponemos cómo abordarlo.", "Hablemos", cot("Innovación / I+D"))}</div></div>""", "prototipado")
-     + bloque("papel", cabeza("Asesoría y diseño", "Más que máquinas: revisamos contigo tu proyecto y sugerimos el mejor camino.") + filas([
-         ("Modelado 3D y CAD", "Convertimos tus ideas o piezas físicas en modelos listos para fabricar."),
-         ("Vectorización", "Preparamos tus gráficos para corte, grabado y vinil."),
-         ("Prototipado", "Primeras versiones físicas para validar forma, tamaño y función."),
-         ("Consultoría de producto", "Acompañamiento para desarrollar tu producto de punta a punta."),
-     ]), "asesoria")
-     + llamado("Construyamos la solución juntos", "Platícanos tu reto y armamos una propuesta a tu medida.", "Contáctanos"))
+ICONOS_PIL = [  # impulsa, asesoría, fórmate, crea
+    '<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+    '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+    '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+    '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+]
+PILARES = [
+    ("Impulsa tu idea", "Tengas una idea clara o apenas una intuición, la exploramos contigo. Puede ser un producto, un proyecto escolar, una tesis o algo para tu comunidad: la aterrizamos y definimos los primeros pasos, aunque hoy no sepas nada del tema.", None),
+    ("Asesoría y orientación", "Te orientamos en lo técnico, el diseño y la fabricación: qué materiales y procesos conviene usar, cómo hacer tu prototipo y qué sigue después. Si no sabes por dónde empezar, empezamos juntos.", None),
+    ("Fórmate para crear", "Talleres y formaciones para aprender a diseñar, prototipar y emprender. Para jóvenes, estudiantes, docentes y cualquier persona con ganas de aprender haciendo.", ("Ver talleres y cursos", "educacion.html#talleres")),
+    ("Haz realidad tu prototipo", "Pasamos de la idea al objeto físico con nuestras máquinas y el acompañamiento del equipo, en piezas únicas o primeras versiones, sin mínimos de producción.", ("Ver servicios y tecnologías", "laboratorio.html#servicios")),
+]
+
+
+def pilares():
+    out = ""
+    for n, (t, d, link) in enumerate(PILARES, 1):
+        a = f'<a class="pil-link" href="{link[1]}">{escape(link[0])} {FLECHA}</a>' if link else ""
+        out += (f'<article class="pil"><div class="pil-top"><span class="pil-n">{n:02d}</span><span class="ico"><svg viewBox="0 0 24 24" fill="none" '
+                f'stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{ICONOS_PIL[n-1]}</svg></span></div>'
+                f'<h3>{escape(t)}</h3><p>{escape(d)}</p>{a}</article>')
+    return f'<div class="pilares">{out}</div>'
+
+
+PARA_QUIEN = ["Emprendedores y emprendedoras", "Jóvenes y estudiantes", "Escuelas y docentes", "Universidades", "Colectivos y proyectos comunitarios", "Personas que no saben por dónde empezar"]
+
+page("innovacion.html", "Innovación",
+     "Te ayudamos a despegar tu proyecto, por sencillo que sea: orientación, asesoría, formación y prototipos para emprendedores, jóvenes, escuelas y universidades.",
+     hero_int("Te ayudamos a despegar tu proyecto, por sencillo que sea",
+              "Seas emprendedor, joven, docente, escuela o universidad, si tienes una idea te acompañamos a hacerla realidad. No necesitas experiencia ni un proyecto terminado: usamos la fabricación digital como medio y te orientamos desde cero.",
+              ["Innovación"], lineal=True)
+     + bloque("papel", cabeza("Cuatro pilares") + pilares(), "pilares")
+     + bloque("hoja", cabeza("¿Para quién es?", "Para quien quiere crear algo, sea grande o pequeño.", sola=True)
+              + '<ul class="temas">' + "".join(f"<li>{escape(x)}</li>" for x in PARA_QUIEN) + "</ul>", "para-quien")
+     + llamado("¿Tienes una idea y no sabes por dónde empezar?", "", "Cuéntanos tu idea", cot("Innovación / I+D")))
 
 # ---- Emprendimiento ----
 page("emprendimiento.html", "Emprendimiento",
