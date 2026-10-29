@@ -514,7 +514,7 @@ def home():
 
 
 page("index.html", TAGLINE,
-     "Fabjardin es un centro de innovación y tecnologías creativas en Chalco: fabricación digital, innovación, emprendimiento y formación.",
+     "Fab Lab y centro de innovación en Chalco, Estado de México: fabricación digital, corte láser, impresión 3D, emprendimiento, talleres y comunidad.",
      home())
 
 # ---- Nosotros ----
@@ -563,7 +563,7 @@ def aliados():
 
 
 page("nosotros.html", "Nosotros",
-     "Conoce a Fabjardin: misión, visión, impacto y nuestra pertenencia a la red global FabLab.",
+     "Conoce Fabjardin, centro de innovación y tecnologías creativas en Chalco: quiénes somos, nuestro impacto y nuestra red mundial de Fab Labs.",
      hero_int(NOSOTROS_H1, NOSOTROS_TXT, ["Nosotros"], lineal=True, html=True)
      + bloque("papel", cabeza("Misión y visión") + filas([
          ("Nuestra misión", "Empoderar a la comunidad facilitando el acceso a la fabricación digital y tecnologías de vanguardia, para transformar ideas en proyectos de alto impacto educativo, social y económico."),
@@ -697,7 +697,7 @@ def servicios_lab():
 
 
 page("laboratorio.html", "Laboratorio de fabricación digital",
-     "Servicios de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, vinil, circuitos, escáner 3D y uso del espacio.",
+     "Laboratorio de fabricación digital en Chalco: corte láser, grabado UV, impresión 3D, router CNC, corte de vinil, sublimación, electrónica y escáner 3D.",
      hero_int("Fabricación y herramientas digitales, en un solo lugar", "", ["Laboratorio"], lineal=True)
      + bloque("papel", cabeza("Servicios y tecnologías") + servicios_lab(), "servicios")
      + bloque("hoja", cabeza("Para qué sirve cada equipo") + equipamiento(), "equipamiento")
@@ -804,7 +804,7 @@ def evidencias():
 
 
 page("innovacion-y-emprendimiento.html", "Innovación y emprendimiento",
-     "Te ayudamos a despegar: orientación, asesoría, formación y comunidad para quienes quieren innovar o emprender en la región.",
+     "Innovación y emprendimiento en Chalco: orientación, asesoría, formación y comunidad para quien tiene una idea o proyecto y quiere despegarlo.",
      hero_int("Te ayudamos a despegar",
               "Somos el punto de apoyo para quienes quieren innovar o emprender en la región: personas con una idea, negocios que empiezan, jóvenes e instituciones.",
               ["Innovación y emprendimiento"], lineal=True)
@@ -816,7 +816,7 @@ page("innovacion-y-emprendimiento.html", "Innovación y emprendimiento",
 TEMAS = ["Diseño 3D y CAD", "Corte y grabado láser", "Impresión 3D", "Electrónica creativa", "Vectorización y diseño gráfico", "Personalización textil",
          "Innovación", "Pensamiento de diseño", "Creatividad", "Emprendimiento"]
 page("educacion.html", "Educación",
-     "Talleres prácticos, bootcamps y programas para escuelas y jóvenes sobre nuevas tecnologías y diseño.",
+     "Talleres y cursos de tecnologías creativas en Chalco para jóvenes, escuelas e instituciones: diseño, fabricación digital y aprendizaje práctico.",
      hero_int("Aprende haciendo",
               "Un ecosistema donde generamos experiencias educativas prácticas sobre nuevas tecnologías creativas.",
               ["Educación"])
@@ -836,7 +836,7 @@ page("educacion.html", "Educación",
 
 # ---- Comunidad ----
 page("comunidad.html", "Comunidad",
-     "Eventos, proyectos y noticias de la comunidad Fabjardin.",
+     "Comunidad Fabjardin en Chalco: eventos, proyectos y noticias de las colaboraciones con instituciones, escuelas y emprendedores de la región.",
      hero_int("Crear es mejor en comunidad",
               "Eventos, proyectos y personas que se encuentran en Fabjardin para aprender, fabricar y colaborar.",
               ["Comunidad"])
@@ -853,7 +853,7 @@ page("comunidad.html", "Comunidad",
 opciones = "".join(f'<option value="{escape(o)}">{escape(o)}</option>' for o in SERVICE_OPTIONS)
 c = CONTACT
 page("contacto.html", "Contacto y cotización",
-     "Describe tu idea o proyecto y recibe una cotización de Fabjardin. Escríbenos por correo, teléfono o WhatsApp.",
+     "Cotiza tu proyecto de fabricación digital en Chalco: cuéntanos tu idea y recibe respuesta de Fabjardin por correo, teléfono o WhatsApp.",
      hero_int("Solicita tu cotización",
               "Describe tu idea, comparte tus archivos y nuestro equipo técnico analizará la viabilidad para darte la mejor solución.",
               ["Contacto"])
