@@ -8,8 +8,7 @@ Sitio web estático (HTML + CSS + JS, sin frameworks) publicado con **GitHub Pag
 index.html                 Portada: "Del archivo al objeto"
 nosotros.html              Misión y visión · Impacto · Red FabLab
 laboratorio.html           Servicios de fabricación · Equipamiento
-innovacion.html            I+D · Prototipado · Asesoría y diseño
-emprendimiento.html        Acompañamiento · Ruta idea→producto · Mentorías y red
+innovacion-y-emprendimiento.html   Para quién · Servicios · Ruta idea→proyecto (innovacion.html y emprendimiento.html redirigen aquí)
 educacion.html             Talleres · BootCamps · Escuelas y jóvenes
 comunidad.html             Agenda · Proyectos · Noticias
 contacto.html              Formulario de cotización y datos de contacto
@@ -40,7 +39,7 @@ Formato WebP (o cambia la extensión en `build.py`). Si el archivo no existe, se
 | Dónde | Carpeta y nombres |
 |---|---|
 | Collage de la portada (dos columnas que se desplazan) | Usa las fotos de `images/servicios/`. Cambia cuáles y su orden en `COLUMNA_A` / `COLUMNA_B` de `tools/build.py` |
-| Cinco ejes de la portada | `images/ejes/` → `laboratorio.webp`, `innovacion.webp`, `emprendimiento.webp`, `educacion.webp`, `comunidad.webp` |
+| Cuatro ejes de la portada | `images/ejes/` → `laboratorio.webp`, `innovacion-y-emprendimiento.webp`, `educacion.webp`, `comunidad.webp` |
 | Encabezado de cada página (3 formas) | `images/hero/` → `<pagina>-1.webp` (rectángulo), `-2.webp`, `-3.webp` (círculos). Ej.: `laboratorio-1.webp` |
 | Servicios de Laboratorio | `images/servicios/` (nombres abajo) |
 

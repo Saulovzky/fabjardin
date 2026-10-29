@@ -275,7 +275,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 /* ---------- Ejes (portada) ---------- */
 .ejes { background: var(--hoja); padding: clamp(2rem, 4vw, 3.2rem) 0 clamp(.8rem, 1.5vw, 1.2rem); }
 .ejes h2 { font-size: clamp(2rem, 3.8vw, 3.4rem); max-width: 22ch; margin-bottom: clamp(1.2rem, 2.5vw, 2rem); color: var(--tinta); }
-.lista-ejes { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .8rem; align-items: stretch; }
+.lista-ejes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; align-items: stretch; }
 .eje { position: relative; display: flex; flex-direction: column; gap: .4rem; min-height: 215px; padding: 1.1rem 1.1rem 1.2rem; border-radius: 24px; text-decoration: none; color: var(--tinta); background: var(--lima); overflow: hidden; transition: transform .22s cubic-bezier(.2,.8,.3,1), box-shadow .22s; }
 .eje:nth-child(2) { background: var(--cian); }
 .eje:nth-child(3) { background: var(--sol); }
@@ -711,3 +711,20 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .pil-link .flecha { width: 1rem; height: 1rem; transition: transform .2s; }
 .pil-link:hover .flecha { transform: translateX(4px); }
 @media (max-width: 760px) { .pilares { grid-template-columns: 1fr; } }
+
+/* Innovación y emprendimiento: servicios en 3 columnas con lista */
+.pilares--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pilares--3 .pil:nth-child(1) { background: var(--lima); } .pilares--3 .pil:nth-child(2) { background: var(--cian); } .pilares--3 .pil:nth-child(3) { background: var(--sol); }
+.pilares--3 .pil:nth-child(4) { background: var(--lila); } .pilares--3 .pil:nth-child(5) { background: var(--coral); } .pilares--3 .pil:nth-child(6) { background: var(--azul); color: #fff; }
+.pilares--3 .pil:nth-child(6) .pil-link { color: #fff; }
+.pilares--3 .pil-n { font-size: clamp(2.6rem, 4.2vw, 3.6rem); }
+.pilares--3 .pil h3 { font-size: clamp(1.55rem, 2.1vw, 2rem); }
+.pilares--3 .pil p { font-size: 1rem; }
+.pil-list { list-style: none; margin: .3rem 0 .4rem; padding: 0; display: grid; gap: .45rem; }
+.pil-list li { position: relative; padding-left: 1.2rem; font-size: .96rem; line-height: 1.4; }
+.pil-list li::before { content: ""; position: absolute; left: 0; top: .5em; width: .55rem; height: .55rem; border-radius: 50%; background: currentColor; opacity: .75; }
+@media (max-width: 1040px) { .pilares--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .pilares--3 { grid-template-columns: 1fr; } }
+.impacto-num--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 760px) { .impacto-num--3 { grid-template-columns: 1fr; } }
+#resultados { padding: clamp(1.8rem, 4vw, 3rem) 0; }
