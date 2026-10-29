@@ -661,6 +661,9 @@ EVIDENCIAS = [
     ("images/evidencia/uiem.jpg", "Visita de la Universidad Intercultural del Estado de México",
      "Visita de la Universidad Intercultural del Estado de México para crear proyectos orientados al manejo y aprovechamiento de residuos, impulsando su reinserción en circuitos económicos mediante la creatividad y la tecnología.",
      "Estudiantes de la Universidad Intercultural del Estado de México frente a Fabjardin mostrando sus piezas"),
+    ("images/evidencia/cbt.jpg", "Talleres con bachilleratos tecnológicos de la Región Volcanes",
+     "Talleres sobre tecnologías creativas para diferentes Colegios de Bachillerato Tecnológico de la Región Volcanes, como complemento a su formación en carreras orientadas al diseño y la tecnología, mediante prácticas de observación y ejecución.",
+     "Estudiantes de bachillerato tecnológico observando una máquina de corte láser durante un taller"),
 ]
 
 
