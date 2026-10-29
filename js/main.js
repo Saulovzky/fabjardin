@@ -319,3 +319,20 @@
   }, { threshold: 0.4 });
   cifras.forEach(function (el) { io.observe(el); });
 })();
+
+/* Evidencias: flechas y contador del carrusel */
+(function () {
+  document.querySelectorAll(".evis").forEach(function (c) {
+    var pista = c.querySelector(".evi-pista"), cnt = c.querySelector(".evi-cnt");
+    if (!pista || !cnt) return;
+    var n = pista.children.length;
+    function idx() { return Math.round(pista.scrollLeft / pista.clientWidth); }
+    c.querySelectorAll(".evi-b").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var i = Math.max(0, Math.min(n - 1, idx() + parseInt(b.getAttribute("data-dir"), 10)));
+        pista.scrollTo({ left: i * pista.clientWidth });
+      });
+    });
+    pista.addEventListener("scroll", function () { cnt.textContent = (idx() + 1) + " / " + n; }, { passive: true });
+  });
+})();

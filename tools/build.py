@@ -653,12 +653,35 @@ def cifras_ie():
 
 PARA_TODOS = "Podemos ayudar a personas con una idea o un proyecto, a negocios que están empezando, a jóvenes con ganas de crear y a instituciones que quieren impulsar la innovación en su comunidad. Sin importar tu edad, tu experiencia ni el tamaño de tu idea."
 
+# Evidencias de trabajo: carrusel (se agregan fotos a esta lista)
+EVIDENCIAS = [
+    ("images/evidencia/pnud-cuba.jpg", "Visita del PNUD Cuba",
+     "Visita a nuestras instalaciones e intercambio de experiencias sobre espacios de innovación con el Programa de las Naciones Unidas para el Desarrollo (PNUD) de Cuba.",
+     "Equipo de Fabjardin y visitantes del PNUD Cuba frente al banner del centro"),
+]
+
+
+def evidencias():
+    sl = ""
+    for i, (img, t, d, alt) in enumerate(EVIDENCIAS, 1):
+        sl += (f'<article class="evi" aria-roledescription="diapositiva" aria-label="{i} de {len(EVIDENCIAS)}">'
+               f'<div class="evi-foto">{foto(img, alt)}</div>'
+               f'<div class="evi-txt"><span class="evi-n">{i:02d}</span><h3>{escape(t)}</h3><p>{escape(d)}</p></div></article>')
+    ctrl = ""
+    if len(EVIDENCIAS) > 1:
+        ctrl = ('<div class="evi-ctrl"><button type="button" class="evi-b" data-dir="-1" aria-label="Anterior">&#8592;</button>'
+                '<span class="evi-cnt" aria-live="polite">1 / %d</span>'
+                '<button type="button" class="evi-b" data-dir="1" aria-label="Siguiente">&#8594;</button></div>') % len(EVIDENCIAS)
+    return (f'<div class="evis" role="region" aria-roledescription="carrusel" aria-label="Evidencias de trabajo">'
+            f'<div class="evi-pista" tabindex="0">{sl}</div>{ctrl}</div>')
+
+
 page("innovacion-y-emprendimiento.html", "Innovación y emprendimiento",
      "Te ayudamos a despegar: orientación, asesoría, formación y comunidad para quienes quieren innovar o emprender en la región.",
      hero_int("Te ayudamos a despegar",
               "Somos el punto de apoyo para quienes quieren innovar o emprender en la región: personas con una idea, negocios que empiezan, jóvenes e instituciones.",
               ["Innovación y emprendimiento"], lineal=True)
-     + bloque("papel", cabeza("¿Para quién?", PARA_TODOS, sola=True), "para-quien")
+     + bloque("papel", cabeza("¿Para quién?", PARA_TODOS, sola=True) + cabeza("Lo que hemos trabajado") + evidencias(), "para-quien")
      + bloque("hoja", cabeza("Servicios") + servicios_ie(), "servicios")
      + llamado("¿Iniciamos?", "", "Cuéntanos tu idea", cot("Innovación y emprendimiento")))
 

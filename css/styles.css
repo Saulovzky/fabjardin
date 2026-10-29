@@ -728,3 +728,22 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .impacto-num--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 760px) { .impacto-num--3 { grid-template-columns: 1fr; } }
 #resultados { padding: clamp(1.8rem, 4vw, 3rem) 0; }
+
+/* Evidencias: carrusel */
+.evis { margin-top: 1.2rem; }
+.evi-pista { display: flex; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; border-radius: 28px; }
+.evi-pista::-webkit-scrollbar { display: none; }
+.evi-pista:focus-visible { outline: 3px solid var(--azul); outline-offset: 4px; }
+.evi { flex: 0 0 100%; scroll-snap-align: start; display: grid; grid-template-columns: 1.5fr 1fr; background: var(--tinta); color: #fff; border-radius: 28px; overflow: hidden; }
+.evi-foto { background: var(--azul); min-height: 100%; }
+.evi-foto img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 3 / 2; }
+.evi-txt { padding: clamp(1.4rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: center; gap: .6rem; }
+.evi-n { font-family: "Big Shoulders Display", sans-serif; font-weight: 800; font-size: 2.4rem; line-height: 1; color: var(--lima); }
+.evi-txt h3 { font-size: clamp(1.5rem, 2.6vw, 2.2rem); line-height: 1.05; margin: 0; color: #fff; }
+.evi-txt p { margin: 0; color: rgba(255,255,255,.88); line-height: 1.55; }
+.evi-ctrl { display: flex; align-items: center; justify-content: flex-end; gap: .8rem; margin-top: .9rem; }
+.evi-b { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--tinta); background: var(--lima); color: var(--tinta); font-size: 1.3rem; font-weight: 700; cursor: pointer; }
+.evi-b:hover { background: var(--tinta); color: #fff; }
+.evi-cnt { font-weight: 700; color: var(--tinta); min-width: 3.5rem; text-align: center; }
+@media (max-width: 800px) { .evi { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .evi-pista { scroll-behavior: auto; } }
