@@ -44,7 +44,7 @@ NAV = [
     ("Laboratorio", "laboratorio.html", [
         ("Servicios y tecnologías", "laboratorio.html#servicios"), ("Para qué sirve cada equipo", "laboratorio.html#equipamiento")]),
     ("Innovación y emprendimiento", "innovacion-y-emprendimiento.html", [
-        ("Servicios", "innovacion-y-emprendimiento.html#servicios"), ("Ruta de la idea al proyecto", "innovacion-y-emprendimiento.html#ruta"), ("¿Para quién es?", "innovacion-y-emprendimiento.html#para-quien")]),
+        ("Para quien quiera y lo necesite", "innovacion-y-emprendimiento.html#para-quien"), ("Servicios", "innovacion-y-emprendimiento.html#servicios")]),
     ("Educación", "educacion.html", [
         ("Talleres y cursos", "educacion.html#talleres"), ("Instituciones", "educacion.html#instituciones")]),
     ("Comunidad", "comunidad.html", [
@@ -97,7 +97,7 @@ HOJA = [
 
 EJES = [
     ("Laboratorio", "laboratorio.html", "Fabricación digital y uso del taller, con la maquinaria lista para usar."),
-    ("Innovación y emprendimiento", "innovacion-y-emprendimiento.html", "Orientación, asesoría, formación y vinculación para despegar tu idea o proyecto, sea del tamaño que sea."),
+    ("Innovación y emprendimiento", "innovacion-y-emprendimiento.html", "Orientación, asesoría, formación y comunidad para despegar tu idea o proyecto, sea del tamaño que sea."),
     ("Educación", "educacion.html", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad."),
     ("Comunidad", "comunidad.html", "Eventos, proyectos y personas con las que creamos en conjunto."),
 ]
@@ -431,7 +431,7 @@ GUIA = {
                 {"t": "Tengo la idea, pero no sé cómo hacerla", **_fab("Asesoría y diseño", "Revisamos contigo tu proyecto y te sugerimos el mejor camino.", ["Asesoría y diseño"])},
             ]}},
         {"t": "Aprender haciendo", "d": "Talleres y capacitaciones intensivas", **_ruta("Educación en el taller", "Talleres, formaciones intensivas y programas para escuelas, empresas y nuestra comunidad.", "Ver talleres y programas", "educacion.html", "Educación / talleres")},
-        {"t": "Impulsar mi idea o proyecto", "d": "Orientación para despegar, aunque no sepas por dónde", **_ruta("Impulsa tu proyecto", "Te ayudamos a despegar tu idea o proyecto, por sencillo que sea: orientación, asesoría, formación y vinculación.", "Ver cómo te acompañamos", "innovacion-y-emprendimiento.html", "Innovación y emprendimiento")},
+        {"t": "Impulsar mi idea o proyecto", "d": "Orientación para despegar, aunque no sepas por dónde", **_ruta("Impulsa tu proyecto", "Te ayudamos a despegar tu idea o proyecto, por sencillo que sea: orientación, asesoría, formación y comunidad.", "Ver cómo te acompañamos", "innovacion-y-emprendimiento.html", "Innovación y emprendimiento")},
         {"t": "Aún no lo sé", "d": "Cuéntanos y te orientamos", "res": {"si": "Platiquemos", "titulo": "Cuéntanos en qué andas", "texto": "Describe tu idea y te decimos si podemos hacerla y con qué.", "items": [],
             "ctas": [{"l": "Escríbenos", "h": "contacto.html"}, {"l": "Hablar por WhatsApp", "h": "wa"}]}},
     ],
@@ -621,36 +621,17 @@ ICONOS_SERV = [
     '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',   # orientación
     '<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',  # asesoría
     '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',   # formación
-    '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',  # vinculación
-    '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',   # proyectos escolares
     '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',  # comunidad
 ]
 SERV_IE = [
-    ("Orientación inicial", "Una primera conversación para entender dónde estás y a dónde quieres llegar, aunque hoy no sepas por dónde empezar.",
-     ["Diagnóstico de tu idea o proyecto", "Ruta personalizada con los siguientes pasos", "Canalización a otras instituciones cuando te convenga"], None),
-    ("Asesoría y mentoría", "Acompañamiento para convertir una idea en un proyecto con sentido, que se pueda probar y sostener.",
-     ["Problema, propuesta de valor y modelo de negocio", "Validación con personas y clientes reales", "Costos, precios y primeras ventas", "Marca y estrategia comercial básica"], None),
-    ("Formación", "Aprende haciendo, con talleres y formaciones intensivas para todos los niveles.",
+    ("Orientación inicial", "Una primera conversación para entender tu idea, aunque hoy no sepas por dónde empezar.",
+     ["Conocemos tu idea o proyecto", "Te decimos qué sigue y por dónde empezar"], None),
+    ("Asesoría y mentoría", "Acompañamiento para aterrizar tu idea y hacerla avanzar paso a paso.",
+     ["Definir qué problema resuelve tu idea y para quién", "Pruebas y mejoras con lo que vas aprendiendo", "Seguimiento con el equipo"], None),
+    ("Formación", "Aprende haciendo, con talleres y formaciones intensivas.",
      ["Talleres y cursos prácticos", "Formaciones intensivas", "Pensamiento de diseño, creatividad, innovación y emprendimiento"], ("Ver talleres y cursos", "educacion.html#talleres")),
-    ("Vinculación y apoyos", "Te conectamos con el ecosistema para que no avances solo.",
-     ["Instituciones, universidades y aliados", "Información y preparación para convocatorias, concursos y programas de apoyo", "Contacto con posibles clientes, socios y fuentes de financiamiento"], None),
-    ("Proyectos de innovación", "Para escuelas, universidades y colectivos que quieren que su comunidad cree soluciones reales.",
-     ["Retos de innovación con estudiantes y docentes", "Acompañamiento de proyectos escolares, tesis y concursos", "Vinculación entre escuela, comunidad y emprendimiento"], ("Ver programas para instituciones", "educacion.html#instituciones")),
-    ("Comunidad y eventos", "Emprender es más fácil en compañía: conoce a otras personas que están creando.",
-     ["Encuentros, charlas y presentaciones de proyectos", "Red de emprendedores y creadores de la región", "Colaboración entre proyectos"], ("Conocer la comunidad", "comunidad.html")),
-]
-PERFILES_IE = [
-    ("Personas con una idea", "Tienes una intuición, un problema que quieres resolver o ganas de crear algo, y no sabes por dónde empezar. Aquí se empieza desde cero."),
-    ("Emprendedores y negocios locales", "Quieres arrancar o hacer crecer un negocio, un producto o un servicio y necesitas método, asesoría y contactos."),
-    ("Jóvenes y estudiantes", "Un proyecto escolar, una tesis, un concurso o tu primera aventura emprendedora, con acompañamiento y formación práctica."),
-    ("Escuelas, universidades y colectivos", "Programas y retos de innovación que acercan a tu comunidad educativa u organización a crear soluciones reales."),
-]
-RUTA_IE = [
-    ("Descubre", "Identificamos qué problema u oportunidad quieres atender y a quién le importa."),
-    ("Valida", "Probamos la idea con personas reales antes de invertir tiempo y dinero."),
-    ("Construye", "Definimos tu propuesta de valor y tu modelo de negocio, y preparamos una primera versión para probar."),
-    ("Lanza", "Salimos al mercado con tus primeros clientes, tu marca y tus canales de venta."),
-    ("Crece", "Mejoramos con lo aprendido, sumamos aliados y buscamos apoyos para dar el siguiente paso."),
+    ("Comunidad y colaboración", "Emprender es más fácil en compañía: conoce a otras personas que están creando.",
+     ["Encuentros y jornadas abiertas", "Colaboraciones con instituciones que abren puertas a tu proyecto"], ("Conocer la comunidad", "comunidad.html")),
 ]
 
 
@@ -661,7 +642,7 @@ def servicios_ie():
         a = f'<a class="pil-link" href="{link[1]}">{escape(link[0])} {FLECHA}</a>' if link else ""
         out += (f'<article class="pil"><div class="pil-top"><span class="pil-n">{n:02d}</span><span class="ico">{_svg(ICONOS_SERV[n-1])}</span></div>'
                 f'<h3>{escape(t)}</h3><p>{escape(d)}</p><ul class="pil-list">{li}</ul>{a}</article>')
-    return f'<div class="pilares pilares--3">{out}</div>'
+    return f'<div class="pilares">{out}</div>'
 
 
 def cifras_ie():
@@ -670,14 +651,15 @@ def cifras_ie():
     return f'<ul class="impacto-num impacto-num--3" aria-label="Resultados">{items}</ul>'
 
 
+PARA_TODOS = "Si tienes una idea, un proyecto o simplemente ganas de crear algo, aquí hay un lugar para ti. Es para quien quiera y lo necesite: sin importar tu edad, tu experiencia ni el tamaño de tu idea."
+
 page("innovacion-y-emprendimiento.html", "Innovación y emprendimiento",
-     "Te ayudamos a despegar tu idea o proyecto, por sencillo que sea: orientación, asesoría, formación y vinculación para emprendedores, jóvenes, escuelas y universidades de Chalco y la región.",
-     hero_int("Te ayudamos a despegar tu proyecto, por sencillo que sea",
-              "Somos el punto de apoyo para quienes quieren innovar o emprender en Chalco y la región: personas con una idea, negocios que empiezan, jóvenes, escuelas y universidades. No necesitas experiencia ni un proyecto terminado: te orientamos desde cero.",
+     "Te ayudamos a despegar: orientación, asesoría, formación y comunidad para quienes quieren innovar o emprender en la región.",
+     hero_int("Te ayudamos a despegar",
+              "Somos el punto de apoyo para quienes quieren innovar o emprender en la región: personas con una idea, negocios que empiezan, jóvenes e instituciones.",
               ["Innovación y emprendimiento"], lineal=True)
-     + bloque("papel", cabeza("¿Para quién es?") + filas(PERFILES_IE), "para-quien")
+     + bloque("papel", cabeza("Para quien quiera y lo necesite", PARA_TODOS, sola=True), "para-quien")
      + bloque("hoja", cabeza("Servicios") + servicios_ie(), "servicios")
-     + bloque("papel", cabeza("De la idea a tu proyecto", "Una ruta en cinco etapas. Entras en la que necesitas y avanzamos juntos.", sola=True) + pasos(RUTA_IE), "ruta")
      + f'<section class="resultados" id="resultados"><div class="contenedor">{cifras_ie()}</div></section>'
      + llamado("¿Tienes una idea y no sabes por dónde empezar?", "", "Cuéntanos tu idea", cot("Innovación y emprendimiento")))
 
