@@ -670,6 +670,9 @@ EVIDENCIAS = [
     ("images/evidencia/cecyt9.jpg", "Jornadas de formación con el IPN",
      "Jornadas de formación en los Centros de Estudios Científicos y Tecnológicos (CECyT) del Instituto Politécnico Nacional, en colaboración con la Secretaría de Innovación e Integración Social.",
      "Cartel de la jornada en el CECyT 9: modelo de negocio, design thinking y curso de prototipado", "cartel"),
+    ("images/evidencia/chinelos.jpg", "Premio para las comparsas de chinelos de Juchitepec",
+     "Desarrollo del premio para las comparsas de chinelos en Juchitepec, de la Secretaría de Cultura y Turismo del Estado de México.",
+     "Premio en forma de figura de chinelo bajo una campana de cristal, con placa dorada", "cartel"),
 ]
 
 
