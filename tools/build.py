@@ -658,6 +658,9 @@ EVIDENCIAS = [
     ("images/evidencia/pnud-cuba.jpg", "Visita del PNUD Cuba",
      "Visita a nuestras instalaciones e intercambio de experiencias sobre espacios de innovación con el Programa de las Naciones Unidas para el Desarrollo (PNUD) de Cuba.",
      "Equipo de Fabjardin y visitantes del PNUD Cuba frente al banner del centro"),
+    ("images/evidencia/uiem.jpg", "Visita de la Universidad Intercultural del Estado de México",
+     "Visita de la Universidad Intercultural del Estado de México para crear proyectos orientados al manejo y aprovechamiento de residuos, impulsando su reinserción en circuitos económicos mediante la creatividad y la tecnología.",
+     "Estudiantes de la Universidad Intercultural del Estado de México frente a Fabjardin mostrando sus piezas"),
 ]
 
 
