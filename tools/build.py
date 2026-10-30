@@ -898,7 +898,16 @@ page("comunidad.html", "Comunidad",
      + llamado("Sé parte de la comunidad", "Colabora, aprende o fabrica con nosotros.", "Contáctanos"))
 
 # Reseñas de Google Maps: (autor, estrellas 1-5, texto, fecha opcional). Agregar solo reseñas reales.
-RESENAS = []
+RESENAS = [
+    ("Angeles Lucero Canales Hernández", 5,
+     "¡Excelente servicio! Aprendí mucho más gracias a ustedes. Tienen buena atención a las necesidades y dudas que se tienen para nosotros como clientes o aprendices."),
+    ("Erik Omar Alvarado Alcántara", 5,
+     "Excelente atención, jóvenes preparados y capacitados. Muy recomendable si quieren desarrollar sus proyectos."),
+    ("Anuna", 5,
+     "Me ayudaron a hacer un exhibidor de madera, en corte CNC como el que usan en sus eventos jeje. Ni idea de materiales pero me asesoraron super bien, corrigieron un diseño que me hicieron anteriormente en otro sitio. Buena atención del equipo, un poco lento pero entiendo que tienen mucha actividad. ¡Gracias!"),
+    ("Mercedes Coronado", 5,
+     "Muy buen trabajo con mucha calidad y sobre todo el ingeniero es un joven super talentoso"),
+]
 
 
 def resenas():
