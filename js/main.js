@@ -213,10 +213,6 @@
 
     var datos = {};
     new FormData(form).forEach(function (v, k) { if (k !== "_gotcha") datos[k] = v; });
-    // Opciones del servicio de formularios (asunto y formato del correo que llega a info@)
-    datos._subject = "Solicitud de contacto: " + datos.servicio;
-    datos._template = "table";
-
     var btn = form.querySelector("button[type=submit]");
     var textoWA = "Hola Fabjardin, soy " + datos.nombre + ". Servicio: " + datos.servicio + ". " + datos.descripcion;
     function fallo() {
@@ -230,14 +226,21 @@
     }
     btn.disabled = true;
     estado.className = "estado"; estado.textContent = "";
-    fetch(cfg.formEndpoint, {
+    if (!cfg.web3formsKey) { btn.disabled = false; fallo(); return; }
+    fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(datos)
+      body: JSON.stringify({
+        access_key: cfg.web3formsKey,
+        subject: "Solicitud de contacto: " + datos.servicio,
+        from_name: "Fabjardin · sitio web",
+        name: datos.nombre, email: datos.email, telefono: datos.telefono || "—",
+        servicio: datos.servicio, mensaje: datos.descripcion
+      })
     }).then(function (r) {
       return r.json().then(function (j) { return { ok: r.ok, j: j }; }, function () { return { ok: r.ok, j: {} }; });
     }).then(function (res) {
-      // FormSubmit responde success "true" solo cuando el mensaje realmente se envió
+      // Solo se muestra el aviso de éxito si el servicio confirma el envío
       if (!res.ok || String(res.j.success) !== "true") throw new Error(res.j.message || "No enviado");
       form.reset();
       mostrar("Recibimos tu solicitud. Te respondemos pronto.", true);

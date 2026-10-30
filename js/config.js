@@ -1,9 +1,8 @@
 /* Configuración editable del sitio (no requiere compilar nada). */
 window.FABJARDIN = {
-  // Servicio de formularios para el formulario de cotización.
-  // Los envíos llegan por correo a info@fabjardin.com mediante FormSubmit.
-  // Si se deja vacío, el formulario abre el correo del usuario con los datos ya escritos.
-  formEndpoint: "https://formsubmit.co/ajax/info@fabjardin.com",
+  // Formulario de contacto (Web3Forms, gratuito): la clave se obtiene en https://web3forms.com
+  // escribiendo el correo donde quieres recibir los mensajes. La clave es pública por diseño.
+  web3formsKey: "",
 
   email: "info@fabjardin.com",
   // WhatsApp en formato internacional, sin "+" ni espacios.

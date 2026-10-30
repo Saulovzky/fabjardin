@@ -807,3 +807,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .res { grid-area: 1 / 1; width: 100%; display: flex; justify-content: center; }
 .res img { width: 100%; height: auto; display: block; background: #fff; border-radius: 22px; box-shadow: 0 6px 24px rgba(0,28,114,.14); }
 .res-pie { justify-content: center; flex-direction: column; gap: .8rem; }
+
+/* Contacto: foto de fondo translúcida */
+#formulario { position: relative; isolation: isolate; padding: clamp(2rem, 5vw, 3.6rem) 0; }
+#formulario::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #fff url("../images/contacto-fondo.webp") center 35% / cover no-repeat; opacity: .16; }

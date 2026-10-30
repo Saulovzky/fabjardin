@@ -929,9 +929,7 @@ opciones = "".join(f'<option value="{escape(o)}">{escape(o)}</option>' for o in 
 c = CONTACT
 page("contacto.html", "Contacto y cotización",
      "Cotiza tu proyecto de fabricación digital en Chalco: cuéntanos tu idea y recibe respuesta de Fabjardin por correo, teléfono o WhatsApp.",
-     hero_int("Solicita tu cotización",
-              "Cuéntanos tu idea y nuestro equipo técnico analizará la viabilidad para darte la mejor solución.",
-              ["Contacto"])
+     '<h1 class="visually-hidden">Contacto y cotización</h1>'
      + bloque("papel", f"""<div class="contacto-grid">
   <div class="formulario">
     <form id="form-cotizacion" novalidate>
@@ -957,7 +955,7 @@ page("contacto.html", "Contacto y cotización",
       <li><small>Ubicación</small><a href="{c['maps']}" target="_blank" rel="noopener">{escape(c['address'])}</a></li>
     </ul>
   </aside></div>
-</div>""")
+</div>""", "formulario")
      + bloque("hoja", resenas(), "resenas"))
 
 # ---- Legales (borradores) ----
