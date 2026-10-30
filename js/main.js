@@ -337,3 +337,25 @@
     pista.addEventListener("scroll", function () { cnt.textContent = (idx() + 1) + " / " + n; }, { passive: true });
   });
 })();
+
+/* Reseñas: rotación automática, con pausa al pasar el cursor y puntos para elegir */
+(function () {
+  var cont = document.querySelector(".resenas");
+  if (!cont) return;
+  var items = cont.querySelectorAll(".res"), puntos = cont.querySelectorAll(".res-p"), i = 0, t = null;
+  if (items.length < 2) return;
+  function ir(n) {
+    items[i].classList.remove("on"); puntos[i].classList.remove("on");
+    i = (n + items.length) % items.length;
+    items[i].classList.add("on"); puntos[i].classList.add("on");
+  }
+  function iniciar() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    detener(); t = setInterval(function () { ir(i + 1); }, 6000);
+  }
+  function detener() { if (t) { clearInterval(t); t = null; } }
+  Array.prototype.forEach.call(puntos, function (p, n) { p.addEventListener("click", function () { ir(n); iniciar(); }); });
+  cont.addEventListener("mouseenter", detener); cont.addEventListener("mouseleave", iniciar);
+  cont.addEventListener("focusin", detener); cont.addEventListener("focusout", iniciar);
+  iniciar();
+})();

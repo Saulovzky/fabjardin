@@ -782,3 +782,20 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .pie-grid { grid-template-columns: 1.3fr .8fr 1.1fr 1.3fr 1.5fr; }
 @media (max-width: 1199px) { .pie-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px) { .pie-grid { grid-template-columns: 1fr; } }
+
+/* Reseñas de Google Maps */
+.lado { display: grid; gap: 1.2rem; }
+.resenas { background: #fff; border: 2px solid var(--tinta); border-radius: 28px; padding: clamp(1.3rem, 3vw, 1.9rem); }
+.resenas h3 { margin: 0 0 .8rem; font-size: 1.5rem; color: var(--tinta); }
+.res-pista { display: grid; }
+.res { grid-area: 1 / 1; margin: 0; opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility .5s; }
+.res.on { opacity: 1; visibility: visible; }
+.res-est { color: #f5a800; font-size: 1.25rem; letter-spacing: .12em; }
+.res blockquote { margin: .5rem 0 .7rem; font-size: 1.02rem; line-height: 1.55; color: var(--tinta); }
+.res figcaption { font-weight: 700; color: var(--tinta); }
+.res-pie { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 1.1rem; }
+.res-puntos { display: flex; gap: .45rem; }
+.res-p { width: 11px; height: 11px; padding: 0; border-radius: 50%; border: 2px solid var(--tinta); background: transparent; cursor: pointer; }
+.res-p.on { background: var(--tinta); }
+.res-pie a { font-weight: 700; color: var(--tinta); }
+@media (prefers-reduced-motion: reduce) { .res { transition: none; } }

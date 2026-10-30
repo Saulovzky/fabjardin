@@ -195,7 +195,6 @@ def cabecera(actual):
     <a class="marca-logo" href="index.html" aria-label="{NAME}, inicio"><img src="images/logo-blanco.png" alt="{NAME} · {TAGLINE}" width="681" height="181"></a>
     <nav class="nav" id="menu-principal" aria-label="Principal">
       <ul>{''.join(items)}</ul>
-      <span class="reloj" id="reloj" aria-hidden="true">Chalco</span>
       <a class="boton boton--lima" href="{ch}">{escape(cl)}</a>
     </nav>
     <button class="boton-menu" aria-expanded="false" aria-controls="menu-principal">Menú</button>
@@ -898,6 +897,25 @@ page("comunidad.html", "Comunidad",
      + bloque("papel", cabeza("Noticias") + evidencias(), "noticias")
      + llamado("Sé parte de la comunidad", "Colabora, aprende o fabrica con nosotros.", "Contáctanos"))
 
+# Reseñas de Google Maps: (autor, estrellas 1-5, texto, fecha opcional). Agregar solo reseñas reales.
+RESENAS = []
+
+
+def resenas():
+    if not RESENAS:
+        return ""
+    est = lambda n: "★" * n + "☆" * (5 - n)
+    items = "".join(
+        f'<figure class="res{" on" if i == 0 else ""}"><div class="res-est" role="img" aria-label="{n} de 5 estrellas">{est(n)}</div>'
+        f'<blockquote>{escape(t)}</blockquote><figcaption>{escape(a)}{" · " + escape(f) if f else ""}</figcaption></figure>'
+        for i, (a, n, t, *fe) in enumerate(RESENAS) for f in [fe[0] if fe else ""])
+    puntos_ = "".join(f'<button type="button" class="res-p{" on" if i == 0 else ""}" aria-label="Reseña {i + 1}"></button>' for i in range(len(RESENAS)))
+    return (f'<section class="resenas" aria-label="Reseñas en Google Maps"><h3>Lo que dicen de nosotros</h3>'
+            f'<div class="res-pista" aria-live="off">{items}</div>'
+            f'<div class="res-pie"><div class="res-puntos">{puntos_}</div>'
+            f'<a href="{CONTACT["maps"]}" target="_blank" rel="noopener">Ver todas en Google Maps</a></div></section>')
+
+
 # ---- Contacto ----
 opciones = "".join(f'<option value="{escape(o)}">{escape(o)}</option>' for o in SERVICE_OPTIONS)
 c = CONTACT
@@ -921,7 +939,7 @@ page("contacto.html", "Contacto y cotización",
       <div id="form-estado" class="estado" role="status" aria-live="polite"></div>
     </form>
   </div>
-  <aside class="panel">
+  <div class="lado"><aside class="panel">
     <h3>Hablemos</h3>
     <p>También puedes escribirnos directamente. Respondemos a la brevedad.</p>
     <ul class="datos">
@@ -930,7 +948,7 @@ page("contacto.html", "Contacto y cotización",
       <li><small>WhatsApp</small><a id="btn-whatsapp" href="https://wa.me/525576571685" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
       <li><small>Ubicación</small><a href="{c['maps']}" target="_blank" rel="noopener">{escape(c['address'])}</a></li>
     </ul>
-  </aside>
+  </aside>{resenas()}</div>
 </div>"""))
 
 # ---- Legales (borradores) ----
