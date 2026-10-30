@@ -145,7 +145,13 @@ def foto(ruta, alt="", clase=""):
     if not hay(ruta):
         return ""
     c = f' class="{clase}"' if clase else ""
-    return f'<img{c} src="{ruta}" alt="{escape(alt)}" loading="lazy" decoding="async">'
+    try:
+        from PIL import Image as _Im
+        with _Im.open(os.path.join(ROOT, ruta)) as _im:
+            wh = f' width="{_im.width}" height="{_im.height}"'
+    except Exception:
+        wh = ""
+    return f'<img{c} src="{ruta}"{wh} alt="{escape(alt)}" loading="lazy" decoding="async">'
 
 
 def rebanadas():
@@ -229,7 +235,7 @@ def pie():
       </div>
       <div><h3>Explora</h3><ul><li><a href="index.html">Inicio</a></li>{cols}</ul></div>
       <div><h3>Servicios</h3><ul>
-        <li><a href="laboratorio.html#servicios">Fabricación digital</a></li>
+        {"".join(f'<li><a href="{v[0]}">{escape(k)}</a></li>' for k, v in SEO_SERV.items())}
         <li><a href="innovacion-y-emprendimiento.html">Innovación y emprendimiento</a></li>
         <li><a href="contacto.html">Solicitar cotización</a></li>
       </ul></div>
@@ -747,11 +753,13 @@ page("laboratorio.html", "Laboratorio de fabricación digital",
 
 def pagina_servicio(nombre, i):
     slug, tit, desc, h1, intro, mats, usos = SEO_SERV[nombre]
+    archivo = next((a for n, a, _, _ in SERVICES if n == nombre), "")
     otros = "".join(f'<li><a href="{SEO_SERV[n][0]}">{escape(n)}</a></li>' for n in SEO_SERV if n != nombre)
     page_slug_titles[slug] = tit
     page(slug, h1, desc,
          hero_int(h1, intro, ['<a href="laboratorio.html">Laboratorio</a>', escape(nombre)], lineal=True)
-         + bloque("papel", '<div class="serv-dos"><div class="serv-col"><h2>Materiales con los que trabajamos</h2>' + puntos(mats)
+         + bloque("papel", '<div class="serv-dos">' + (f'<figure class="serv-foto">{foto("images/servicios/" + archivo, f"{h1}: {nombre} en el laboratorio de fabricación digital de Fabjardin")}</figure>' if archivo else "")
+                  + '<div class="serv-col"><h2>Materiales con los que trabajamos</h2>' + puntos(mats)
                   + '</div><div class="serv-col serv-col--2"><h2>Para qué sirve</h2>' + puntos(usos) + '</div></div>', "materiales")
          + bloque("papel", cabeza("Otros servicios del laboratorio") + f'<ul class="otros-serv">{otros}</ul>', "otros")
          + llamado("¿Cotizamos tu proyecto?", "", "Solicitar cotización", cot(nombre)))
@@ -807,22 +815,22 @@ PARA_TODOS = "Podemos ayudar a personas con una idea o un proyecto, a negocios q
 
 # Evidencias de trabajo: carrusel (se agregan fotos a esta lista)
 EVIDENCIAS = [
-    ("images/evidencia/pnud-cuba.jpg", "Visita del PNUD Cuba",
+    ("images/evidencia/pnud-cuba.webp", "Visita del PNUD Cuba",
      "Visita a nuestras instalaciones e intercambio de experiencias sobre espacios de innovación con el Programa de las Naciones Unidas para el Desarrollo (PNUD) de Cuba.",
      "Equipo de Fabjardin y visitantes del PNUD Cuba frente al banner del centro"),
-    ("images/evidencia/uiem.jpg", "Visita de la Universidad Intercultural del Estado de México",
+    ("images/evidencia/uiem.webp", "Visita de la Universidad Intercultural del Estado de México",
      "Visita de la Universidad Intercultural del Estado de México para crear proyectos orientados al manejo y aprovechamiento de residuos, impulsando su reinserción en circuitos económicos mediante la creatividad y la tecnología.",
      "Estudiantes de la Universidad Intercultural del Estado de México frente a Fabjardin mostrando sus piezas"),
-    ("images/evidencia/cbt.jpg", "Talleres con bachilleratos tecnológicos de la Región Volcanes",
+    ("images/evidencia/cbt.webp", "Talleres con bachilleratos tecnológicos de la Región Volcanes",
      "Talleres sobre tecnologías creativas para diferentes Colegios de Bachillerato Tecnológico de la Región Volcanes, como complemento a su formación en carreras orientadas al diseño y la tecnología, mediante prácticas de observación y ejecución.",
      "Estudiantes de bachillerato tecnológico observando una máquina de corte láser durante un taller"),
-    ("images/evidencia/cecytem.jpg", "Visita de la Dirección General del CECYTEM",
+    ("images/evidencia/cecytem.webp", "Visita de la Dirección General del CECYTEM",
      "Visita, recorrido y experiencia con la Dirección General del CECYTEM, el Colegio de Estudios Científicos y Tecnológicos del Estado de México.",
      "Directivos del CECYTEM recorriendo el laboratorio de Fabjardin"),
-    ("images/evidencia/cecyt9.jpg", "Jornadas de formación con el IPN",
+    ("images/evidencia/cecyt9.webp", "Jornadas de formación con el IPN",
      "Jornadas de formación en los Centros de Estudios Científicos y Tecnológicos (CECyT) del Instituto Politécnico Nacional, en colaboración con la Secretaría de Innovación e Integración Social.",
      "Cartel de la jornada en el CECyT 9: modelo de negocio, design thinking y curso de prototipado", "cartel"),
-    ("images/evidencia/chinelos.jpg", "Premio para las comparsas de chinelos de Juchitepec",
+    ("images/evidencia/chinelos.webp", "Premio para las comparsas de chinelos de Juchitepec",
      "Desarrollo del premio para las comparsas de chinelos en Juchitepec, de la Secretaría de Cultura y Turismo del Estado de México.",
      "Premio en forma de figura de chinelo bajo una campana de cristal, con placa dorada", "cartel"),
 ]

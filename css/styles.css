@@ -772,3 +772,13 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .redes a:hover, .redes a:focus-visible { background: var(--lima); border-color: var(--lima); color: var(--tinta); }
 .redes svg { width: 18px; height: 18px; display: block; }
 @media (max-width: 620px) { .pie .legal { flex-direction: column; align-items: flex-start; } }
+
+/* Página de servicio: foto + materiales + usos */
+.serv-dos { grid-template-columns: 1fr 1fr 1fr; }
+.serv-foto { margin: 0; border-radius: 28px; overflow: hidden; background: var(--hoja); min-height: 100%; }
+.serv-foto img { width: 100%; height: 100%; object-fit: cover; display: block; aspect-ratio: 1 / 1; }
+@media (max-width: 1000px) { .serv-dos { grid-template-columns: 1fr 1fr; } .serv-foto { grid-column: 1 / -1; } .serv-foto img { aspect-ratio: 16 / 7; } }
+@media (max-width: 800px) { .serv-dos { grid-template-columns: 1fr; } .serv-foto img { aspect-ratio: 4 / 3; } }
+.pie-grid { grid-template-columns: 1.3fr .8fr 1.1fr 1.3fr 1.5fr; }
+@media (max-width: 1199px) { .pie-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 620px) { .pie-grid { grid-template-columns: 1fr; } }
