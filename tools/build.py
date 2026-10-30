@@ -255,6 +255,8 @@ def pie():
 
 
 import json as _json
+import time as _time
+VERSION = _time.strftime("%Y%m%d%H%M")
 
 
 def jsonld(slug, titulo, desc):
@@ -318,7 +320,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preload" href="fonts/display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/body-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/styles.css?v={VERSION}">
 {ld}</head>
 <body data-tono="{TONOS.get(slug.replace(".html", ""), "lima")}">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
@@ -328,8 +330,8 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 </main>
 {pie()}
 <a class="wa-flotante" href="{CONTACT["wa"]}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">{WA_ICONO}<span>WhatsApp</span></a>
-<script src="js/config.js"></script>
-<script src="js/main.js"></script>
+<script src="js/config.js?v={VERSION}"></script>
+<script src="js/main.js?v={VERSION}"></script>
 </body>
 </html>
 """
@@ -897,30 +899,27 @@ page("comunidad.html", "Comunidad",
      + bloque("papel", cabeza("Noticias") + evidencias(), "noticias")
      + llamado("Sé parte de la comunidad", "Colabora, aprende o fabrica con nosotros.", "Contáctanos"))
 
-# Reseñas de Google Maps: (autor, estrellas 1-5, texto, fecha opcional). Agregar solo reseñas reales.
+# Reseñas de Google Maps (capturas reales): (archivo, autor, estrellas, texto para accesibilidad)
 RESENAS = [
-    ("Angeles Lucero Canales Hernández", 5,
+    ("angeles", "Angeles Lucero Canales Hernández", 5,
      "¡Excelente servicio! Aprendí mucho más gracias a ustedes. Tienen buena atención a las necesidades y dudas que se tienen para nosotros como clientes o aprendices."),
-    ("Erik Omar Alvarado Alcántara", 5,
+    ("erik", "Erik Omar Alvarado Alcántara", 5,
      "Excelente atención, jóvenes preparados y capacitados. Muy recomendable si quieren desarrollar sus proyectos."),
-    ("Anuna", 5,
-     "Me ayudaron a hacer un exhibidor de madera, en corte CNC como el que usan en sus eventos jeje. Ni idea de materiales pero me asesoraron super bien, corrigieron un diseño que me hicieron anteriormente en otro sitio. Buena atención del equipo, un poco lento pero entiendo que tienen mucha actividad. ¡Gracias!"),
-    ("Mercedes Coronado", 5,
+    ("anuna", "Anuna", 5,
+     "Me ayudaron a hacer un exhibidor de madera, en corte CNC como el que usan en sus eventos. Ni idea de materiales pero me asesoraron super bien, corrigieron un diseño que me hicieron anteriormente en otro sitio. Buena atención del equipo, un poco lento pero entiendo que tienen mucha actividad. ¡Gracias!"),
+    ("mercedes", "Mercedes Coronado", 5,
      "Muy buen trabajo con mucha calidad y sobre todo el ingeniero es un joven super talentoso"),
 ]
 
 
 def resenas():
-    if not RESENAS:
-        return ""
-    est = lambda n: "★" * n + "☆" * (5 - n)
     items = "".join(
-        f'<figure class="res{" on" if i == 0 else ""}"><div class="res-est" role="img" aria-label="{n} de 5 estrellas">{est(n)}</div>'
-        f'<blockquote>{escape(t)}</blockquote><figcaption>{escape(a)}{" · " + escape(f) if f else ""}</figcaption></figure>'
-        for i, (a, n, t, *fe) in enumerate(RESENAS) for f in [fe[0] if fe else ""])
+        f'<figure class="res{" on" if i == 0 else ""}">'
+        + foto(f"images/resenas/{f}.webp", f"Reseña de {a} en Google Maps, {n} de 5 estrellas: {t}").replace('loading="lazy"', 'loading="eager"' if i == 0 else 'loading="lazy"')
+        + "</figure>" for i, (f, a, n, t) in enumerate(RESENAS))
     puntos_ = "".join(f'<button type="button" class="res-p{" on" if i == 0 else ""}" aria-label="Reseña {i + 1}"></button>' for i in range(len(RESENAS)))
-    return (f'<section class="resenas" aria-label="Reseñas en Google Maps"><h3>Lo que dicen de nosotros</h3>'
-            f'<div class="res-pista" aria-live="off">{items}</div>'
+    return (f'<section class="resenas" aria-label="Reseñas en Google Maps"><h2>Lo que dicen de nosotros</h2>'
+            f'<div class="res-pista">{items}</div>'
             f'<div class="res-pie"><div class="res-puntos">{puntos_}</div>'
             f'<a href="{CONTACT["maps"]}" target="_blank" rel="noopener">Ver todas en Google Maps</a></div></section>')
 
@@ -957,8 +956,9 @@ page("contacto.html", "Contacto y cotización",
       <li><small>WhatsApp</small><a id="btn-whatsapp" href="https://wa.me/525576571685" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
       <li><small>Ubicación</small><a href="{c['maps']}" target="_blank" rel="noopener">{escape(c['address'])}</a></li>
     </ul>
-  </aside>{resenas()}</div>
-</div>"""))
+  </aside></div>
+</div>""")
+     + bloque("hoja", resenas(), "resenas"))
 
 # ---- Legales (borradores) ----
 BORRADOR = '<div class="borrador">Borrador: este texto es una plantilla general y debe ser revisado y completado por la persona responsable, idealmente con asesoría legal, antes de la publicación definitiva.</div>'

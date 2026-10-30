@@ -217,37 +217,32 @@
     datos._subject = "Solicitud de contacto: " + datos.servicio;
     datos._template = "table";
 
-    if (cfg.formEndpoint) {
-      var btn = form.querySelector("button[type=submit]");
-      btn.disabled = true;
-      fetch(cfg.formEndpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(datos)
-      }).then(function (r) {
-        if (!r.ok) throw new Error("HTTP " + r.status);
-        form.reset();
-        mostrar("Recibimos tu solicitud. Te respondemos pronto.", true);
-      }).catch(function () {
-        mostrar("No pudimos enviar el formulario. Escríbenos a " + cfg.email + " o por WhatsApp.", false);
-      }).finally(function () { btn.disabled = false; });
-      return;
+    var btn = form.querySelector("button[type=submit]");
+    var textoWA = "Hola Fabjardin, soy " + datos.nombre + ". Servicio: " + datos.servicio + ". " + datos.descripcion;
+    function fallo() {
+      estado.innerHTML = "";
+      estado.appendChild(document.createTextNode("No pudimos enviar tu solicitud en este momento. Escríbenos a " + cfg.email + " o "));
+      var a = document.createElement("a");
+      a.href = "https://wa.me/" + cfg.whatsapp + "?text=" + encodeURIComponent(textoWA);
+      a.target = "_blank"; a.rel = "noopener"; a.textContent = "mándanos tu solicitud por WhatsApp";
+      estado.appendChild(a); estado.appendChild(document.createTextNode("."));
+      estado.className = "estado error";
     }
-
-    // Sin endpoint configurado: abre el correo con los datos ya escritos.
-    var cuerpo = [
-      "Nombre: " + datos.nombre,
-      "Email: " + datos.email,
-      "Teléfono: " + (datos.telefono || "—"),
-      "Servicio: " + datos.servicio,
-      "",
-      "Descripción del proyecto:",
-      datos.descripcion
-    ].join("\n");
-    location.href = "mailto:" + cfg.email +
-      "?subject=" + encodeURIComponent("Solicitud de cotización: " + datos.servicio) +
-      "&body=" + encodeURIComponent(cuerpo);
-    mostrar("Abrimos tu programa de correo con la solicitud lista para enviar.", true);
+    btn.disabled = true;
+    estado.className = "estado"; estado.textContent = "";
+    fetch(cfg.formEndpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(datos)
+    }).then(function (r) {
+      return r.json().then(function (j) { return { ok: r.ok, j: j }; }, function () { return { ok: r.ok, j: {} }; });
+    }).then(function (res) {
+      // FormSubmit responde success "true" solo cuando el mensaje realmente se envió
+      if (!res.ok || String(res.j.success) !== "true") throw new Error(res.j.message || "No enviado");
+      form.reset();
+      mostrar("Recibimos tu solicitud. Te respondemos pronto.", true);
+    }).catch(function () { fallo(); })
+      .finally(function () { btn.disabled = false; });
   });
 
   var wa = document.getElementById("btn-whatsapp");
