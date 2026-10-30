@@ -213,6 +213,9 @@
 
     var datos = {};
     new FormData(form).forEach(function (v, k) { if (k !== "_gotcha") datos[k] = v; });
+    // Opciones del servicio de formularios (asunto y formato del correo que llega a info@)
+    datos._subject = "Solicitud de contacto: " + datos.servicio;
+    datos._template = "table";
 
     if (cfg.formEndpoint) {
       var btn = form.querySelector("button[type=submit]");
@@ -237,8 +240,6 @@
       "Email: " + datos.email,
       "Teléfono: " + (datos.telefono || "—"),
       "Servicio: " + datos.servicio,
-      "Urgencia: " + datos.urgencia,
-      "Enlace a archivos: " + (datos.archivos || "—"),
       "",
       "Descripción del proyecto:",
       datos.descripcion

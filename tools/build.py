@@ -50,7 +50,7 @@ NAV = [
     ("Comunidad", "comunidad.html", [
         ("Eventos y agenda", "comunidad.html#agenda"), ("Proyectos", "comunidad.html#proyectos"), ("Noticias", "comunidad.html#noticias")]),
 ]
-NAV_CTA = ("Cotiza tu proyecto", "contacto.html")
+NAV_CTA = ("Hablemos", "contacto.html")
 
 # --------------------------------------------------------------------------
 # Servicios de fabricación: (nombre, foto, qué hace, qué se puede hacer)
@@ -904,7 +904,7 @@ c = CONTACT
 page("contacto.html", "Contacto y cotización",
      "Cotiza tu proyecto de fabricación digital en Chalco: cuéntanos tu idea y recibe respuesta de Fabjardin por correo, teléfono o WhatsApp.",
      hero_int("Solicita tu cotización",
-              "Describe tu idea, comparte tus archivos y nuestro equipo técnico analizará la viabilidad para darte la mejor solución.",
+              "Cuéntanos tu idea y nuestro equipo técnico analizará la viabilidad para darte la mejor solución.",
               ["Contacto"])
      + bloque("papel", f"""<div class="contacto-grid">
   <div class="formulario">
@@ -914,11 +914,7 @@ page("contacto.html", "Contacto y cotización",
         <div class="campo"><label for="email">Email de contacto</label><input id="email" name="email" type="email" autocomplete="email" required></div>
         <div class="campo"><label for="telefono">Teléfono (opcional)</label><input id="telefono" name="telefono" type="tel" autocomplete="tel"></div>
         <div class="campo"><label for="servicio">Servicio requerido</label><select id="servicio" name="servicio" required>{opciones}</select></div>
-        <div class="campo ancho"><label for="urgencia">Urgencia</label>
-          <select id="urgencia" name="urgencia"><option>Normal (3-5 días)</option><option>Prioritario (24-48h)</option><option>Sin prisa</option></select></div>
         <div class="campo ancho"><label for="descripcion">Descripción del proyecto</label><textarea id="descripcion" name="descripcion" required placeholder="Qué quieres fabricar, materiales, medidas, cantidad…"></textarea></div>
-        <div class="campo ancho"><label for="archivos">Enlace a tus archivos (DXF, STL, PDF…)</label><input id="archivos" name="archivos" type="url" placeholder="https://drive.google.com/…">
-          <span class="ayuda">Sube tus archivos a Google Drive, Dropbox o similar y pega aquí el enlace, con permiso de lectura.</span></div>
         <div class="trampa" aria-hidden="true"><label>No llenar<input name="_gotcha" type="text" tabindex="-1" autocomplete="off"></label></div>
       </div>
       <div class="fila-botones" style="margin-top:1.4rem"><button class="boton boton--lleno" type="submit">Enviar solicitud</button></div>
