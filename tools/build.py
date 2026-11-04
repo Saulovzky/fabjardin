@@ -306,7 +306,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{escape(full)}</title>
 <meta name="description" content="{escape(desc)}">
-<meta name="theme-color" content="#001c72">
+<meta name="theme-color" content="#2f4156">
 {robots}<link rel="canonical" href="{url}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_MX">
@@ -337,7 +337,7 @@ def pagina(slug, titulo, desc, cuerpo, noindex=False):
 """
 
 
-def panal_svg(color="#001c72", op=".10"):
+def panal_svg(color="#2f4156", op=".10"):
     """Panal de la cama de corte láser como mosaico sin costuras."""
     r = 20.0
     w, h = math.sqrt(3) * r, 3 * r
