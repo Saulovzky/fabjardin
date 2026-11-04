@@ -1,7 +1,7 @@
 /* ==========================================================================
    FABJARDIN · del archivo al objeto
-   Paleta corporativa: azul 2F4156, azul verdoso 567C8D, azul claro C8D9E6,
-   crema F5EEDE, negro 010101, gris A1A1A1 y blanco.
+   Azul corporativo 2F4156 como base y colores de apoyo suavizados
+   (lima, cian, sol, coral, lila, azul medio) que se reparten por secciones.
    ========================================================================== */
 
 @font-face {
@@ -28,21 +28,21 @@
   /* Marca */
   --tinta: #2f4156;        /* azul corporativo */
   --noche: #1e2b3a;
-  /* Paleta de apoyo */
-  --azul: #567c8d;         /* azul verdoso */
-  --lima: #f5eede;         /* crema */
-  --cian: #c8d9e6;         /* azul claro */
-  --sol: #e9dfc6;
-  --coral: #567c8d;
-  --lila: #a9bfce;
+  /* Paleta de apoyo: colores de antes, suavizados */
+  --azul: #5b84b1;         /* azul medio */
+  --lima: #d3e08c;
+  --cian: #8fd0d9;
+  --sol: #f0cf7e;
+  --coral: #e98d6e;
+  --lila: #b9b0e3;
   /* Neutros */
-  --hoja: #f5eede;
+  --hoja: #f3f1ea;
   --papel: #ffffff;
-  --trazo: #c8d9e6;
-  --texto: #010101;
-  --suave: #4a5663;
-  --grabado: #c8d9e6;
-  --corte: #567c8d;
+  --trazo: #d5dde6;
+  --texto: #0f1722;
+  --suave: #4f5b6b;
+  --grabado: #a9c4dc;
+  --corte: #e0735a;
   --acento: var(--lima);   /* cambia por página (data-tono) */
   --c2: var(--cian);
   --c3: var(--sol);
@@ -163,7 +163,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: .98; le
 
 .marca-corte svg, .t-marca svg { overflow: visible; }
 .pieza { fill: var(--tinta); }
-.rayo { fill: var(--corte); opacity: 0; filter: drop-shadow(0 0 6px var(--corte)) drop-shadow(0 0 16px rgba(86,124,141,.7)); }
+.rayo { fill: var(--corte); opacity: 0; filter: drop-shadow(0 0 6px var(--corte)) drop-shadow(0 0 16px rgba(91,132,177,.7)); }
 
 /* ---------- Hero de páginas interiores ---------- */
 .hero-int { position: relative; background: var(--tinta); color: #fff; overflow: hidden; border-radius: 0 0 clamp(28px, 4vw, 56px) clamp(28px, 4vw, 56px); padding: clamp(1.2rem, 2.4vw, 1.8rem) 0 clamp(1.4rem, 2.8vw, 2.2rem); }
@@ -345,7 +345,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .campo label { font-weight: 700; font-size: .95rem; color: var(--tinta); }
 .campo input, .campo select, .campo textarea { width: 100%; min-width: 0; font: inherit; color: var(--texto); background: #fff; border: 2px solid var(--trazo); border-radius: 16px; padding: .85rem 1rem; }
 .campo textarea { min-height: 150px; resize: vertical; }
-.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(86,124,141,.2); }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(91,132,177,.2); }
 .campo .ayuda { font-size: .85rem; color: var(--suave); }
 .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .estado { margin-top: 1rem; padding: .9rem 1.1rem; border-radius: 14px; display: none; font-weight: 600; }
@@ -496,15 +496,15 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .temas li.otro input { width: clamp(15rem, 24vw, 21rem); border: 0; background: transparent; font: 800 clamp(1.3rem, 1.9vw, 1.7rem)/1 var(--display); color: var(--tinta); padding: .8rem 0 .8rem 1.4rem; outline: none; }
 .temas li.otro input::placeholder { color: var(--tinta); opacity: .65; }
 .temas li.otro button { border: 0; background: var(--tinta); color: #fff; width: 2.4rem; height: 2.4rem; margin: .35rem; border-radius: 50%; font-size: 1.1rem; cursor: pointer; }
-.temas li.otro:focus-within { border-style: solid; box-shadow: 0 0 0 3px rgba(86,124,141,.25); }
+.temas li.otro:focus-within { border-style: solid; box-shadow: 0 0 0 3px rgba(91,132,177,.25); }
 
-.temas li.nuevo { position: relative; display: inline-flex; align-items: center; gap: .8rem; background: #e9dfc6; transition: background-color .5s .1s; }
+.temas li.nuevo { position: relative; display: inline-flex; align-items: center; gap: .8rem; background: #ecd9b8; transition: background-color .5s .1s; }
 .temas li.nuevo.c1 { --f: var(--cian); } .temas li.nuevo.c2 { --f: var(--sol); } .temas li.nuevo.c3 { --f: var(--lila); } .temas li.nuevo.c4 { --f: var(--coral); }
 .temas li.nuevo.c0 { --f: var(--lima); }
 .temas li.nuevo.listo { background: var(--f); }
 .temas li.nuevo .txt { display: inline-block; color: var(--tinta); }
 .temas li.nuevo.grabando .txt { animation: revela 1.7s linear both, quema 1.9s ease-out both; }
-.temas li.nuevo .rayo-grabado { position: absolute; top: 12%; bottom: 12%; left: 1.5rem; width: 3px; margin-left: -1px; border-radius: 2px; opacity: 0; background: #fff; box-shadow: 0 0 6px 2px #567c8d, 0 0 18px 6px rgba(86,124,141,.75); pointer-events: none; }
+.temas li.nuevo .rayo-grabado { position: absolute; top: 12%; bottom: 12%; left: 1.5rem; width: 3px; margin-left: -1px; border-radius: 2px; opacity: 0; background: #fff; box-shadow: 0 0 6px 2px #567c8d, 0 0 18px 6px rgba(91,132,177,.75); pointer-events: none; }
 .temas li.nuevo.grabando .rayo-grabado { animation: barre 1.7s linear both; }
 .temas li.nuevo .enviar-tema { display: none; font: 700 .85rem/1 var(--cuerpo); color: #fff; background: var(--tinta); padding: .5rem .8rem; border-radius: 999px; text-decoration: none; white-space: nowrap; }
 .temas li.nuevo.listo .enviar-tema { display: inline-block; animation: entra .4s both; }
@@ -586,7 +586,7 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 .eq:nth-child(6n+4) .num { background: var(--lila); } .eq:nth-child(6n+5) .num { background: var(--coral); } .eq:nth-child(6n+6) .num { background: var(--azul); color: #fff; }
 .eq-n { flex: 1; font: 800 clamp(1.25rem, 1.7vw, 1.55rem)/1.1 var(--display); }
 .eq-f { width: 1.1rem; height: 1.1rem; flex: none; opacity: .5; transition: transform .25s, opacity .2s; }
-.eq-b:hover, .eq-b:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(86,124,141,.25); }
+.eq-b:hover, .eq-b:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(91,132,177,.25); }
 .eq.on .eq-b { background: var(--tinta); color: #fff; }
 .eq.on .eq-b .num { background: var(--lima); color: var(--tinta); }
 .eq.on .eq-f { opacity: 1; }
@@ -812,5 +812,3 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 #formulario { position: relative; isolation: isolate; padding: clamp(2rem, 5vw, 3.6rem) 0; }
 #formulario::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #fff url("../images/contacto-fondo.webp") center 35% / cover no-repeat; opacity: .16; }
 
-/* Paleta corporativa: la tarjeta crema sobre fondo crema necesita borde */
-.eje:nth-child(1) { background: #fff; box-shadow: inset 0 0 0 2px var(--trazo); }
