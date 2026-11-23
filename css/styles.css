@@ -812,3 +812,12 @@ body[data-tono="azul"] .bloque--tinta .panel p { color: var(--suave); }
 #formulario { position: relative; isolation: isolate; padding: clamp(2rem, 5vw, 3.6rem) 0; }
 #formulario::before { content: ""; position: absolute; inset: 0; z-index: -1; background: #fff url("../images/contacto-fondo.webp") center 35% / cover no-repeat; opacity: .16; }
 
+
+/* Botón "Hablemos" del encabezado: verde fosforescente */
+.nav > .boton--lima { background: #39ff14; border-color: #39ff14; color: #0b1a0b; box-shadow: 0 0 18px rgba(57,255,20,.45); }
+.nav > .boton--lima:hover, .nav > .boton--lima:focus-visible { background: #7dff5e; border-color: #7dff5e; box-shadow: 0 0 26px rgba(57,255,20,.65); }
+
+/* Menú móvil: que los títulos largos pasen a otra línea en vez de cortarse */
+@media (max-width: 900px) {
+  .nav a.enlace { white-space: normal; overflow-wrap: anywhere; }
+}
